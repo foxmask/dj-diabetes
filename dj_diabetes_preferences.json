@@ -1,0 +1,101 @@
+[
+{
+    "pk": 1, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:00:27.396Z", 
+        "created": "2014-06-23T20:00:27.396Z", 
+        "value": "1", 
+        "key": "meal", 
+        "title": "Breakfast"
+    }
+},
+{
+    "pk": 2, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:03:49.163Z", 
+        "created": "2014-06-23T20:03:49.163Z", 
+        "value": "3", 
+        "key": "meal", 
+        "title": "Diner"
+    }
+},
+{
+    "pk": 3, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:05:34.912Z", 
+        "created": "2014-06-23T20:03:58.268Z", 
+        "value": "4", 
+        "key": "meal", 
+        "title": "Lunch"
+    }
+},
+{
+    "pk": 4, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:12:39.704Z", 
+        "created": "2014-06-23T20:12:39.704Z", 
+        "value": "1\r\n", 
+        "key": "moment", 
+        "title": "Ajeun avant le petit dej"
+    }
+},
+{
+    "pk": 5, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:12:57.607Z", 
+        "created": "2014-06-23T20:12:57.606Z", 
+        "value": "2", 
+        "key": "moment", 
+        "title": "avant le repas du midi"
+    }
+},
+{
+    "pk": 6, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:13:21.946Z", 
+        "created": "2014-06-23T20:13:21.946Z", 
+        "value": "3\r\n", 
+        "key": "moment", 
+        "title": "Apr\u00e8s le repas du midi"
+    }
+},
+{
+    "pk": 7, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:13:36.514Z", 
+        "created": "2014-06-23T20:13:36.514Z", 
+        "value": "4", 
+        "key": "moment", 
+        "title": "Avant le diner"
+    }
+},
+{
+    "pk": 8, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:13:46.208Z", 
+        "created": "2014-06-23T20:13:46.208Z", 
+        "value": "5", 
+        "key": "moment", 
+        "title": "Au diner"
+    }
+},
+{
+    "pk": 9, 
+    "model": "dj_diabetes.preferences", 
+    "fields": {
+        "modified": "2014-06-23T20:57:34.103Z", 
+        "created": "2014-06-23T20:38:50.430Z", 
+        "value": "1", 
+        "key": "insulin", 
+        "title": "Do I use Insulin ? (1=yes, 0=no)"
+    }
+}
+]

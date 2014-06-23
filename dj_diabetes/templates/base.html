@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+{% load staticfiles %}
+{% load i18n %}
+{% load url from future %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% trans "Home" %} - {% trans "My Glucose Manager" %}{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!--link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}" type="text/css" media="screen" /-->
+    <link rel="stylesheet" href="{% static "css/diabetes.css" %}" type="text/css" media="screen" />
+    <!--link rel="stylesheet" href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" type="text/css" media="screen" /-->
+    <meta name="author" content="FoxMaSk">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body role="document">
+    {% block navbar %}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}" title="{% trans "Home" %}">My Glucose Manager</a>
+            </div>
+            <div class="navbar-collapse collapse">            
+                {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}" title="{% trans "Glucose" %}">{% trans "Glucose" %}</a></li>
+                    <li><a href="{% url 'appointments' %}" title="{% trans "Appointments" %}">{% trans "Appointments" %}</a></li>
+                    <li><a href="{% url 'issues' %}" title="{% trans "Issues" %}">{% trans "Issues" %}</a></li>
+                    <li><a href="{% url 'weights' %}" title="{% trans "Weights" %}">{% trans "Weights" %}</a></li>
+                    <li><a href="{% url 'meals' %}" title="{% trans "Meals" %}">{% trans "Meals" %}</a></li>
+                    <li><a href="{% url 'exams' %}" title="{% trans "Exams" %}">{% trans "Exams" %}</a></li>
+                    <li><a href="{% url 'exercises' %}" title="{% trans "Exercises" %}">{% trans "Exercises" %}</a></li>
+                    <li><a href="{% url 'logout' %}" title="{% trans "log out" %}"><span class="glyphicon glyphicon-off"></span></a></li>
+                </ul>
+                {% endif %}
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>    
+    {% endblock navbar %}
+
+    <div class="container">
+        <div class="row">
+        {% block content %}
+            <div class="jumbotron">
+                <p>
+                    <strong>My Glucoses Manager</strong> is up !
+                </p>
+                <p>Have Fun</p>
+                <a class="btn btn-primary" href="{% url 'login' %}">{% trans "Log in" %}</a>
+            </div>
+        {% endblock %}
+        {% block sidebar %}
+        {% endblock sidebar %}
+        </div>
+    </div><!--/.container-->
+    <hr/>
+    <footer class="footer">
+        {% block footer %}
+        <div class="container">
+            <p>2014 - My Glucose Manager</p>
+        </div>
+        {% endblock footer %}
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</body>
+</html>

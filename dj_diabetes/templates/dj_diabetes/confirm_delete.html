@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n %}
+{% block title %}{% trans "My Glucose Manager" %}{% endblock %}
+{% block content %}
+    <div class="col-md-12" id="delete-content-form">
+        <form method="post" role="form" class="form-horizontal" action="">
+        {% csrf_token %}
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <div class="alert alert-danger">
+            	<p>{% trans "Are you sure you want to delete "%} {{ object }} ?</p>
+                </div>
+                <button class="btn btn-danger">{% trans "Confirm" %}</button>
+                <a href="javascript:back()" class="btn btn-primary">{% trans "Cancel" %}</a>
+            </div>
+          </div>
+
+        </fieldset>     
+        </form>        
+    </div>
+{% endblock %}

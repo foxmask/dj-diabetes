@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n %}
+{% block title %}{% trans "My Glucose Manager" %}{% endblock %}
+{% block content %}
+    <div class="col-md-6" id="exercise-content-form">
+        <form method="post" role="form" class="form-horizontal" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <fieldset>
+        {% if action = 'add_exercise' %}
+        <legend>{% trans "Exercise" %}</legend>
+        {% else %}
+        <legend>{% trans 'Edition of the exercise' %}</legend>
+        {% endif %}
+          <div class="form-group">
+            {{ form.sports.errors }}          
+            <label for="id_sports" class="col-sm-4 control-label">{% trans "Sports" %}</label>            
+            <div class="col-sm-4">
+              {{ form.sports }}
+            </div>
+          </div>
+          <div class="form-group">
+            {{ form.duration.errors }}          
+            <label for="id_duration" class="col-sm-4 control-label">{% trans "Duration" %}</label>            
+            <div class="col-sm-4">
+              {{ form.duration }}
+            </div>
+          </div>
+          <div class="form-group">
+            {{ form.comment.errors }}          
+            <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>            
+            <div class="col-sm-4">
+              {{ form.comment }}
+            </div>
+          </div>          
+          <div class="form-group">
+            {{ form.date_exercise.errors }}
+            <label for="id_date_exercise" class="col-sm-4 control-label">{% trans "Date" %}</label>
+            <div class="col-sm-4">              
+              {{ form.date_exercise }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {% if action = 'add_exercise' %}                
+                <button class="btn btn-primary">{% trans "Add it" %}</button>
+                {% else %}
+                <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                {% endif %}
+            </div>
+          </div>
+
+        </fieldset>     
+        </form>
+    </div>
+    <div class="col-md-6" id="exercise-content-graph">
+        <legend>{% trans "Last exercises" %}</legend>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Sports" %}</th>                
+                <th>{% trans "Duration" %}</th>
+                <th>{% trans "Actions" %}</th>
+            <tr>
+        {% for line in data %}
+            <tr>
+                <td>{{ line.date_exercise }}</td>
+                <td>{{ line.sports }}</td>
+                <td>{{ line.duration }}</td>
+                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'exercise_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exercise_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>    
+{% endblock %}

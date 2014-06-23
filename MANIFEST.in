@@ -1,0 +1,5 @@
+exclude dj_diabetes/local_settings.py manage.py
+include *.txt *.rst 
+recursive-include dj_diabetes *.html *.png *.css *.gif *.jpg *.jpeg
+recursive-include dj_diabetes/static *
+recursive-include dj_diabetes/templates *

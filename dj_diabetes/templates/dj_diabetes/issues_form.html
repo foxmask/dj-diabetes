@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n %}
+{% block title %}{% trans "My Glucose Manager" %}{% endblock %}
+{% block content %}
+    <div class="col-md-6" id="issue-content-form">
+        <form method="post" role="form" class="form-horizontal" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <fieldset>
+        {% if action = 'add_issue' %}
+        <legend>{% trans "Issues" %}</legend>
+        {% else %}
+        <legend>{% trans 'Edition of the issue' %}</legend>
+        {% endif %}
+          <div class="form-group">
+            {{ form.question_to.errors }}          
+            <label for="id_question_to" class="col-sm-4 control-label">{% trans "Question to" %}</label>            
+            <div class="col-sm-4">
+              {{ form.question_to }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {{ form.question.errors }}          
+            <label for="id_question" class="col-sm-4 control-label">{% trans "Question" %}</label>            
+            <div class="col-sm-12">
+              {{ form.question }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {{ form.answer.errors }}          
+            <label for="id_question" class="col-sm-4 control-label">{% trans "Answer" %}</label>            
+            <div class="col-sm-12">
+              {{ form.answer }}
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            {{ form.date_answer.errors }}
+            <label for="id_date_answer" class="col-sm-4 control-label">{% trans "Answer Date" %}</label>
+            <div class="col-sm-4">              
+              {{ form.date_answer }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                {% if action = 'add_issue' %}                
+                <button class="btn btn-primary">{% trans "Add it" %}</button>
+                {% else %}
+                <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                {% endif %}
+            </div>
+          </div>
+
+        </fieldset>     
+        </form>
+    </div>
+    <div class="col-md-6" id="issue-content-graph">
+        <legend>{% trans "Last questions" %}</legend>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Question" %}</th>
+                <th>{% trans "Answer" %}</th>
+                <th>{% trans "Actions" %}</th>
+            <tr>
+        {% for line in data %}
+            {% if line.date_answer %}
+            <tr class="success">
+                <td>{{ line.created }}</td>
+                <td>{{ line.question }}</td>
+                <td>{{ line.answer }}</td>
+                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
+            </tr>
+            {% else %}
+            <tr class="danger">
+                <td>{{ line.created }}</td>
+                <td>{{ line.question }}</td>
+                <td>{{ line.answer }}</td>
+                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+            </tr>            
+            {% endif %}
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
+import logging
+
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy, reverse
-
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
@@ -13,17 +16,13 @@ from dj_diabetes.models import Issues, Exercises, Glucoses, Weights, Meals
 from dj_diabetes.forms import GlucosesForm, AppointmentsForm, IssuesForm
 from dj_diabetes.forms import WeightsForm, MealsForm, ExercisesForm, ExamsForm
 
-
-import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-from django.contrib.auth import logout
 
 #************************
 # FBV : simple actions  *
 #************************
-
 
 def logout_view(request):
     """
@@ -33,9 +32,37 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('home'))
 
 
+def round_value(value):
+    if value:
+        return round(float(value), 1)
+    else:
+        return 0
+
+
+@login_required
+def chart_data_json(request):
+    data = {}
+    data['chart_data'] = ChartData.get_datas()
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+class ChartData(object):
+
+    @classmethod
+    def get_datas(cls):
+        glucose_data = Glucoses.objects.all().order_by('-date_glucose')[:14]
+
+        data = {'date_glucose': [], 'glucose': []}
+        for g in glucose_data:
+            data['date_glucose'].append(g.date_glucose.strftime('%m/%d'))
+            data['glucose'].append(round_value(g.glucose))
+
+        return data
+
 #************************
 # Classe Based View
 #************************
+
 
 class GlucosesCreateView(CreateView):
     """
@@ -57,10 +84,12 @@ class GlucosesCreateView(CreateView):
         return HttpResponseRedirect(reverse('home'))
 
     def get_context_data(self, **kw):
+        data = Glucoses.objects.all().order_by('-date_glucose')[:14]
+
         context = super(GlucosesCreateView, self).get_context_data(**kw)
         #context['use_insuline'] = [False if insulin in GlucosesForm]
         context['action'] = 'add_glucoses'
-        context['data'] = Glucoses.objects.all()
+        context['data'] = data
         return context
 
 
@@ -428,8 +457,8 @@ class ExamsUpdateView(UpdateView):
     """
     model = Examinations
 
-    from django.forms.models import modelformset_factory
-    ExaminationDetailsFormSet = modelformset_factory(ExaminationDetails, extra=1)
+    #from django.forms.models import modelformset_factory
+    #ExaminationDetailsFormSet = modelformset_factory(ExaminationDetails, extra=1)
 
     fields = ['examination_types', 'comments', 'date_examination']
     template_name = "dj_diabetes/exams_form.html"
@@ -447,7 +476,7 @@ class ExamsUpdateView(UpdateView):
     def get_context_data(self, **kw):
         context = super(ExamsUpdateView, self).get_context_data(**kw)
         context['data'] = Examinations.objects.all()
-        context['formset'] = self.ExaminationDetailsFormSet()
+        # context['formset'] = self.ExaminationDetailsFormSet()
         return context
 
 

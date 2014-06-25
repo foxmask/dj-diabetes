@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load url from future %}
 {% load i18n %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
@@ -68,6 +69,9 @@
     </div>
     <div class="col-md-6" id="glucose-content-graph">
         <legend>{% trans "Last mesures" %}</legend>
+        <div class="panel panel-default">
+            <div class="panel-body" id="chart_panel"></div>
+        </div>            
         <table class="table table-striped table-hover">
             <tr>
                 <th>{% trans "Date" %}</th>
@@ -85,4 +89,37 @@
         {% endfor %}
         </table>
     </div>
+{% endblock %}
+{% block extrajs %}
+<script src="{% static 'js/highcharts/highcharts.js' %}"></script>
+<script src="{% static 'js/highcharts/modules/exporting.js' %}"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+    // Glucose Average by Day chart
+     var dataByDayOptions = {
+        chart: {
+            renderTo: 'chart_panel',
+            type: 'line',
+        },
+        legend: {enabled: false},
+        title: {text: 'Last mesures of Glucose by Day'},
+        subtitle: {text: 'Last 14 Days'},
+        xAxis: {title: {text: null}, labels: {rotation: -45}},
+        yAxis: {title: {text: null}},
+        series: [{}],
+    };
+
+    var chartDataUrl = "{% url 'chart_data_json' %}";
+    $.getJSON(chartDataUrl,
+        function(data) {
+            dataByDayOptions.xAxis.categories = data['chart_data']['date_glucose'];
+            dataByDayOptions.series[0].name = 'Avg Glucose (mg/dL)';
+            dataByDayOptions.series[0].data = data['chart_data']['glucose'];
+            var chart = new Highcharts.Chart(dataByDayOptions);
+    });
+} );
+//]]>
+</script>
+
 {% endblock %}

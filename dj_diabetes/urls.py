@@ -62,4 +62,9 @@ urlpatterns =\
         url(r'^pref/$', GlucosesCreateView.as_view(), name='pref'),
         #url(r'^$', 'dj_diabetes.views.glucose_create', name='home'),
         # url(r'^blog/', include('blog.urls')),
+        url(
+            regex=r'^chart_data_json/$',
+            view='dj_diabetes.views.chart_data_json',
+            name='chart_data_json',
+        ),
 )

@@ -13,13 +13,6 @@ requirements:
 * Django >= 1.6.5
 
 
-installation:
-=======
-
-./manager.py syncdb
-./mananger.py loaddata dj_diabetes_preferences.json
-
-
 Installation:
 =============
 to get the project, from your virtualenv, do :

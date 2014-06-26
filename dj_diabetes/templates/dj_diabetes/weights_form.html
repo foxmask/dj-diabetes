@@ -13,23 +13,25 @@
         {% else %}
         <legend>{% trans 'Edition of the weight' %}</legend>
         {% endif %}
-          <div class="form-group">
+        <div class="panel panel-default">
+        <br/>
+        <div class="form-group">
             {{ form.weight.errors }}          
             <label for="id_weight" class="col-sm-4 control-label">{% trans "Weight" %}</label>            
             <div class="col-sm-4">
               {{ form.weight }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
             {{ form.date_weight.errors }}
             <label for="id_date_weight" class="col-sm-4 control-label">{% trans "Weight Date" %}</label>
             <div class="col-sm-4">              
               {{ form.date_weight }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_weight' %}                
                 <button class="btn btn-primary">{% trans "Add it" %}</button>
@@ -37,7 +39,8 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-          </div>
+        </div>
+        </div>
 
         </fieldset>     
         </form>
@@ -59,4 +62,15 @@
         {% endfor %}
         </table>
     </div>
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+    $('#id_date_weight').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
+//]]>
+</script>
 {% endblock %}

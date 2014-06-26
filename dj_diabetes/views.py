@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 import json
 import logging
+import arrow
 
+from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -23,6 +25,16 @@ logger = logging.getLogger(__name__)
 #************************
 # FBV : simple actions  *
 #************************
+def right_now(model):
+    """
+        return a dict of 2 property set with current date and time
+    """
+    now_date = arrow.utcnow().to(settings.TIME_ZONE).format('YYYY-MM-DD')
+    now_hour = arrow.utcnow().to(settings.TIME_ZONE).format('HH:mm:ss')
+    my_date = 'date_' + model
+    my_hour = 'hour_' + model
+    return {my_date: now_date, my_hour: now_hour}
+
 
 def logout_view(request):
     """
@@ -75,6 +87,13 @@ class GlucosesCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(GlucosesCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx 
+            property of the current model
+        """
+        return right_now("glucose")
+
     def form_valid(self, form):
         glucose = form.save(commit=False)
         if form.is_valid():
@@ -98,6 +117,7 @@ class GlucosesUpdateView(UpdateView):
         to Edit Glucoses
     """
     model = Glucoses
+    form_class = GlucosesForm
     template_name = "dj_diabetes/glucoses_form.html"
     fields = ['moment', 'comment', 'glucose', 'insulin', 'date_glucose']
 
@@ -137,6 +157,13 @@ class AppointmentsCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(AppointmentsCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx
+            property of the current model
+        """
+        return right_now("appointment")
+
     def form_valid(self, form):
         appointments = form.save(commit=False)
         if form.is_valid():
@@ -157,6 +184,7 @@ class AppointmentsUpdateView(UpdateView):
         to Edit Appointments
     """
     model = Appointments
+    form_class = AppointmentsForm
     template_name = "dj_diabetes/appointments_form.html"
     fields = ['appointment_types', 'title', 'body', 'date_appointment',
               'recall_one_duration', 'recall_two_duration',
@@ -218,6 +246,7 @@ class IssuesUpdateView(UpdateView):
         to Edit Issues
     """
     model = Issues
+    form_class = IssuesForm
     fields = ['question', 'question_to', 'answer', 'date_answer']
     template_name = "dj_diabetes/issues_form.html"
 
@@ -257,6 +286,9 @@ class WeightsCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(WeightsCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        return {'date_weight': arrow.utcnow().to(settings.TIME_ZONE).format('YYYY-MM-DD')}
+
     def form_valid(self, form):
         weights = form.save(commit=False)
         if form.is_valid():
@@ -277,6 +309,7 @@ class WeightsUpdateView(UpdateView):
         to Edit Weights
     """
     model = Weights
+    form_class = WeightsForm
     fields = ['weight', 'date_weight']
     template_name = "dj_diabetes/weights_form.html"
 
@@ -316,6 +349,14 @@ class MealsCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(MealsCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx 
+            property of the current model
+        """
+        return right_now("meal")
+
+
     def form_valid(self, form):
         meals = form.save(commit=False)
         print "meals ? ", meals.breakfast_lunch_diner
@@ -338,6 +379,7 @@ class MealsUpdateView(UpdateView):
         to Edit Meals
     """
     model = Meals
+    form_class = MealsForm
     fields = ['food', 'breakfast_lunch_diner', 'meal_date']
     template_name = "dj_diabetes/meals_form.html"
 
@@ -377,6 +419,13 @@ class ExercisesCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(ExercisesCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx 
+            property of the current model
+        """
+        return right_now("exercise")
+
     def form_valid(self, form):
         exercise = form.save(commit=False)
         if form.is_valid():
@@ -397,6 +446,7 @@ class ExercisesUpdateView(UpdateView):
         to Edit Exercises
     """
     model = Exercises
+    form_class = ExercisesForm
     fields = fields = ['sports', 'comment', 'duration', 'date_exercise']
     template_name = "dj_diabetes/exercises_form.html"
 
@@ -436,6 +486,13 @@ class ExamsCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(ExamsCreateView, self).dispatch(*args, **kwargs)
 
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx 
+            property of the current model
+        """
+        return right_now("examination")
+
     def form_valid(self, form):
         exercise = form.save(commit=False)
         if form.is_valid():
@@ -456,7 +513,7 @@ class ExamsUpdateView(UpdateView):
         to Edit Exams
     """
     model = Examinations
-
+    form_class = ExamsForm
     #from django.forms.models import modelformset_factory
     #ExaminationDetailsFormSet = modelformset_factory(ExaminationDetails, extra=1)
 

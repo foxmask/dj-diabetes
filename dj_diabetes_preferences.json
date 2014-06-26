@@ -36,9 +36,9 @@
     "pk": 4, 
     "model": "dj_diabetes.preferences", 
     "fields": {
-        "modified": "2014-06-23T20:12:39.704Z", 
+        "modified": "2014-06-26T11:40:20.166Z", 
         "created": "2014-06-23T20:12:39.704Z", 
-        "value": "1\r\n", 
+        "value": "1", 
         "key": "moment", 
         "title": "Ajeun avant le petit dej"
     }
@@ -60,7 +60,7 @@
     "fields": {
         "modified": "2014-06-23T20:13:21.946Z", 
         "created": "2014-06-23T20:13:21.946Z", 
-        "value": "3\r\n", 
+        "value": "3", 
         "key": "moment", 
         "title": "Apr\u00e8s le repas du midi"
     }
@@ -85,17 +85,6 @@
         "value": "5", 
         "key": "moment", 
         "title": "Au diner"
-    }
-},
-{
-    "pk": 9, 
-    "model": "dj_diabetes.preferences", 
-    "fields": {
-        "modified": "2014-06-23T20:57:34.103Z", 
-        "created": "2014-06-23T20:38:50.430Z", 
-        "value": "1", 
-        "key": "insulin", 
-        "title": "Do I use Insulin ? (1=yes, 0=no)"
     }
 }
 ]

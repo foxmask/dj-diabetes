@@ -11,6 +11,7 @@ requirements:
 =========
 * Python 2.7.x
 * Django >= 1.6.5
+* arrow 0.4.2
 
 
 Installation:

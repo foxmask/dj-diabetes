@@ -2,6 +2,7 @@
 {% load static %}
 {% load url from future %}
 {% load i18n %}
+{% load dj_diabetes_extras %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
 {% block content %}
     <div class="col-md-6" id="glucose-content-form">
@@ -14,47 +15,57 @@
         {% else %}
         <legend>{% trans 'Edition of the glucose' %}</legend>
         {% endif %}
-          <div class="form-group">
-            {{ form.glucose.errors }}          
-            <label for="id_glucose" class="col-sm-4 control-label">{% trans "Glucoses" %}</label>            
+        <div class="panel panel-default">
+        <br/>
+        <div class="form-group">
+            {{ form.glucose.errors }}
+            <label for="id_glucose" class="col-sm-4 control-label">{% trans "Glucoses" %}</label>
             <div class="col-sm-4">
               {{ form.glucose }}
             </div>
-          </div>
-          {% if form.insulin %}
-          <div class="form-group">
+        </div>
+        {% if form.insulin %}
+        <div class="form-group">
             {{ form.insulin.errors }}
             <label for="id_insulin" class="col-sm-4 control-label">{% trans "Insulin" %}</label>
-            <div class="col-sm-4">            
+            <div class="col-sm-4">
               {{ form.insulin }}
             </div>
-          </div>
-          {% endif %}
-          <div class="form-group">
-            {{ form.comment.errors }}          
+        </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form.comment.errors }}
             <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>
-            <div class="col-sm-12">              
+            <div class="col-sm-offset-1 col-sm-10">
               {{ form.comment }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
-            {{ form.moment.errors }}          
+        <div class="form-group">
+            {{ form.moment.errors }}
             <label for="id_moment" class="col-sm-4 control-label">{% trans "Moment" %}</label>
-            <div class="col-sm-4">              
+            <div class="col-sm-4">
               {{ form.moment }}
             </div>
-          </div>
-
-          <div class="form-group">
+        </div>
+        
+        <div class="form-group">
             {{ form.date_glucose.errors }}
             <label for="id_date_glucose" class="col-sm-4 control-label">{% trans "Date" %}</label>
-            <div class="col-sm-4">              
+            <div class="col-sm-4">
               {{ form.date_glucose }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
+            {{ form.hour_glucose.errors }}
+            <label for="id_hour_glucose" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+            <div class="col-sm-4">
+              {{ form.hour_glucose }}
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_glucoses' %}                
                 <button class="btn btn-primary">{% trans "Add it" %}</button>
@@ -62,9 +73,9 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-          </div>
-
-        </fieldset>     
+        </div>
+        </div>
+        </fieldset>
         </form>
     </div>
     <div class="col-md-6" id="glucose-content-graph">
@@ -77,13 +88,15 @@
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Glucose" %}</th>
                 <th>{% trans "Insulin" %}</th>
+                <th>{% trans "Moment" %}</th>
                 <th>{% trans "Actions" %}</th>
             <tr>
         {% for line in data %}
             <tr>
-                <td>{{ line.date_glucose }}</td>
+                <td>{{ line.date_glucose }} {{ line.hour_glucose }}</td>
                 <td>{{ line.glucose }}</td>
                 <td>{{ line.insulin }}</td>
+                <td>{{ line.moment|which_value:'moment' }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'glucose_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'glucose_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
@@ -119,6 +132,11 @@ $(document).ready(function() {
             var chart = new Highcharts.Chart(dataByDayOptions);
     });
 } );
+$(function(){
+    $('#id_date_glucose').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
 //]]>
 </script>
 

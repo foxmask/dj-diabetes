@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dj_diabetes',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,3 +103,4 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+

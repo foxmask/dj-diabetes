@@ -40,9 +40,11 @@ class GlucosesForm(forms.ModelForm):
         model = Glucoses
         # Do the user uses insulin ?
         if settings.DJ_DIABETES['insulin'] is True:
-            fields = ['moment', 'comment', 'glucose', 'insulin', 'date_glucose']
+            fields = ['moment', 'comment', 'glucose', 'insulin',
+                      'date_glucose', 'hour_glucose']
         else:
-            fields = ['moment', 'comment', 'glucose', 'date_glucose']
+            fields = ['moment', 'comment', 'glucose',
+                      'date_glucose', 'hour_glucose']
 
 
 class AppointmentsForm(forms.ModelForm):
@@ -55,7 +57,8 @@ class AppointmentsForm(forms.ModelForm):
 
     class Meta:
         model = Appointments
-        fields = ['appointment_types', 'title', 'body', 'date_appointment',
+        fields = ['appointment_types', 'title', 'body',
+                  'date_appointment', 'hour_appointment',
                   'recall_one_duration', 'recall_two_duration',
                   'recall_one_unit', 'recall_two_unit']
 
@@ -91,19 +94,25 @@ class MealsForm(forms.ModelForm):
     """
     # get the list of pref to get the value in the dropdow
     breakfast_lunch_diner = forms.ChoiceField(pref_filter("meal"))
+    food = forms.CharField(widget=forms.Textarea(
+        {'class': 'form-control', 'rows': '3'}))
 
     class Meta:
         model = Meals
-        fields = ['food', 'breakfast_lunch_diner', 'meal_date']
+        fields = ['food', 'breakfast_lunch_diner', 'date_meal', 'hour_meal']
 
 
 class ExercisesForm(forms.ModelForm):
     """
         Exercises Form
     """
+    comment = forms.CharField(widget=forms.Textarea(
+        {'class': 'form-control', 'rows': '3'}))
+
     class Meta:
         model = Exercises
-        fields = ['sports', 'comment', 'duration', 'date_exercise']
+        fields = ['sports', 'comment', 'duration',
+                  'date_exercise', 'hour_exercise']
 
 
 class ExamsForm(forms.ModelForm):
@@ -116,7 +125,8 @@ class ExamsForm(forms.ModelForm):
 
     class Meta:
         model = Examinations
-        fields = ['examination_types', 'comments', 'date_examination']
+        fields = ['examination_types', 'comments',
+                  'date_examination', 'hour_examination']
 
 
 class ExamDetailsForm(forms.ModelForm):

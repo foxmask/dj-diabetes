@@ -24,9 +24,10 @@ urlpatterns =\
         # ****************************************
         url(r'^logout/$', 'dj_diabetes.views.logout_view', name='logout'),
         url(r'^$', GlucosesCreateView.as_view(), name='home'),
-        url(r'^glucose/edit/(?P<pk>\d+)$', GlucosesUpdateView.as_view(),
+        url(r'^glucoses/$', GlucosesCreateView.as_view(), name='glucoses'),
+        url(r'^glucoses/edit/(?P<pk>\d+)$', GlucosesUpdateView.as_view(),
             name='glucose_edit'),
-        url(r'^glucose/delete/(?P<pk>\d+)$', GlucosesDeleteView.as_view(),
+        url(r'^glucoses/delete/(?P<pk>\d+)$', GlucosesDeleteView.as_view(),
             name='glucose_delete'),
         url(r'^appoints/$', AppointmentsCreateView.as_view(),
             name='appointments'),

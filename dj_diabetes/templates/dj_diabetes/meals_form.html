@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load url from future %}
 {% load i18n %}
+{% load dj_diabetes_extras %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
 {% block content %}
     <div class="col-md-6" id="meal-content-form">
@@ -13,29 +14,41 @@
         {% else %}
         <legend>{% trans 'Edition of the meal' %}</legend>
         {% endif %}
-          <div class="form-group">
+        <div class="panel panel-default">
+        <br/>        
+        <div class="form-group">
             {{ form.food.errors }}          
             <label for="id_food" class="col-sm-4 control-label">{% trans "Food" %}</label>            
-            <div class="col-sm-4">
+            <div class="col-sm-offset-1 col-sm-10">
               {{ form.food }}
             </div>
-          </div>
-          <div class="form-group">
+        </div>
+
+        <div class="form-group">
             {{ form.breakfast_lunch_diner.errors }}          
             <label for="id_breakfast_lunch_diner" class="col-sm-4 control-label">{% trans "Moment ?" %}</label>            
             <div class="col-sm-4">
               {{ form.breakfast_lunch_diner }}
             </div>
-          </div>
-          <div class="form-group">
-            {{ form.meal_date.errors }}
-            <label for="id_meal_date" class="col-sm-4 control-label">{% trans "Date" %}</label>
-            <div class="col-sm-4">              
-              {{ form.meal_date }}
-            </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
+            {{ form.date_meal.errors }}
+            <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date" %}</label>
+            <div class="col-sm-4">              
+              {{ form.date_meal }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.hour_meal.errors }}
+            <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+            <div class="col-sm-4">              
+              {{ form.hour_meal }}
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_meal' %}                
                 <button class="btn btn-primary">{% trans "Add it" %}</button>
@@ -43,8 +56,8 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-          </div>
-
+        </div>
+        </div>
         </fieldset>     
         </form>
     </div>
@@ -60,11 +73,22 @@
         {% for line in data %}
             <tr>
                 <td>{{ line.food }}</td>
-                <td>{% if line.breakfast_lunch_diner == 1 %}{% trans "Breakfast" %}{% elif line.breakfast_lunch_diner == 1 %}{% trans "Lunch"%}{% else %}{% trans "Diner" %}{% endif %}</td>
-                <td>{{ line.meal_date }}</td>
+                <td>{{ line.breakfast_lunch_diner|which_value:'meal' }}</td>                
+                <td>{{ line.date_mea }} {{ line.hour_meal }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'meal_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'meal_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
         </table>
     </div>
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+    $('#id_date_meal').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
+//]]>
+</script>
 {% endblock %}

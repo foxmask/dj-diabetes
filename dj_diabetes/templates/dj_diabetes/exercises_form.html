@@ -13,36 +13,49 @@
         {% else %}
         <legend>{% trans 'Edition of the exercise' %}</legend>
         {% endif %}
-          <div class="form-group">
+        <div class="panel panel-default">
+        <br/>
+        <div class="form-group">
             {{ form.sports.errors }}          
             <label for="id_sports" class="col-sm-4 control-label">{% trans "Sports" %}</label>            
             <div class="col-sm-4">
               {{ form.sports }}
             </div>
-          </div>
-          <div class="form-group">
+        </div>
+
+        <div class="form-group">
             {{ form.duration.errors }}          
             <label for="id_duration" class="col-sm-4 control-label">{% trans "Duration" %}</label>            
             <div class="col-sm-4">
               {{ form.duration }}
             </div>
-          </div>
-          <div class="form-group">
+        </div>
+
+        <div class="form-group">
             {{ form.comment.errors }}          
             <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>            
-            <div class="col-sm-4">
+            <div class="col-sm-offset-1 col-sm-10">
               {{ form.comment }}
             </div>
-          </div>          
-          <div class="form-group">
+        </div>          
+
+        <div class="form-group">
             {{ form.date_exercise.errors }}
             <label for="id_date_exercise" class="col-sm-4 control-label">{% trans "Date" %}</label>
             <div class="col-sm-4">              
               {{ form.date_exercise }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
+            {{ form.hour_exercise.errors }}
+            <label for="id_hour_exercise" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+            <div class="col-sm-4">
+              {{ form.hour_exercise }}
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_exercise' %}                
                 <button class="btn btn-primary">{% trans "Add it" %}</button>
@@ -50,8 +63,8 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-          </div>
-
+        </div>
+        </div>
         </fieldset>     
         </form>
     </div>
@@ -67,11 +80,22 @@
         {% for line in data %}
             <tr>
                 <td>{{ line.date_exercise }}</td>
-                <td>{{ line.sports }}</td>
+                <td>{{ line.sports.title }}</td>
                 <td>{{ line.duration }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'exercise_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exercise_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
         </table>
     </div>    
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+    $('#id_date_exercise').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
+//]]>
+</script>
 {% endblock %}

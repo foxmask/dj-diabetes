@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    birth_date = models.DateTimeField(null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=15)
     address = models.TextField()
     zipcode = models.CharField(max_length=50)
@@ -63,7 +63,7 @@ class Issues(models.Model):
     question = models.TextField()
     question_to = models.CharField(max_length=255)
     answer = models.TextField(null=True, blank=True)
-    date_answer = models.DateTimeField(null=True, blank=True)
+    date_answer = models.DateField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -113,7 +113,8 @@ class Appointments(models.Model):
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    date_appointment = models.DateTimeField(null=True)
+    date_appointment = models.DateField(null=True)
+    hour_appointment = models.TimeField(null=True)
     recall_one_duration = models.IntegerField(null=True)
     recall_two_duration = models.IntegerField(null=True)
     recall_one_unit = models.IntegerField(null=True)
@@ -162,7 +163,8 @@ class Glucoses(models.Model):
     glucose = models.DecimalField(max_digits=5, decimal_places=2)
     insulin = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     comment = models.TextField()
-    date_glucose = models.DateTimeField()
+    date_glucose = models.DateField()
+    hour_glucose = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -188,7 +190,8 @@ class Meals(models.Model):
     user = models.ForeignKey(User)
     food = models.TextField()
     breakfast_lunch_diner = models.CharField(max_length=2)
-    meal_date = models.DateTimeField(null=True)
+    date_meal = models.DateField(null=True)
+    hour_meal = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -235,7 +238,8 @@ class Examinations(models.Model):
     user = models.ForeignKey(User)
     examination_types = models.ForeignKey(ExaminationTypes)
     comments = models.TextField()
-    date_examination = models.DateTimeField()
+    date_examination = models.DateField()
+    hour_examination = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -287,7 +291,7 @@ class Weights(models.Model):
     """
     user = models.ForeignKey(User)
     weight = models.FloatField()
-    date_weight = models.DateTimeField()
+    date_weight = models.DateField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -333,7 +337,8 @@ class Exercises(models.Model):
     sports = models.ForeignKey(Sports)
     comment = models.TextField()
     duration = models.FloatField()
-    date_exercise = models.DateTimeField(null=True)
+    date_exercise = models.DateField(null=True)
+    hour_exercise = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

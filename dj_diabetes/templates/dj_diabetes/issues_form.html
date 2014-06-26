@@ -13,40 +13,41 @@
         {% else %}
         <legend>{% trans 'Edition of the issue' %}</legend>
         {% endif %}
-          <div class="form-group">
+        <div class="panel panel-default">
+        <br/>
+        <div class="form-group">
             {{ form.question_to.errors }}          
             <label for="id_question_to" class="col-sm-4 control-label">{% trans "Question to" %}</label>            
             <div class="col-sm-4">
               {{ form.question_to }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
             {{ form.question.errors }}          
             <label for="id_question" class="col-sm-4 control-label">{% trans "Question" %}</label>            
-            <div class="col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
               {{ form.question }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
             {{ form.answer.errors }}          
             <label for="id_question" class="col-sm-4 control-label">{% trans "Answer" %}</label>            
-            <div class="col-sm-12">
+            <div class="col-sm-offset-1 col-sm-10">
               {{ form.answer }}
             </div>
-          </div>
+        </div>
 
-
-          <div class="form-group">
+        <div class="form-group">
             {{ form.date_answer.errors }}
             <label for="id_date_answer" class="col-sm-4 control-label">{% trans "Answer Date" %}</label>
             <div class="col-sm-4">              
               {{ form.date_answer }}
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_issue' %}                
                 <button class="btn btn-primary">{% trans "Add it" %}</button>
@@ -54,8 +55,8 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-          </div>
-
+        </div>
+        </div>
         </fieldset>     
         </form>
     </div>
@@ -66,6 +67,7 @@
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Question" %}</th>
                 <th>{% trans "Answer" %}</th>
+                <th>{% trans "Answered at" %}</th>
                 <th>{% trans "Actions" %}</th>
             <tr>
         {% for line in data %}
@@ -74,6 +76,7 @@
                 <td>{{ line.created }}</td>
                 <td>{{ line.question }}</td>
                 <td>{{ line.answer }}</td>
+                <td>{{ line.date_answer }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
             </tr>
             {% else %}
@@ -81,10 +84,22 @@
                 <td>{{ line.created }}</td>
                 <td>{{ line.question }}</td>
                 <td>{{ line.answer }}</td>
+                <td>{% trans "not yet answered" %}</td>
                 <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>            
             {% endif %}
         {% endfor %}
         </table>
     </div>
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+    $('#id_date_answer').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
+//]]>
+</script>
 {% endblock %}

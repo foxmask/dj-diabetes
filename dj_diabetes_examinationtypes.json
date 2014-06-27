@@ -1,0 +1,308 @@
+[
+{
+    "pk": 3, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:55:52.086Z", 
+        "modified": "2014-06-27T13:55:52.086Z", 
+        "title": "HbA1c"
+    }
+},
+{
+    "pk": 4, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:05.797Z", 
+        "modified": "2014-06-27T13:56:05.797Z", 
+        "title": "Exploration d''une anomalie lipidique (CT, HDL-C, LDL-C, TG)"
+    }
+},
+{
+    "pk": 5, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:12.901Z", 
+        "modified": "2014-06-27T13:56:12.901Z", 
+        "title": "Cr\u00e9atinin\u00e9mie avec estimation du d\u00e9bit de filtration glom\u00e9rulaire"
+    }
+},
+{
+    "pk": 6, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:19.794Z", 
+        "modified": "2014-06-27T13:56:19.794Z", 
+        "title": "Recherche d''albuminurie sur \u00e9chantillon urinaire (Albuminurie / Cr\u00e9atininurie)"
+    }
+},
+{
+    "pk": 7, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:25.577Z", 
+        "modified": "2014-06-27T13:56:25.577Z", 
+        "title": "Glyc\u00e9mie veineuse Contr\u00f4le de l''auto-surveillance glyc\u00e9mique"
+    }
+},
+{
+    "pk": 8, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:30.420Z", 
+        "modified": "2014-06-27T13:56:30.421Z", 
+        "title": "TSH"
+    }
+},
+{
+    "pk": 9, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:35.941Z", 
+        "modified": "2014-06-27T13:56:35.941Z", 
+        "title": "Anticorps sp\u00e9cifiques"
+    }
+},
+{
+    "pk": 10, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:39.588Z", 
+        "modified": "2014-06-27T13:56:39.588Z", 
+        "title": "H\u00e9mogramme"
+    }
+},
+{
+    "pk": 11, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:43.571Z", 
+        "modified": "2014-06-27T13:56:43.571Z", 
+        "title": "CRP"
+    }
+},
+{
+    "pk": 12, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:56:52.040Z", 
+        "modified": "2014-06-27T13:56:52.040Z", 
+        "title": "Pr\u00e9l\u00e8vements bact\u00e9riologiques"
+    }
+},
+{
+    "pk": 13, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:02.078Z", 
+        "modified": "2014-06-27T13:57:02.078Z", 
+        "title": "Pr\u00e9l\u00e8vement bact\u00e9riologique et biopsie"
+    }
+},
+{
+    "pk": 14, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:07.798Z", 
+        "modified": "2014-06-27T13:57:07.798Z", 
+        "title": "Examen du fond d''oeil au biomicroscope"
+    }
+},
+{
+    "pk": 15, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:18.639Z", 
+        "modified": "2014-06-27T13:57:18.639Z", 
+        "title": "R\u00e9tinographie avec ou sans mydriase, r\u00e9alis\u00e9e au cabinet de l'opthalmologiste"
+    }
+},
+{
+    "pk": 16, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:27.210Z", 
+        "modified": "2014-06-27T13:57:27.210Z", 
+        "title": "R\u00e9tinographie avec ou sans mydriase, r\u00e9alis\u00e9e par un orthoptiste ou un infirmier, et avec interpr\u00e9tation diff\u00e9r\u00e9e"
+    }
+},
+{
+    "pk": 17, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:33.698Z", 
+        "modified": "2014-06-27T13:57:33.698Z", 
+        "title": "Angiographie fluoresc\u00e9ine"
+    }
+},
+{
+    "pk": 18, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:41.143Z", 
+        "modified": "2014-06-27T13:57:41.143Z", 
+        "title": "Pachym\u00e9trie, tomographie en coh\u00e9rence optique (OCT)"
+    }
+},
+{
+    "pk": 19, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:57:50.267Z", 
+        "modified": "2014-06-27T13:57:50.268Z", 
+        "title": "\u00e9chobiom\u00e9trie pr\u00e9op\u00e9ratoire"
+    }
+},
+{
+    "pk": 20, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:01.443Z", 
+        "modified": "2014-06-27T13:58:01.443Z", 
+        "title": "Evaluation du champ visuel"
+    }
+},
+{
+    "pk": 21, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:07.484Z", 
+        "modified": "2014-06-27T13:58:07.484Z", 
+        "title": "Heidelberg Retina Tomographe (HRT)"
+    }
+},
+{
+    "pk": 22, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:14.113Z", 
+        "modified": "2014-06-27T13:58:14.113Z", 
+        "title": "Photocoagulation laser"
+    }
+},
+{
+    "pk": 23, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:22.533Z", 
+        "modified": "2014-06-27T13:58:22.533Z", 
+        "title": "ECG de repos"
+    }
+},
+{
+    "pk": 24, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:40.477Z", 
+        "modified": "2014-06-27T13:58:40.477Z", 
+        "title": "Bilan cardiologique (\u00e9chographie, tests de stimulation non invasifs : scintigraphie myocardique, test d'effort)"
+    }
+},
+{
+    "pk": 25, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:58:53.333Z", 
+        "modified": "2014-06-27T13:58:53.333Z", 
+        "title": "Echo-Doppler et mesure de l'index de pression systolique bras-cheville (IPS)"
+    }
+},
+{
+    "pk": 26, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:10.459Z", 
+        "modified": "2014-06-27T13:59:10.459Z", 
+        "title": "Test de marche, mesure de l'IPS par pression du gros orteil Bilan pr\u00e9interventionnel (TcPO\u00b2 art\u00e9riographie conventionnelle ou angio-RM ou angioscanner)"
+    }
+},
+{
+    "pk": 27, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:17.856Z", 
+        "modified": "2014-06-27T13:59:17.856Z", 
+        "title": "Radiographie du pied"
+    }
+},
+{
+    "pk": 28, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:26.828Z", 
+        "modified": "2014-06-27T13:59:26.828Z", 
+        "title": "Bilan recherche ost\u00e9ite (scanner, IRM, scintigraphie leucocytes marqu\u00e9s ou osseuse)"
+    }
+},
+{
+    "pk": 29, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:31.180Z", 
+        "modified": "2014-06-27T13:59:31.180Z", 
+        "title": "EMG"
+    }
+},
+{
+    "pk": 30, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:37.237Z", 
+        "modified": "2014-06-27T13:59:37.237Z", 
+        "title": "Test de dysautonomie"
+    }
+},
+{
+    "pk": 31, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:42.321Z", 
+        "modified": "2014-06-27T13:59:42.321Z", 
+        "title": "glyc\u00e9mie"
+    }
+},
+{
+    "pk": 32, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:49.091Z", 
+        "modified": "2014-06-27T13:59:49.091Z", 
+        "title": "h\u00e9moglobine glycolys\u00e9e"
+    }
+},
+{
+    "pk": 33, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T13:59:55.363Z", 
+        "modified": "2014-06-27T13:59:55.363Z", 
+        "title": "examen d'urine"
+    }
+},
+{
+    "pk": 34, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T14:00:01.662Z", 
+        "modified": "2014-06-27T14:00:01.662Z", 
+        "title": "angiographie r\u00e9tinienne"
+    }
+},
+{
+    "pk": 35, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T14:00:06.543Z", 
+        "modified": "2014-06-27T14:00:06.543Z", 
+        "title": "Glyc\u00e9mie capillaire et insulinoth\u00e9rapie"
+    }
+},
+{
+    "pk": 36, 
+    "model": "dj_diabetes.examinationtypes", 
+    "fields": {
+        "created": "2014-06-27T14:00:12.118Z", 
+        "modified": "2014-06-27T14:00:12.118Z", 
+        "title": "Dosage de l''h\u00e9moglobine glyqu\u00e9e"
+    }
+}
+]

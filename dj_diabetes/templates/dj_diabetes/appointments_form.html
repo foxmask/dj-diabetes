@@ -102,20 +102,37 @@
     </div>
     <div class="col-md-6" id="appointment-content-graph">
         <legend>{% trans "Last appointments" %}</legend>        
-            <table class="table table-striped table-hover">
-                <tr>
-                    <th>{% trans "Date" %}</th>
-                    <th>{% trans "Title" %}</th>
-                    <th>{% trans "Actions" %}</th>
-                <tr>
-            {% for line in data %}
-                <tr>
-                    <td>{{ line.date_appointment }}</td>
-                    <td>{{ line.title }}</td>
-                    <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'appointment_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'appointment_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
-                </tr>
-            {% endfor %}
-            </table>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Actions" %}</th>
+            <tr>
+        {% for line in data %}
+            <tr>
+                <td>{{ line.date_appointment }}</td>
+                <td>{{ line.title }}</td>
+                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'appointment_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'appointment_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
+            </tr>
+        {% endfor %}
+        </table>
+
+        <div class="col-md-12">
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li><a href="{% url 'appointments' %}?page={{ data.previous_page_number }}">{% trans "previous" %}</a></li>
+                {% endif %}
+                    <li class="active"><a >
+                    {% blocktrans with page_number=data.number total_of_pages=data.paginator.num_pages %}
+                    Page {{ page_number }} of {{ total_of_pages }}
+                    {% endblocktrans %}</a>
+                    </li>
+                {% if data.has_next %}
+                    <li><a href="{% url 'appointments' %}?page={{ data.next_page_number }}">{% trans "next" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
         </div>
     </div>
 {% endblock %}

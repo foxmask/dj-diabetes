@@ -101,6 +101,25 @@
             </tr>
         {% endfor %}
         </table>
+
+
+        <div class="col-md-12">
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li><a href="{% url 'glucoses' %}?page={{ data.previous_page_number }}">{% trans "previous" %}</a></li>
+                {% endif %}
+                    <li class="active"><a >
+                    {% blocktrans with page_number=data.number total_of_pages=data.paginator.num_pages %}
+                    Page {{ page_number }} of {{ total_of_pages }}
+                    {% endblocktrans %}</a>
+                    </li>
+                {% if data.has_next %}
+                    <li><a href="{% url 'glucoses' %}?page={{ data.next_page_number }}">{% trans "next" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+
     </div>
 {% endblock %}
 {% block extrajs %}
@@ -127,7 +146,7 @@ $(document).ready(function() {
     $.getJSON(chartDataUrl,
         function(data) {
             dataByDayOptions.xAxis.categories = data['chart_data']['date_glucose'];
-            dataByDayOptions.series[0].name = 'Avg Glucose (mg/dL)';
+            dataByDayOptions.series[0].name = 'Glucose (mg/dL)';
             dataByDayOptions.series[0].data = data['chart_data']['glucose'];
             var chart = new Highcharts.Chart(dataByDayOptions);
     });

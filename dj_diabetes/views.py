@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # dj_diabetes
 from dj_diabetes.models import Appointments, Examinations, ExaminationDetails
@@ -25,6 +26,24 @@ logger = logging.getLogger(__name__)
 #************************
 # FBV : simple actions  *
 #************************
+def page_it(data, record_per_page, page=''):
+    """
+        return the data of the current page
+    """
+    paginator = Paginator(data, record_per_page)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        data = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999),
+        # deliver last page of results.
+        data = paginator.page(paginator.num_pages)
+
+    return data
+
+
 def right_now(model):
     """
         return a dict of 2 property set with current date and time
@@ -89,7 +108,7 @@ class GlucosesCreateView(CreateView):
 
     def get_initial(self):
         """
-            set the default date and hour of the date_xxx and hour_xxx 
+            set the default date and hour of the date_xxx and hour_xxx
             property of the current model
         """
         return right_now("glucose")
@@ -103,7 +122,12 @@ class GlucosesCreateView(CreateView):
         return HttpResponseRedirect(reverse('home'))
 
     def get_context_data(self, **kw):
-        data = Glucoses.objects.all().order_by('-date_glucose')[:14]
+        data = Glucoses.objects.all().order_by('-date_glucose')
+        #paginator vars
+        record_per_page = 5
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
 
         context = super(GlucosesCreateView, self).get_context_data(**kw)
         #context['use_insuline'] = [False if insulin in GlucosesForm]
@@ -173,9 +197,16 @@ class AppointmentsCreateView(CreateView):
         return HttpResponseRedirect(reverse('appointments'))
 
     def get_context_data(self, **kw):
+        data = Appointments.objects.all().order_by('-date_appointment')
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(AppointmentsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_appointments'
-        context['data'] = Appointments.objects.all()
+        context['data'] = data
         return context
 
 
@@ -235,9 +266,16 @@ class IssuesCreateView(CreateView):
         return HttpResponseRedirect(reverse('issues'))
 
     def get_context_data(self, **kw):
+        data = Issues.objects.all().order_by('-created')
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(IssuesCreateView, self).get_context_data(**kw)
         context['action'] = 'add_issue'
-        context['data'] = Issues.objects.all()
+        context['data'] = data
         return context
 
 
@@ -298,9 +336,16 @@ class WeightsCreateView(CreateView):
         return HttpResponseRedirect(reverse('weights'))
 
     def get_context_data(self, **kw):
+        data = Weights.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(WeightsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_weight'
-        context['data'] = Weights.objects.all()
+        context['data'] = data
         return context
 
 
@@ -351,11 +396,10 @@ class MealsCreateView(CreateView):
 
     def get_initial(self):
         """
-            set the default date and hour of the date_xxx and hour_xxx 
+            set the default date and hour of the date_xxx and hour_xxx
             property of the current model
         """
         return right_now("meal")
-
 
     def form_valid(self, form):
         meals = form.save(commit=False)
@@ -368,9 +412,16 @@ class MealsCreateView(CreateView):
         return HttpResponseRedirect(reverse('meals'))
 
     def get_context_data(self, **kw):
+        data = Meals.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(MealsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_meal'
-        context['data'] = Meals.objects.all()
+        context['data'] = data
         return context
 
 
@@ -421,7 +472,7 @@ class ExercisesCreateView(CreateView):
 
     def get_initial(self):
         """
-            set the default date and hour of the date_xxx and hour_xxx 
+            set the default date and hour of the date_xxx and hour_xxx
             property of the current model
         """
         return right_now("exercise")
@@ -435,9 +486,16 @@ class ExercisesCreateView(CreateView):
         return HttpResponseRedirect(reverse('exercises'))
 
     def get_context_data(self, **kw):
+        data = Exercises.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(ExercisesCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exercise'
-        context['data'] = Exercises.objects.all()
+        context['data'] = data
         return context
 
 
@@ -488,7 +546,7 @@ class ExamsCreateView(CreateView):
 
     def get_initial(self):
         """
-            set the default date and hour of the date_xxx and hour_xxx 
+            set the default date and hour of the date_xxx and hour_xxx
             property of the current model
         """
         return right_now("examination")
@@ -502,9 +560,16 @@ class ExamsCreateView(CreateView):
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
+        data = Examinations.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+        
         context = super(ExamsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exam'
-        context['data'] = Examinations.objects.all()
+        context['data'] = data
         return context
 
 

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.conf import settings
+from django.forms.models import inlineformset_factory
+#from django.forms.formsets import inlineformset_factory
 
 from dj_diabetes.models import Glucoses, Appointments, Sports, Foods, Meals
 from dj_diabetes.models import ExaminationTypes, AppointmentTypes, Issues
@@ -135,7 +137,10 @@ class ExamDetailsForm(forms.ModelForm):
     """
     class Meta:
         model = ExaminationDetails
-        fields = ['examination', 'title', 'value']
+        fields = ['title', 'value']
+
+# a formeset based on the model of the Mother and Child + 2 new empty lines
+ExamDetailsFormSet = inlineformset_factory(Examinations, ExaminationDetails, extra=2)
 
 
 # ADMIN FORMS Part

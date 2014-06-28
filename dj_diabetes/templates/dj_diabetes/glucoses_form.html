@@ -82,7 +82,7 @@
         <legend>{% trans "Last mesures" %}</legend>
         <div class="panel panel-default">
             <div class="panel-body" id="chart_panel"></div>
-        </div>            
+        </div>
         <table class="table table-striped table-hover">
             <tr>
                 <th>{% trans "Date" %}</th>
@@ -90,18 +90,17 @@
                 <th>{% trans "Insulin" %}</th>
                 <th>{% trans "Moment" %}</th>
                 <th>{% trans "Actions" %}</th>
-            <tr>
+            </tr>
         {% for line in data %}
             <tr>
                 <td>{{ line.date_glucose }} {{ line.hour_glucose }}</td>
                 <td>{{ line.glucose }}</td>
                 <td>{{ line.insulin }}</td>
                 <td>{{ line.moment|which_value:'moment' }}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'glucose_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'glucose_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'glucose_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'glucose_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
         </table>
-
 
         <div class="col-md-12">
             <ul class="pagination">
@@ -118,7 +117,6 @@
                 {% endif %}
             </ul>
         </div>
-
 
     </div>
 {% endblock %}

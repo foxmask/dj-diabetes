@@ -69,7 +69,7 @@
                 <th>{% trans "Answer" %}</th>
                 <th>{% trans "Answered at" %}</th>
                 <th>{% trans "Actions" %}</th>
-            <tr>
+            </tr>
         {% for line in data %}
             {% if line.date_answer %}
             <tr class="success">
@@ -77,7 +77,7 @@
                 <td>{{ line.question }}</td>
                 <td>{{ line.answer }}</td>
                 <td>{{ line.date_answer }}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
             </tr>
             {% else %}
             <tr class="danger">
@@ -85,7 +85,7 @@
                 <td>{{ line.question }}</td>
                 <td>{{ line.answer }}</td>
                 <td>{% trans "not yet answered" %}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'issue_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'issue_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>            
             {% endif %}
         {% endfor %}

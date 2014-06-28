@@ -14,39 +14,59 @@
         <legend>{% trans 'Edition of the examination' %}</legend>
         {% endif %}
         <div class="panel panel-default">
-        <br/>
-        <div class="form-group">
-            {{ form.examination_types.errors }}          
-            <label for="id_examination_types" class="col-sm-4 control-label">{% trans "Type" %}</label>            
-            <div class="col-sm-4">
-              {{ form.examination_types }}
+            <br/>
+            <div class="form-group">
+                {{ form.examination_types.errors }}          
+                <label for="id_examination_types" class="col-sm-2 control-label">{% trans "Type" %}</label>            
+                <div class="col-sm-6">
+                  {{ form.examination_types }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.comments.errors }}          
+                <label for="id_comments" class="col-sm-4 control-label">{% trans "Comments" %}</label>            
+                <div class="col-sm-offset-1 col-sm-10">
+                  {{ form.comments }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.date_examination.errors }}
+                <label for="id_date_examination" class="col-sm-4 control-label">{% trans "Date" %}</label>
+                <div class="col-sm-4">              
+                  {{ form.date_examination }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.hour_examination.errors }}
+                <label for="id_hour_examination" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+                <div class="col-sm-4">              
+                  {{ form.hour_examination }}
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            {{ form.comments.errors }}          
-            <label for="id_comments" class="col-sm-4 control-label">{% trans "Comments" %}</label>            
-            <div class="col-sm-offset-1 col-sm-10">
-              {{ form.comments }}
+        </fieldset>
+        {% if action = 'add_exam' %}
+        {% else %}       
+        <legend>{% trans "Examinations details" %}</legend>
+            <div class="panel panel-default">
+            {{ examsdetails_form.management_form }}
+            <table class="table table-striped table-hover">
+            <tr>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Value" %}</th>
+            </tr>
+            {% for form in examsdetails_form %}
+            <tr>
+                <td>{{ form.id }} {{ form.title }} {{ form.title.errors }}</td>
+                <td>{{ form.value }} {{ form.value.errors }}</td>
+            </tr>            
+            {% endfor %}
+            </table>
             </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.date_examination.errors }}
-            <label for="id_date_examination" class="col-sm-4 control-label">{% trans "Date" %}</label>
-            <div class="col-sm-4">              
-              {{ form.date_examination }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.hour_examination.errors }}
-            <label for="id_hour_examination" class="col-sm-4 control-label">{% trans "Hour" %}</label>
-            <div class="col-sm-4">              
-              {{ form.hour_examination }}
-            </div>
-        </div>
-
+        {% endif %}
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_exam' %}                
@@ -55,18 +75,10 @@
                 <button class="btn btn-primary">{% trans "Edit it" %}</button>
                 {% endif %}
             </div>
-        </div>
-        </div>
-        </fieldset>     
+        </div>        
         </form>
-        {% if action = 'add_exam' %}
-        {% else %}
-        {% for form_line in formset %}
-        {{ form.as_table }}
-        {% endfor %}
-        {% endif %}
     </div>
-    <div class="col-md-6" id="meal-content-graph">
+    <div class="col-md-6" id="exams-content-graph">
         <legend>{% trans "Last examinations" %}</legend>
         <table class="table table-striped table-hover">
             <tr>
@@ -74,13 +86,13 @@
                 <th>{% trans "Type" %}</th>
                 <th>{% trans "Comments" %}</th>
                 <th>{% trans "Actions" %}</th>
-            <tr>
+            </tr>
         {% for line in data %}
             <tr>
                 <td>{{ line.date_examination }}</td>
                 <td>{{ line.examination_types.title }}</td>
                 <td>{{ line.comments }}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'exam_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exam_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'exam_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exam_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
         </table>

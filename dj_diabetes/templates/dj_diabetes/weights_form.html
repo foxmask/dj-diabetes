@@ -52,12 +52,12 @@
                 <th>{% trans "Weight" %}</th>
                 <th>{% trans "Date" %}</th>
                 <th>{% trans "Actions" %}</th>
-            <tr>
+            </tr>
         {% for line in data %}
             <tr>
                 <td>{{ line.weight }}</td>
                 <td>{{ line.date_weight }}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'weight_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'weight_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'weight_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'weight_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
             </tr>
         {% endfor %}
         </table>

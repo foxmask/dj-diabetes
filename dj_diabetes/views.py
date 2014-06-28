@@ -14,10 +14,11 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # dj_diabetes
-from dj_diabetes.models import Appointments, Examinations, ExaminationDetails
+from dj_diabetes.models import Appointments, Examinations
 from dj_diabetes.models import Issues, Exercises, Glucoses, Weights, Meals
 from dj_diabetes.forms import GlucosesForm, AppointmentsForm, IssuesForm
-from dj_diabetes.forms import WeightsForm, MealsForm, ExercisesForm, ExamsForm
+from dj_diabetes.forms import WeightsForm, MealsForm, ExercisesForm
+from dj_diabetes.forms import ExamsForm, ExamDetailsFormSet
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -156,8 +157,15 @@ class GlucosesUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('home'))
 
     def get_context_data(self, **kw):
+        data = Glucoses.objects.all().order_by('-date_glucose')
+        #paginator vars
+        record_per_page = 5
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(GlucosesUpdateView, self).get_context_data(**kw)
-        context['data'] = Glucoses.objects.all()
+        context['data'] = data
         return context
 
 
@@ -232,8 +240,15 @@ class AppointmentsUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('appointments'))
 
     def get_context_data(self, **kw):
+        data = Appointments.objects.all().order_by('-date_appointment')
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(AppointmentsUpdateView, self).get_context_data(**kw)
-        context['data'] = Appointments.objects.all()
+        context['data'] = data
         return context
 
 
@@ -299,8 +314,15 @@ class IssuesUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('issues'))
 
     def get_context_data(self, **kw):
+        data = Issues.objects.all().order_by('-created')
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(IssuesUpdateView, self).get_context_data(**kw)
-        context['data'] = Issues.objects.all()
+        context['data'] = data
         return context
 
 
@@ -369,8 +391,15 @@ class WeightsUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('weights'))
 
     def get_context_data(self, **kw):
+        data = Weights.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(WeightsUpdateView, self).get_context_data(**kw)
-        context['data'] = Weights.objects.all()
+        context['data'] = data
         return context
 
 
@@ -445,8 +474,15 @@ class MealsUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('meals'))
 
     def get_context_data(self, **kw):
+        data = Meals.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(MealsUpdateView, self).get_context_data(**kw)
-        context['data'] = Meals.objects.all()
+        context['data'] = data
         return context
 
 
@@ -519,8 +555,15 @@ class ExercisesUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('exercises'))
 
     def get_context_data(self, **kw):
+        data = Exercises.objects.all()
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(ExercisesUpdateView, self).get_context_data(**kw)
-        context['data'] = Exercises.objects.all()
+        context['data'] = data
         return context
 
 
@@ -566,7 +609,7 @@ class ExamsCreateView(CreateView):
         page = self.request.GET.get('page')
         # paginator call
         data = page_it(data, record_per_page, page)
-        
+
         context = super(ExamsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exam'
         context['data'] = data
@@ -579,26 +622,42 @@ class ExamsUpdateView(UpdateView):
     """
     model = Examinations
     form_class = ExamsForm
-    #from django.forms.models import modelformset_factory
-    #ExaminationDetailsFormSet = modelformset_factory(ExaminationDetails, extra=1)
-
     fields = ['examination_types', 'comments', 'date_examination']
     template_name = "dj_diabetes/exams_form.html"
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ExamsUpdateView, self).dispatch(*args, **kwargs)
+#    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(ExamsUpdateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        if form.is_valid():
-            form.save()
+        if self.request.POST:
+            formset = ExamDetailsFormSet(self.request.POST, instance=self.object)
+            if formset.is_valid():
+                self.object = form.save()
+                formset.instance = self.object
+                formset.save()
 
+        else:
+            formset = ExamDetailsFormSet(instance=self.object)
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
+
+
+        data = Examinations.objects.all().order_by('-created')
+        #paginator vars
+        record_per_page = 15
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+
         context = super(ExamsUpdateView, self).get_context_data(**kw)
-        context['data'] = Examinations.objects.all()
-        # context['formset'] = self.ExaminationDetailsFormSet()
+        context['data'] = data
+
+        if self.request.POST:
+            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
+        else:
+            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
         return context
 
 

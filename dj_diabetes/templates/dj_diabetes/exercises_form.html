@@ -76,13 +76,13 @@
                 <th>{% trans "Sports" %}</th>                
                 <th>{% trans "Duration" %}</th>
                 <th>{% trans "Actions" %}</th>
-            <tr>
+            </tr>
         {% for line in data %}
             <tr>
                 <td>{{ line.date_exercise }}</td>
                 <td>{{ line.sports.title }}</td>
                 <td>{{ line.duration }}</td>
-                <td><a class="btn btn-sm btn-info" role="button" class="btn btn-default" href="{% url 'exercise_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exercise_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
+                <td><a class="btn btn-sm btn-info" role="button" href="{% url 'exercise_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'exercise_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
         </table>

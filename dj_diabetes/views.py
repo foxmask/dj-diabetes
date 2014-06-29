@@ -408,7 +408,7 @@ class WeightsDeleteView(DeleteView):
         to Delete Weights
     """
     model = Weights
-    success_url = reverse_lazy('weight')
+    success_url = reverse_lazy('weights')
     template_name = 'dj_diabetes/confirm_delete.html'
 
 
@@ -603,7 +603,7 @@ class ExamsCreateView(CreateView):
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
-        data = Examinations.objects.all()
+        data = Examinations.objects.all().order_by('-created')
         #paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
@@ -613,6 +613,11 @@ class ExamsCreateView(CreateView):
         context = super(ExamsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exam'
         context['data'] = data
+
+        if self.request.POST:
+            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
+        else:
+            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
         return context
 
 
@@ -642,8 +647,6 @@ class ExamsUpdateView(UpdateView):
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
-
-
         data = Examinations.objects.all().order_by('-created')
         #paginator vars
         record_per_page = 15

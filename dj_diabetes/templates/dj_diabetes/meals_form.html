@@ -10,59 +10,93 @@
         {{ form.non_field_errors }}
         <fieldset>
         {% if action = 'add_meal' %}
-        <legend>{% trans "Meal" %}</legend>
+        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans "Meal" %}</legend>
         {% else %}
-        <legend>{% trans 'Edition of the meal' %}</legend>
+        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans 'Edition of the meal' %}</legend>
         {% endif %}
         <div class="panel panel-default">
-        <br/>        
-        <div class="form-group">
-            {{ form.food.errors }}          
-            <label for="id_food" class="col-sm-4 control-label">{% trans "Food" %}</label>            
-            <div class="col-sm-offset-1 col-sm-10">
-              {{ form.food }}
-            </div>
-        </div>
+            <br/>
 
-        <div class="form-group">
-            {{ form.breakfast_lunch_diner.errors }}          
-            <label for="id_breakfast_lunch_diner" class="col-sm-4 control-label">{% trans "Moment ?" %}</label>            
-            <div class="col-sm-4">
-              {{ form.breakfast_lunch_diner }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.date_meal.errors }}
-            <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date" %}</label>
-            <div class="col-sm-4">              
-              {{ form.date_meal }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.hour_meal.errors }}
-            <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour" %}</label>
-            <div class="col-sm-4">              
-              {{ form.hour_meal }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
-                {% if action = 'add_meal' %}                
-                <button class="btn btn-primary">{% trans "Add it" %}</button>
+            <div class="form-group{% if form.food.errors %} has-error has-feedback{% endif %}">    
+                {% if form.food.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.food.errors }}</div>
+                <label for="id_food" class="col-sm-4 control-label">{% trans "Food" %}</label> 
+                <div class="col-sm-offset-1 col-sm-10">
+                {{ form.food }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
                 {% else %}
-                <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                <label for="id_food" class="col-sm-4 control-label">{% trans "Food" %}</label>
+                <div class="col-sm-offset-1 col-sm-10">
+                {{ form.food }}
+                </div>
                 {% endif %}
             </div>
-        </div>
+
+            <div class="form-group{% if form.breakfast_lunch_diner.errors %} has-error has-feedback{% endif %}">    
+                {% if form.breakfast_lunch_diner.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.breakfast_lunch_diner.errors }}</div>>
+                <label for="id_breakfast_lunch_diner" class="col-sm-4 control-label">{% trans "Moment ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.breakfast_lunch_diner }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_breakfast_lunch_diner" class="col-sm-4 control-label">{% trans "Moment ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.breakfast_lunch_diner }}
+                </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group{% if form.date_meal.errors %} has-error has-feedback{% endif %}">    
+                {% if form.date_meal.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_meal.errors }}</div>>
+                <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.date_meal }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.date_meal }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.hour_meal.errors %} has-error has-feedback{% endif %}">    
+                {% if form.hour_meal.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_meal.errors }}</div>>
+                <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.hour_meal }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
+                <div class="col-sm-4">
+                {{ form.hour_meal }}
+                </div>
+                {% endif %}
+            </div>            
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    {% if action = 'add_meal' %}                
+                    <button class="btn btn-primary">{% trans "Add it" %}</button>
+                    {% else %}
+                    <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         </fieldset>     
         </form>
     </div>
     <div class="col-md-6" id="meal-content-graph">
-        <legend>{% trans "Last meals" %}</legend>
+        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans "Last meals" %}</legend>
         <table class="table table-striped table-hover">
             <tr>
                 <th>{% trans "Food" %}</th>

@@ -11,75 +11,108 @@
         {{ form.non_field_errors }}
         <fieldset>
         {% if action = 'add_glucoses' %}
-        <legend>{% trans "Glucoses" %}</legend>
+        <legend><span class="glyphicon glyphicon-tint"></span> {% trans "Glucoses" %}</legend>
         {% else %}
-        <legend>{% trans 'Edition of the glucose' %}</legend>
+        <legend><span class="glyphicon glyphicon-tint"></span> {% trans 'Edition of the glucose' %}</legend>
         {% endif %}
         <div class="panel panel-default">
-        <br/>
-        <div class="form-group">
-            {{ form.glucose.errors }}
-            <label for="id_glucose" class="col-sm-4 control-label">{% trans "Glucoses" %}</label>
-            <div class="col-sm-4">
-              {{ form.glucose }}
-            </div>
-        </div>
-        {% if form.insulin %}
-        <div class="form-group">
-            {{ form.insulin.errors }}
-            <label for="id_insulin" class="col-sm-4 control-label">{% trans "Insulin" %}</label>
-            <div class="col-sm-4">
-              {{ form.insulin }}
-            </div>
-        </div>
-        {% endif %}
-        <div class="form-group">
-            {{ form.comment.errors }}
-            <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>
-            <div class="col-sm-offset-1 col-sm-10">
-              {{ form.comment }}
-            </div>
-        </div>
+            <br/>
 
-        <div class="form-group">
-            {{ form.moment.errors }}
-            <label for="id_moment" class="col-sm-4 control-label">{% trans "Moment" %}</label>
-            <div class="col-sm-4">
-              {{ form.moment }}
-            </div>
-        </div>
-        
-        <div class="form-group">
-            {{ form.date_glucose.errors }}
-            <label for="id_date_glucose" class="col-sm-4 control-label">{% trans "Date" %}</label>
-            <div class="col-sm-4">
-              {{ form.date_glucose }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.hour_glucose.errors }}
-            <label for="id_hour_glucose" class="col-sm-4 control-label">{% trans "Hour" %}</label>
-            <div class="col-sm-4">
-              {{ form.hour_glucose }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
-                {% if action = 'add_glucoses' %}                
-                <button class="btn btn-primary">{% trans "Add it" %}</button>
+            <div class="form-group{% if form.glucose.errors %} has-error has-feedback{% endif %}">
+                {% if form.glucose.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.glucose.errors }}</div>
+                <label for="id_glucose" class="col-sm-4 control-label">{% trans "Glucoses" %}</label>
+                <div class="col-sm-4">
+                {{ form.glucose }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
                 {% else %}
-                <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                <label for="id_glucose" class="col-sm-4 control-label">{% trans "Glucoses" %}</label>
+                <div class="col-sm-4">
+                {{ form.glucose }}
+                </div>
                 {% endif %}
             </div>
-        </div>
+
+            {% if form.insulin %}
+            <div class="form-group{% if form.insulin.errors %} has-error has-feedback{% endif %}">
+                {% if form.insulin.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.insulin.errors }}</div>
+                <label for="id_insulin" class="col-sm-4 control-label">{% trans "Insulin" %}</label>
+                <div class="col-sm-4">
+                {{ form.insulin }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_insulin" class="col-sm-4 control-label">{% trans "Insulin" %}</label>
+                <div class="col-sm-4">
+                {{ form.insulin }}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="form-group{% if form.comment.errors %} has-error has-feedback{% endif %}">
+                {% if form.comment.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.comment.errors }}</div>
+                <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>
+                <div class="col-sm-4">
+                {{ form.comment }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_comment" class="col-sm-4 control-label">{% trans "Comment" %}</label>
+                <div class="col-sm-4">
+                {{ form.comment }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.moment.errors %} has-error has-feedback{% endif %}">
+                {% if form.moment.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.moment.errors }}</div>
+                {% endif %}
+                <label for="id_moment" class="col-sm-4 control-label">{% trans "Moment" %}</label>
+                <div class="col-sm-4">
+                {{ form.moment }}
+                </div>                
+            </div>            
+            
+            <div class="form-group{% if form.date_glucose.errors %} has-error has-feedback{% endif %}">
+                {% if form.date_glucose.errors %}            
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_glucose.errors }}</div>
+                {% endif %}
+                <label for="id_date_glucose" class="col-sm-4 control-label">{% trans "Date" %}</label>
+                <div class="col-sm-4">
+                  {{ form.date_glucose }}
+                </div>
+            </div>
+
+            <div class="form-group{% if form.hour_glucose.errors %} has-error has-feedback{% endif %}">
+                {% if form.hour_glucose.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_glucose.errors }}</div>
+                {% endif %}
+                <label for="id_hour_glucose" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+                <div class="col-sm-4">
+                  {{ form.hour_glucose }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    {% if action = 'add_glucoses' %}                
+                    <button class="btn btn-primary">{% trans "Add it" %}</button>
+                    {% else %}
+                    <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         </fieldset>
         </form>
     </div>
     <div class="col-md-6" id="glucose-content-graph">
-        <legend>{% trans "Last mesures" %}</legend>
+        <legend><span class="glyphicon glyphicon-tint"></span>{% trans "Last mesures" %}</legend>
         <div class="panel panel-default">
             <div class="panel-body" id="chart_panel"></div>
         </div>

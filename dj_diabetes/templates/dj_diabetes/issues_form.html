@@ -9,59 +9,93 @@
         {{ form.non_field_errors }}
         <fieldset>
         {% if action = 'add_issue' %}
-        <legend>{% trans "Issues" %}</legend>
+        <legend><span class="glyphicon glyphicon-question-sign"></span> {% trans "Issues" %}</legend>
         {% else %}
-        <legend>{% trans 'Edition of the issue' %}</legend>
+        <legend><span class="glyphicon glyphicon-question-sign"></span> {% trans 'Edition of the issue' %}</legend>
         {% endif %}
         <div class="panel panel-default">
-        <br/>
-        <div class="form-group">
-            {{ form.question_to.errors }}          
-            <label for="id_question_to" class="col-sm-4 control-label">{% trans "Question to" %}</label>            
-            <div class="col-sm-4">
-              {{ form.question_to }}
-            </div>
-        </div>
+            <br/>
 
-        <div class="form-group">
-            {{ form.question.errors }}          
-            <label for="id_question" class="col-sm-4 control-label">{% trans "Question" %}</label>            
-            <div class="col-sm-offset-1 col-sm-10">
-              {{ form.question }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.answer.errors }}          
-            <label for="id_question" class="col-sm-4 control-label">{% trans "Answer" %}</label>            
-            <div class="col-sm-offset-1 col-sm-10">
-              {{ form.answer }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.date_answer.errors }}
-            <label for="id_date_answer" class="col-sm-4 control-label">{% trans "Answer Date" %}</label>
-            <div class="col-sm-4">              
-              {{ form.date_answer }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
-                {% if action = 'add_issue' %}                
-                <button class="btn btn-primary">{% trans "Add it" %}</button>
+            <div class="form-group{% if form.question_to.errors %} has-error has-feedback{% endif %}">    
+                {% if form.question_to.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.question_to.errors }}</div>
+                <label for="id_question_to" class="col-sm-4 control-label">{% trans "Question to" %}</label>
+                <div class="col-sm-4">
+                {{ form.question_to }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
                 {% else %}
-                <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                <label for="id_question_to" class="col-sm-4 control-label">{% trans "Question to" %}</label>
+                <div class="col-sm-4">
+                {{ form.question_to }}
+                </div>
                 {% endif %}
             </div>
-        </div>
+
+
+            <div class="form-group{% if form.question.errors %} has-error has-feedback{% endif %}">    
+                {% if form.question.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.question.errors }}</div>
+                <label for="id_question" class="col-sm-4 control-label">{% trans "Question" %}</label>
+                <div class="col-sm-4">
+                {{ form.question }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_question" class="col-sm-4 control-label">{% trans "Question" %}</label>
+                <div class="col-sm-offset-1 col-sm-10">
+                {{ form.question }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.answer.errors %} has-error has-feedback{% endif %}">    
+                {% if form.answer.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.answer.errors }}</div>
+                <label for="id_answer" class="col-sm-4 control-label">{% trans "Answer" %}</label>
+                <div class="col-sm-4">
+                {{ form.answer }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_answer" class="col-sm-4 control-label">{% trans "Answer" %}</label>
+                <div class="col-sm-offset-1 col-sm-10">
+                {{ form.answer }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.date_answer.errors %} has-error has-feedback{% endif %}">    
+                {% if form.date_answer.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_answer.errors }}</div>
+                <label for="id_date_answer" class="col-sm-4 control-label">{% trans "Answer Date" %}</label>
+                <div class="col-sm-4">
+                {{ form.date_answer }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_date_answer" class="col-sm-4 control-label">{% trans "Answer Date" %}</label>
+                <div class="col-sm-4">
+                {{ form.date_answer }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    {% if action = 'add_issue' %}                
+                    <button class="btn btn-primary">{% trans "Add it" %}</button>
+                    {% else %}
+                    <button class="btn btn-primary">{% trans "Edit it" %}</button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         </fieldset>     
         </form>
     </div>
     <div class="col-md-6" id="issue-content-graph">
-        <legend>{% trans "Last questions" %}</legend>
+        <legend><span class="glyphicon glyphicon-question-sign"></span> {% trans "Last questions" %}</legend>
         <table class="table table-striped table-hover">
             <tr>
                 <th>{% trans "Date" %}</th>

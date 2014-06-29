@@ -9,48 +9,54 @@
         {{ form.non_field_errors }}
         <fieldset>
         {% if action = 'add_exam' %}
-        <legend>{% trans "Exams" %}</legend>
+        <legend><span class="glyphicon glyphicon-pushpin"></span> {% trans "Exams" %}</legend>
         {% else %}
-        <legend>{% trans 'Edition of the examination' %}</legend>
+        <legend><span class="glyphicon glyphicon-pushpin"></span> {% trans 'Edition of the examination' %}</legend>
         {% endif %}
         <div class="panel panel-default">
             <br/>
-            <div class="form-group">
-                {{ form.examination_types.errors }}          
-                <label for="id_examination_types" class="col-sm-2 control-label">{% trans "Type" %}</label>            
+            <div class="form-group{% if form.examination_types.errors %} has-error{% endif %}">
+                {% if form.examination_types.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.examination_types.errors }}</div>
+                {% endif %}
+                <label for="id_examination_types" class="col-sm-2 control-label">{% trans "Type" %}</label>
                 <div class="col-sm-6">
-                  {{ form.examination_types }}
+                {{ form.examination_types }}
                 </div>
             </div>
 
-            <div class="form-group">
-                {{ form.comments.errors }}          
-                <label for="id_comments" class="col-sm-4 control-label">{% trans "Comments" %}</label>            
+            <div class="form-group{% if form.comments.errors %} has-error{% endif %}">
+                {% if form.comments.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.comments.errors }}</div>
+                {% endif %}
+                <label for="id_comments" class="col-sm-4 control-label">{% trans "Comments" %}</label>
                 <div class="col-sm-offset-1 col-sm-10">
                   {{ form.comments }}
                 </div>
             </div>
 
-            <div class="form-group">
-                {{ form.date_examination.errors }}
+            <div class="form-group{% if form.date_examination.errors %} has-error{% endif %}">
+                {% if form.date_examination.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_examination.errors }}</div>
+                {% endif %}
                 <label for="id_date_examination" class="col-sm-4 control-label">{% trans "Date" %}</label>
-                <div class="col-sm-4">              
+                <div class="col-sm-4">
                   {{ form.date_examination }}
                 </div>
             </div>
 
-            <div class="form-group">
-                {{ form.hour_examination.errors }}
+            <div class="form-group{% if form.hour_examination.errors %} has-error{% endif %}">
+                {% if form.hour_examination.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_examination.errors }}</div>
+                {% endif %}
                 <label for="id_hour_examination" class="col-sm-4 control-label">{% trans "Hour" %}</label>
-                <div class="col-sm-4">              
+                <div class="col-sm-4">
                   {{ form.hour_examination }}
                 </div>
             </div>
         </div>
         </fieldset>
-        {% if action = 'add_exam' %}
-        {% else %}       
-        <legend>{% trans "Examinations details" %}</legend>
+        <legend><span class="glyphicon glyphicon-pushpin"></span> {% trans "Examinations details" %}</legend>
             <div class="panel panel-default">
             {{ examsdetails_form.management_form }}
             <table class="table table-striped table-hover">
@@ -60,13 +66,30 @@
             </tr>
             {% for form in examsdetails_form %}
             <tr>
-                <td>{{ form.id }} {{ form.title }} {{ form.title.errors }}</td>
-                <td>{{ form.value }} {{ form.value.errors }}</td>
+                <td>{{ form.id }}
+                    <div class="form-group{% if form.title.errors %} has-error{% endif %}">
+                        {% if form.title.errors %}
+                        <div class="col-sm-6 alert alert-danger" role="alert">{{ form.title.errors }}</div>
+                        {% endif %}
+                        <div class="col-sm-4">
+                          {{ form.title }}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group{% if form.value.errors %} has-error{% endif %}">
+                        {% if form.value.errors %}
+                        <div class="col-sm-6 alert alert-danger" role="alert">{{ form.value.errors }}</div>
+                        {% endif %}
+                        <div class="col-sm-4">
+                          {{ form.value }}
+                        </div>
+                    </div>
+                </td>
             </tr>            
             {% endfor %}
             </table>
             </div>
-        {% endif %}
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 {% if action = 'add_exam' %}                
@@ -79,7 +102,7 @@
         </form>
     </div>
     <div class="col-md-6" id="exams-content-graph">
-        <legend>{% trans "Last examinations" %}</legend>
+        <legend><span class="glyphicon glyphicon-pushpin"></span> {% trans "Last examinations" %}</legend>
         <table class="table table-striped table-hover">
             <tr>
                 <th>{% trans "Date" %}</th>

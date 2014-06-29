@@ -164,7 +164,7 @@ class Glucoses(models.Model):
     insulin = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     comment = models.TextField()
     date_glucose = models.DateField()
-    hour_glucose = models.TimeField(null=True)
+    hour_glucose = models.TimeField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -202,11 +202,11 @@ class Meals(models.Model):
     def show(self):
         return "Meals %s %s %s %s %s %s" % (self.user_id, self.food,
                                             self.breakfast_lunch_diner,
-                                            self.meal_date,
+                                            self.date_meal,
                                             self.created, self.modified)
 
     def __unicode__(self):
-        return "%s (date: %s)" % (self.food, self.meal_date)
+        return "%s (date: %s)" % (self.food, self.date_meal)
 
 
 class ExaminationTypes(models.Model):

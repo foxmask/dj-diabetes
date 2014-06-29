@@ -32,11 +32,19 @@ class GlucosesForm(forms.ModelForm):
     """
         glucoses Form
     """
+    glucose = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
     # get the list of pref to get the value in the dropdow
+    insulin = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
     moment = forms.ChoiceField(pref_filter("moment"))
     # to " suit " the HTML textearea
     comment = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
+    date_glucose = forms.DateField(widget=forms.TextInput(
+        {'class': 'form-control'}))
+    hour_glucose = forms.TimeField(widget=forms.TextInput(
+        {'class': 'form-control'}))
 
     class Meta:
         model = Glucoses
@@ -54,8 +62,18 @@ class AppointmentsForm(forms.ModelForm):
         Appointments Form
     """
     # to " suit " the HTML textearea
+    title = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
     body = forms.CharField(widget=forms.Textarea(
-        {'class': 'form-control', 'rows': '3'}))
+        attrs={'class': 'form-control', 'rows': '3'}))
+    recall_one_duration = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
+    recall_two_duration = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
+    recall_one_unit = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
+    recall_two_unit = forms.IntegerField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
 
     class Meta:
         model = Appointments
@@ -69,12 +87,16 @@ class IssuesForm(forms.ModelForm):
     """
         Issues Form
     """
+    question_to = forms.CharField(widget=forms.TextInput(
+        {'class': 'form-control'}))
     # to " suit " the HTML textearea
     question = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
     # to " suit " the HTML textearea
     answer = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
+    date_answer = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
 
     class Meta:
         model = Issues
@@ -85,6 +107,11 @@ class WeightsForm(forms.ModelForm):
     """
         Weights Form
     """
+    weight = forms.IntegerField(widget=forms.TextInput(
+        {'class': 'form-control', 'type': 'number'}))
+    date_weight = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+
     class Meta:
         model = Weights
         fields = ['weight', 'date_weight']
@@ -98,6 +125,10 @@ class MealsForm(forms.ModelForm):
     breakfast_lunch_diner = forms.ChoiceField(pref_filter("meal"))
     food = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
+    date_meal = forms.DateField(widget=forms.TextInput(
+        {'class': 'form-control'}))
+    hour_meal = forms.TimeField(widget=forms.TextInput(
+        {'class': 'form-control'}))    
 
     class Meta:
         model = Meals
@@ -110,6 +141,12 @@ class ExercisesForm(forms.ModelForm):
     """
     comment = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
+    duration = forms.IntegerField(widget=forms.TextInput(
+        {'class': 'form-control', 'type': 'number'}))
+    date_exercise = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    hour_exercise = forms.TimeField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
 
     class Meta:
         model = Exercises
@@ -124,6 +161,10 @@ class ExamsForm(forms.ModelForm):
     # to " suit " the HTML textearea
     comments = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
+    date_examination = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    hour_examination = forms.TimeField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
 
     class Meta:
         model = Examinations
@@ -135,6 +176,11 @@ class ExamDetailsForm(forms.ModelForm):
     """
         Details of Exams Form
     """
+    title = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    value = forms.DecimalField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'type': 'number'}))
+
     class Meta:
         model = ExaminationDetails
         fields = ['title', 'value']

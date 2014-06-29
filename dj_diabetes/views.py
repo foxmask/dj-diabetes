@@ -595,10 +595,15 @@ class ExamsCreateView(CreateView):
         return right_now("examination")
 
     def form_valid(self, form):
-        exercise = form.save(commit=False)
-        if form.is_valid():
-            exercise.user = self.request.user
-            exercise.save()
+        if self.request.POST:
+            formset = ExamDetailsFormSet(self.request.POST, instance=self.object)
+            if formset.is_valid():
+                self.object = form.save(user=self.request.user)
+                formset.instance = self.object
+                formset.save()
+
+        else:
+            formset = ExamDetailsFormSet(instance=self.object)
 
         return HttpResponseRedirect(reverse('exams'))
 
@@ -638,7 +643,7 @@ class ExamsUpdateView(UpdateView):
         if self.request.POST:
             formset = ExamDetailsFormSet(self.request.POST, instance=self.object)
             if formset.is_valid():
-                self.object = form.save()
+                self.object = form.save(user=self.request.user)
                 formset.instance = self.object
                 formset.save()
 

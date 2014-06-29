@@ -166,10 +166,17 @@ class ExamsForm(forms.ModelForm):
     hour_examination = forms.TimeField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
+    def save(self, user=None):
+        self.myobject = super(ExamsForm, self).save(commit=False)
+        self.myobject.user = user
+        self.myobject.save()
+
     class Meta:
         model = Examinations
         fields = ['examination_types', 'comments',
                   'date_examination', 'hour_examination']
+        exclude = ('user',)
+
 
 
 class ExamDetailsForm(forms.ModelForm):

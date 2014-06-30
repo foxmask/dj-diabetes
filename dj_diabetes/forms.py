@@ -2,8 +2,10 @@
 from django import forms
 from django.conf import settings
 from django.forms.models import inlineformset_factory
+from django.forms import ChoiceField
 #from django.forms.formsets import inlineformset_factory
 
+from dj_diabetes.models import UserProfile
 from dj_diabetes.models import Glucoses, Appointments, Sports, Foods, Meals
 from dj_diabetes.models import ExaminationTypes, AppointmentTypes, Issues
 from dj_diabetes.models import Weights, Exercises, Preferences
@@ -25,7 +27,58 @@ def pref_filter(filter):
     return all_data
 
 
+def appointment_types():
+    """
+        get appointment_types
+    """
+    choices = AppointmentTypes.objects.all()
+    data = ()
+    all_data = ()
+    for choice in choices:
+        data = (int(choice.id), choice.title)
+        all_data = (data,) + all_data
+    print all_data
+    return all_data
+
+
+def exam_types():
+    """
+        get examination_types
+    """
+    choices = ExaminationTypes.objects.all()
+    data = ()
+    all_data = ()
+    for choice in choices:
+        data = (int(choice.id), choice.title)
+        all_data = (data,) + all_data
+    return all_data
+
+
 # Non-ADMIN FORMS Part
+class UserProfileForm(forms.ModelForm):
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    # get the list of pref to get the value in the dropdow
+    password = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    phone = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    address = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    zipcode = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    town = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = UserProfile
 
 
 class GlucosesForm(forms.ModelForm):
@@ -37,7 +90,8 @@ class GlucosesForm(forms.ModelForm):
     # get the list of pref to get the value in the dropdow
     insulin = forms.IntegerField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'number'}))
-    moment = forms.ChoiceField(pref_filter("moment"))
+    moment = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-control'}))
     # to " suit " the HTML textearea
     comment = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
@@ -56,12 +110,18 @@ class GlucosesForm(forms.ModelForm):
             fields = ['moment', 'comment', 'glucose',
                       'date_glucose', 'hour_glucose']
 
+    def __init__(self, *args, **kwargs):
+        super(GlucosesForm, self).__init__(*args, **kwargs)
+        self.fields['moment'].choices = pref_filter("moment")
+
 
 class AppointmentsForm(forms.ModelForm):
     """
         Appointments Form
     """
     # to " suit " the HTML textearea
+    appointment_types = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control'}))
     title = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     body = forms.CharField(widget=forms.Textarea(
@@ -81,6 +141,10 @@ class AppointmentsForm(forms.ModelForm):
                   'date_appointment', 'hour_appointment',
                   'recall_one_duration', 'recall_two_duration',
                   'recall_one_unit', 'recall_two_unit']
+
+    def __init__(self, *args, **kwargs):
+        super(AppointmentsForm, self).__init__(*args, **kwargs)
+        self.fields['appointment_types'].choices = appointment_types()
 
 
 class IssuesForm(forms.ModelForm):
@@ -122,17 +186,22 @@ class MealsForm(forms.ModelForm):
         Meals Form
     """
     # get the list of pref to get the value in the dropdow
-    breakfast_lunch_diner = forms.ChoiceField(pref_filter("meal"))
+    breakfast_lunch_diner = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-control'}))
     food = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
     date_meal = forms.DateField(widget=forms.TextInput(
         {'class': 'form-control'}))
     hour_meal = forms.TimeField(widget=forms.TextInput(
-        {'class': 'form-control'}))    
+        {'class': 'form-control'}))
 
     class Meta:
         model = Meals
         fields = ['food', 'breakfast_lunch_diner', 'date_meal', 'hour_meal']
+
+    def __init__(self, *args, **kwargs):
+        super(MealsForm, self).__init__(*args, **kwargs)
+        self.fields['breakfast_lunch_diner'].choices = pref_filter("meal")
 
 
 class ExercisesForm(forms.ModelForm):
@@ -159,6 +228,8 @@ class ExamsForm(forms.ModelForm):
         Exams Form
     """
     # to " suit " the HTML textearea
+    examination_types = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-control'}))
     comments = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
     date_examination = forms.DateField(widget=forms.TextInput(
@@ -177,6 +248,12 @@ class ExamsForm(forms.ModelForm):
                   'date_examination', 'hour_examination']
         exclude = ('user',)
 
+    def __init__(self, *args, **kwargs):
+        """
+            used to fill the Dropdown examination_types
+        """
+        super(ExamsForm, self).__init__(*args, **kwargs)
+        self.fields['examination_types'].choices = exam_types()
 
 
 class ExamDetailsForm(forms.ModelForm):

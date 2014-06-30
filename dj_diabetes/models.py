@@ -11,13 +11,11 @@ class UserProfile(models.Model):
     """
     user = models.OneToOneField(User)
     name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=15)
     address = models.TextField()
     zipcode = models.CharField(max_length=50)
     town = models.CharField(max_length=255)
-    group_id = models.IntegerField(null=True, blank=True)
     role = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

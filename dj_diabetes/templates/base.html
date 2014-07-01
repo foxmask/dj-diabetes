@@ -50,6 +50,7 @@
                     <li><a href="{% url 'meals' %}" title="{% trans "Meals" %}">{% trans "Meals" %}</a></li>
                     <li><a href="{% url 'exams' %}" title="{% trans "Exams" %}">{% trans "Exams" %}</a></li>
                     <li><a href="{% url 'exercises' %}" title="{% trans "Exercises" %}">{% trans "Exercises" %}</a></li>
+                    <li><a href="{% url 'my_profile' user.id %}" title="{% trans "My Profile" %}">{% trans "My Profile" %}</a>
                     <li><a href="{% url 'logout' %}" title="{% trans "log out" %}"><span class="glyphicon glyphicon-off"></span></a></li>
                 </ul>
                 {% endif %}

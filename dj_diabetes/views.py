@@ -16,9 +16,11 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # dj_diabetes
 from dj_diabetes.models import Appointments, Examinations
 from dj_diabetes.models import Issues, Exercises, Glucoses, Weights, Meals
+from dj_diabetes.models import UserProfile
 from dj_diabetes.forms import GlucosesForm, AppointmentsForm, IssuesForm
 from dj_diabetes.forms import WeightsForm, MealsForm, ExercisesForm
 from dj_diabetes.forms import ExamsForm, ExamDetailsFormSet
+from dj_diabetes.forms import UserProfileForm
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -583,9 +585,9 @@ class ExamsCreateView(CreateView):
     form_class = ExamsForm
     template_name = "dj_diabetes/exams_form.html"
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ExamsCreateView, self).dispatch(*args, **kwargs)
+#    @method_decorator(login_required)
+#    def dispatch(self, *args, **kwargs):
+#        return super(ExamsCreateView, self).dispatch(*args, **kwargs)
 
     def get_initial(self):
         """
@@ -635,9 +637,9 @@ class ExamsUpdateView(UpdateView):
     fields = ['examination_types', 'comments', 'date_examination']
     template_name = "dj_diabetes/exams_form.html"
 
-#    @method_decorator(login_required)
-#    def dispatch(self, *args, **kwargs):
-#        return super(ExamsUpdateView, self).dispatch(*args, **kwargs)
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ExamsUpdateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         if self.request.POST:
@@ -676,3 +678,22 @@ class ExamsDeleteView(DeleteView):
     model = Examinations
     success_url = reverse_lazy('exams')
     template_name = 'dj_diabetes/confirm_delete.html'
+
+
+class UserProfileUpdateView(UpdateView):
+    """
+
+    """
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = "dj_diabetes/userprofile_form.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UserProfileUpdateView, self).dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        form = UserProfileUpdateView(self.request.POST or None)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('home'))

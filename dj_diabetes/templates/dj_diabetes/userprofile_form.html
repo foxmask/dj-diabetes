@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n %}
+{% block title %}{% trans "My Glucose Manager" %}{% endblock %}
+{% block content %}
+    <div class="col-md-6" id="exercise-content-form">
+        <form method="post" role="form" class="form-horizontal" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <fieldset>
+        <legend>{% trans 'Edit my profile' %}</legend>
+        <div class="panel panel-default">
+            <br/>
+            <div class="form-group{% if form.name.errors %} has-error has-feedback{% endif %}">    
+                {% if form.name.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.name.errors }}</div>
+                <label for="id_name" class="col-sm-4 control-label">{% trans "Name" %}</label>
+                <div class="col-sm-4">
+                {{ form.name }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_name" class="col-sm-4 control-label">{% trans "Name" %}</label>
+                <div class="col-sm-4">
+                {{ form.name }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.birth_date.errors %} has-error has-feedback{% endif %}">    
+                {% if form.birth_date.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.birth_date.errors }}</div>
+                <label for="id_birth_date" class="col-sm-4 control-label">{% trans "Birthday" %}</label>
+                <div class="col-sm-4">
+                {{ form.birth_date }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_birth_date" class="col-sm-4 control-label">{% trans "Birthday" %}</label>
+                <div class="col-sm-4">
+                {{ form.birth_date }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.phone.errors %} has-error has-feedback{% endif %}">    
+                {% if form.phone.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.phone.errors }}</div>
+                <label for="id_phone" class="col-sm-4 control-label">{% trans "Phone" %}</label>
+                <div class="col-sm-4">
+                {{ form.phone }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_phone" class="col-sm-4 control-label">{% trans "Phone" %}</label>
+                <div class="col-sm-4">
+                {{ form.phone }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.address.errors %} has-error has-feedback{% endif %}">    
+                {% if form.address.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.address.errors }}</div>
+                <label for="id_address" class="col-sm-4 control-label">{% trans "Address" %}</label>
+                <div class="col-sm-4">
+                {{ form.address }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_address" class="col-sm-4 control-label">{% trans "Address" %}</label>
+                <div class="col-sm-4">
+                {{ form.address }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.zipcode.errors %} has-error has-feedback{% endif %}">    
+                {% if form.zipcode.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.zipcode.errors }}</div>
+                <label for="id_zipcode" class="col-sm-4 control-label">{% trans "ZipCode" %}</label>
+                <div class="col-sm-4">
+                {{ form.zipcode }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_zipcode" class="col-sm-4 control-label">{% trans "ZipCode" %}</label>
+                <div class="col-sm-4">
+                {{ form.zipcode }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group{% if form.town.errors %} has-error has-feedback{% endif %}">    
+                {% if form.town.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.town.errors }}</div>
+                <label for="id_town" class="col-sm-4 control-label">{% trans "Town" %}</label>
+                <div class="col-sm-4">
+                {{ form.town }}
+                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                </div>
+                {% else %}
+                <label for="id_town" class="col-sm-4 control-label">{% trans "Town" %}</label>
+                <div class="col-sm-4">
+                {{ form.town }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <button class="btn btn-primary">{% trans "Save" %}</button>
+                </div>
+            </div>
+        </div>
+        </fieldset>     
+        </form>
+    </div>
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+    $('#id_birth_date').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+});
+//]]>
+</script>
+{% endblock %}

@@ -6,7 +6,8 @@ from dj_diabetes.views import GlucosesCreateView, GlucosesUpdateView, GlucosesDe
     WeightsCreateView, WeightsUpdateView, WeightsDeleteView,\
     MealsCreateView, MealsUpdateView, MealsDeleteView,\
     ExercisesCreateView, ExercisesUpdateView, ExercisesDeleteView,\
-    ExamsCreateView, ExamsUpdateView, ExamsDeleteView
+    ExamsCreateView, ExamsUpdateView, ExamsDeleteView,\
+    UserProfileUpdateView
 
 from django.contrib import admin
 
@@ -68,4 +69,5 @@ urlpatterns =\
             view='dj_diabetes.views.chart_data_json',
             name='chart_data_json',
         ),
+        url(r'my_profile/(?P<pk>\d+)$', UserProfileUpdateView.as_view(), name='my_profile'),
 )

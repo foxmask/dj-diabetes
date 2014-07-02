@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     """
         Related user to handle his profile
     """
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     name = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=15, blank=True)

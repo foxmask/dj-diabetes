@@ -687,13 +687,4 @@ class UserProfileUpdateView(UpdateView):
     model = UserProfile
     form_class = UserProfileForm
     template_name = "dj_diabetes/userprofile_form.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserProfileUpdateView, self).dispatch(*args, **kwargs)
-
-    def form_valid(self, form):
-        form = UserProfileUpdateView(self.request.POST or None)
-        if form.is_valid():
-            form.save()
-        return HttpResponseRedirect(reverse('home'))
+    success_url = reverse_lazy('home')

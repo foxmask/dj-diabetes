@@ -3,14 +3,15 @@
 {% load i18n %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
 {% block content %}
+    <h1 class="page-header">{% trans "My Profile" %}</h1>
     <div class="col-md-6" id="exercise-content-form">
         <form method="post" role="form" class="form-horizontal" action="">
         {% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
-        <legend>{% trans 'Edit my profile' %}</legend>
         <div class="panel panel-default">
             <br/>
+            <h3> <span class="glyphicon glyphicon-user"></span> {% trans "Identity" %}</h3>
             <div class="form-group{% if form.name.errors %} has-error has-feedback{% endif %}">    
                 {% if form.name.errors %}
                 <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.name.errors }}</div>
@@ -42,7 +43,7 @@
                 </div>
                 {% endif %}
             </div>
-
+            <h3> <span class="glyphicon glyphicon-road"></span> {% trans "Address" %}</h3>
             <div class="form-group{% if form.phone.errors %} has-error has-feedback{% endif %}">    
                 {% if form.phone.errors %}
                 <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.phone.errors }}</div>

@@ -27,49 +27,13 @@ def pref_filter(filter):
     return all_data
 
 
-def appointment_types():
-    """
-        get appointment_types
-    """
-    choices = AppointmentTypes.objects.all()
-    data = ()
-    all_data = ()
-    for choice in choices:
-        data = (int(choice.id), choice.title)
-        all_data = (data,) + all_data
-    print all_data
-    return all_data
-
-
-def exam_types():
-    """
-        get examination_types
-    """
-    choices = ExaminationTypes.objects.all()
-    data = ()
-    all_data = ()
-    for choice in choices:
-        data = (int(choice.id), choice.title)
-        all_data = (data,) + all_data
-    return all_data
-
-
 # Non-ADMIN FORMS Part
 class UserProfileForm(forms.ModelForm):
 
-#    username = forms.CharField(widget=forms.TextInput(
-        #attrs={'class': 'form-control'}))
-    # get the list of pref to get the value in the dropdow
-#    password = forms.CharField(widget=forms.TextInput(
-#        attrs={'class': 'form-control'}))
-    name = forms.DateField(widget=forms.TextInput(
+    name = forms.CharField(widget=forms.TextInput(
         {'class': 'form-control'}))
-#    last_name = forms.CharField(widget=forms.TextInput(
-#        attrs={'class': 'form-control'}))
-#    first_name = forms.CharField(widget=forms.TextInput(
-#        attrs={'class': 'form-control'}))
-#    email = forms.CharField(widget=forms.TextInput(
-#        attrs={'type': 'email', 'class': 'form-control'}))
+    birth_date = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
     phone = forms.CharField(widget=forms.TextInput(
         {'type': 'tel', 'class': 'form-control'}))
     address = forms.CharField(widget=forms.Textarea(
@@ -78,14 +42,11 @@ class UserProfileForm(forms.ModelForm):
         attrs={'class': 'form-control'}))
     town = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
-    birth_date = forms.DateField(widget=forms.TextInput(
-        attrs={'class': 'form-control'}))
 
     class Meta:
         model = UserProfile
-        fields = [#'username', 'password', 'last_name', 'first_name', 'email',
-                  'name', 'phone', 'address',
-                  'zipcode', 'town', 'role', 'birth_date']
+        fields = ['name', 'birth_date', 'phone',
+                  'address', 'zipcode', 'town']
 
 
 class GlucosesForm(forms.ModelForm):
@@ -127,8 +88,6 @@ class AppointmentsForm(forms.ModelForm):
         Appointments Form
     """
     # to " suit " the HTML textearea
-#    appointment_types = forms.ChoiceField(
-#        widget=forms.Select(attrs={'class': 'form-control'}))
     title = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     body = forms.CharField(widget=forms.Textarea(
@@ -148,10 +107,6 @@ class AppointmentsForm(forms.ModelForm):
                   'date_appointment', 'hour_appointment',
                   'recall_one_duration', 'recall_two_duration',
                   'recall_one_unit', 'recall_two_unit']
-
-#    def __init__(self, *args, **kwargs):
-#        super(AppointmentsForm, self).__init__(*args, **kwargs)
-#        self.fields['appointment_types'].choices = appointment_types()
 
 
 class IssuesForm(forms.ModelForm):
@@ -193,8 +148,8 @@ class MealsForm(forms.ModelForm):
         Meals Form
     """
     # get the list of pref to get the value in the dropdow
-#    breakfast_lunch_diner = forms.ChoiceField(widget=forms.Select(
-#        attrs={'class': 'form-control'}))
+    breakfast_lunch_diner = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-control'}))
     food = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
     date_meal = forms.DateField(widget=forms.TextInput(
@@ -206,9 +161,9 @@ class MealsForm(forms.ModelForm):
         model = Meals
         fields = ['food', 'breakfast_lunch_diner', 'date_meal', 'hour_meal']
 
-#    def __init__(self, *args, **kwargs):
-#        super(MealsForm, self).__init__(*args, **kwargs)
-#        self.fields['breakfast_lunch_diner'].choices = pref_filter("meal")
+    def __init__(self, *args, **kwargs):
+        super(MealsForm, self).__init__(*args, **kwargs)
+        self.fields['breakfast_lunch_diner'].choices = pref_filter("meal")
 
 
 class ExercisesForm(forms.ModelForm):
@@ -235,8 +190,6 @@ class ExamsForm(forms.ModelForm):
         Exams Form
     """
     # to " suit " the HTML textearea
-#    examination_types = forms.ChoiceField(widget=forms.Select(
-#        attrs={'class': 'form-control'}))
     comments = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
     date_examination = forms.DateField(widget=forms.TextInput(
@@ -254,13 +207,6 @@ class ExamsForm(forms.ModelForm):
         fields = ['examination_types', 'comments',
                   'date_examination', 'hour_examination']
         exclude = ('user',)
-
-#    def __init__(self, *args, **kwargs):
-#        """
-#            used to fill the Dropdown examination_types
-#        """
-#        super(ExamsForm, self).__init__(*args, **kwargs)
-#        self.fields['examination_types'].choices = ExaminationTypes.objects.all() #exam_types()
 
 
 class ExamDetailsForm(forms.ModelForm):

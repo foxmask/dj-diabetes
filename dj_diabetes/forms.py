@@ -2,8 +2,6 @@
 from django import forms
 from django.conf import settings
 from django.forms.models import inlineformset_factory
-from django.forms import ChoiceField
-#from django.forms.formsets import inlineformset_factory
 
 from dj_diabetes.models import UserProfile
 from dj_diabetes.models import Glucoses, Appointments, Sports, Foods, Meals
@@ -100,6 +98,10 @@ class AppointmentsForm(forms.ModelForm):
         attrs={'class': 'form-control', 'type': 'number'}))
     recall_two_unit = forms.IntegerField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'number'}))
+    date_appointment = forms.DateField(widget=forms.TextInput(
+        {'class': 'form-control'}))
+    hour_appointment = forms.TimeField(widget=forms.TextInput(
+        {'class': 'form-control'}))
 
     class Meta:
         model = Appointments
@@ -107,6 +109,10 @@ class AppointmentsForm(forms.ModelForm):
                   'date_appointment', 'hour_appointment',
                   'recall_one_duration', 'recall_two_duration',
                   'recall_one_unit', 'recall_two_unit']
+
+    def __init__(self, *args, **kwargs):
+        super(AppointmentsForm, self).__init__(*args, **kwargs)
+        self.fields['appointment_types'].widget.attrs['class'] = 'form-control'
 
 
 class IssuesForm(forms.ModelForm):
@@ -184,6 +190,10 @@ class ExercisesForm(forms.ModelForm):
         fields = ['sports', 'comment', 'duration',
                   'date_exercise', 'hour_exercise']
 
+    def __init__(self, *args, **kwargs):
+        super(ExercisesForm, self).__init__(*args, **kwargs)
+        self.fields['sports'].widget.attrs['class'] = 'form-control'
+
 
 class ExamsForm(forms.ModelForm):
     """
@@ -208,6 +218,10 @@ class ExamsForm(forms.ModelForm):
                   'date_examination', 'hour_examination']
         exclude = ('user',)
 
+    def __init__(self, *args, **kwargs):
+        super(ExamsForm, self).__init__(*args, **kwargs)
+        self.fields['examination_types'].widget.attrs['class'] = 'form-control'
+
 
 class ExamDetailsForm(forms.ModelForm):
     """
@@ -223,13 +237,11 @@ class ExamDetailsForm(forms.ModelForm):
         fields = ['title', 'value']
 
 # a formeset based on the model of the Mother and Child + 2 new empty lines
-ExamDetailsFormSet = inlineformset_factory(Examinations, ExaminationDetails, extra=2)
-
+ExamDetailsFormSet = inlineformset_factory(Examinations,
+                                           ExaminationDetails, extra=2)
 
 
 # ADMIN FORMS Part
-
-
 class ExaminationTypesAdminForm(forms.ModelForm):
     """
         Manage the examination types

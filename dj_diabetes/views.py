@@ -146,7 +146,6 @@ class GlucosesUpdateView(UpdateView):
     model = Glucoses
     form_class = GlucosesForm
     template_name = "dj_diabetes/glucoses_form.html"
-    fields = ['moment', 'comment', 'glucose', 'insulin', 'date_glucose']
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -227,9 +226,6 @@ class AppointmentsUpdateView(UpdateView):
     model = Appointments
     form_class = AppointmentsForm
     template_name = "dj_diabetes/appointments_form.html"
-    fields = ['appointment_types', 'title', 'body', 'date_appointment',
-              'recall_one_duration', 'recall_two_duration',
-              'recall_one_unit', 'recall_two_unit']
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -302,7 +298,6 @@ class IssuesUpdateView(UpdateView):
     """
     model = Issues
     form_class = IssuesForm
-    fields = ['question', 'question_to', 'answer', 'date_answer']
     template_name = "dj_diabetes/issues_form.html"
 
     @method_decorator(login_required)
@@ -379,7 +374,6 @@ class WeightsUpdateView(UpdateView):
     """
     model = Weights
     form_class = WeightsForm
-    fields = ['weight', 'date_weight']
     template_name = "dj_diabetes/weights_form.html"
 
     @method_decorator(login_required)
@@ -462,7 +456,6 @@ class MealsUpdateView(UpdateView):
     """
     model = Meals
     form_class = MealsForm
-    fields = ['food', 'breakfast_lunch_diner', 'meal_date']
     template_name = "dj_diabetes/meals_form.html"
 
     @method_decorator(login_required)
@@ -543,7 +536,6 @@ class ExercisesUpdateView(UpdateView):
     """
     model = Exercises
     form_class = ExercisesForm
-    fields = fields = ['sports', 'comment', 'duration', 'date_exercise']
     template_name = "dj_diabetes/exercises_form.html"
 
     @method_decorator(login_required)
@@ -634,7 +626,6 @@ class ExamsUpdateView(UpdateView):
     """
     model = Examinations
     form_class = ExamsForm
-    fields = ['examination_types', 'comments', 'date_examination']
     template_name = "dj_diabetes/exams_form.html"
 
     @method_decorator(login_required)

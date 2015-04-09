@@ -1,6 +1,6 @@
-===========
+=================
  Django Diabetes
-===========
+=================
 
 Django Diabetes is a personnal Glucose Manager
 
@@ -8,9 +8,9 @@ It permits to follow your daily health
 
 
 requirements:
-=========
-* Python 2.7.x
-* Django >= 1.6.5
+=============
+* Python 2.7.x / 3.x
+* Django >= 1.8
 * arrow 0.4.2
 
 
@@ -18,7 +18,7 @@ Installation:
 =============
 to get the project, from your virtualenv, do :
 
-.. code: system
+.. code:: system
 
     git clone https://github.com/foxmask/dj-diabetes.git
 

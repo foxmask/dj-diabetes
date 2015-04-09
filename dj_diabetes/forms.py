@@ -238,7 +238,8 @@ class ExamDetailsForm(forms.ModelForm):
 
 # a formeset based on the model of the Mother and Child + 2 new empty lines
 ExamDetailsFormSet = inlineformset_factory(Examinations,
-                                           ExaminationDetails, extra=2)
+                                           ExaminationDetails,
+                                           fields=('title', 'value'), extra=2)
 
 
 # ADMIN FORMS Part

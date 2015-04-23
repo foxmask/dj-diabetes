@@ -9,6 +9,7 @@ It permits to follow your daily health
 
 requirements:
 =============
+
 * Python 2.7.x / 3.x
 * Django >= 1.8
 * arrow 0.4.2
@@ -16,6 +17,7 @@ requirements:
 
 Installation:
 =============
+
 to get the project, from your virtualenv, do :
 
 .. code:: system

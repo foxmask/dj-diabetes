@@ -3,27 +3,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
+from dj_diabetes.models import HatModel
 
-@python_2_unicode_compatible
-class ExaminationTypes(models.Model):
+
+class ExaminationTypes(HatModel):
 
     """
         ExaminationTypes
     """
-    title = models.CharField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
     class Meta:
         verbose_name = 'Examination Types'
         verbose_name_plural = 'Examination Types'
-
-    def show(self):
-        return "Examination Types %s %s %s" % (self.title, self.created,
-                                               self.modified)
-
-    def __str__(self):
-        return "%s" % (self.title)
 
 
 @python_2_unicode_compatible

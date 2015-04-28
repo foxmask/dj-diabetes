@@ -10,7 +10,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
 from dj_diabetes.tools import page_it, right_now
-from dj_diabetes.models.exams import Examinations
+from dj_diabetes.models.exams import Examinations, ExaminationTypes
 from dj_diabetes.forms.base import ExamsForm, ExamDetailsFormSet
 
 # Get an instance of a logger
@@ -27,10 +27,6 @@ class ExamsCreateView(CreateView):
     """
     form_class = ExamsForm
     template_name = "dj_diabetes/exams_form.html"
-
-#    @method_decorator(login_required)
-#    def dispatch(self, *args, **kwargs):
-#        return super(ExamsCreateView, self).dispatch(*args, **kwargs)
 
     def get_initial(self):
         """

@@ -3,28 +3,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
+from dj_diabetes.models import HatModel
 
-@python_2_unicode_compatible
-class AppointmentTypes(models.Model):
+
+class AppointmentTypes(HatModel):
 
     """
         AppointmentTypes
     """
-    title = models.CharField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
     class Meta:
         verbose_name = 'Appointment Types'
         verbose_name_plural = 'Appointment Types'
-
-    def show(self):
-        return "Appointment Types %s %s %s" % (self.title,
-                                               self.created,
-                                               self.modified)
-
-    def __str__(self):
-        return "%s" % (self.title)
 
 
 @python_2_unicode_compatible

@@ -8,15 +8,27 @@ from django.views.generic.edit import ModelFormMixin
 
 from dj_diabetes.tools import right_now
 
-from appointments import AppointmentTypes, Appointments
-from exams import Examinations, ExaminationTypes, ExaminationDetails
-from foods import Foods
-from glucoses import Glucoses
-from issues import Issues
-from meals import Meals
-from sports import Sports, Exercises
-from weights import Weights
 
+@python_2_unicode_compatible
+class HatModel(models.Model):
+    """
+        HatModel
+    """
+    title = models.CharField(max_length=255, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+    def show(self):
+        return "%s %s %s %s" % (self._meta.model_name,
+                                self.title,
+                                self.created,
+                                self.modified)
+
+    def __str__(self):
+        return "%s" % (self.title)
 
 
 @python_2_unicode_compatible
@@ -97,3 +109,14 @@ class SuccessMixin(object):
 
     def get_success_url(self):
         return reverse(self.model.__name__.lower())
+
+
+
+from appointments import AppointmentTypes, Appointments
+from exams import Examinations, ExaminationTypes, ExaminationDetails
+from foods import Foods
+from glucoses import Glucoses
+from issues import Issues
+from meals import Meals
+from sports import Sports, Exercises
+from weights import Weights

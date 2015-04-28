@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 import logging
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
-from dj_diabetes.tools import page_it, right_now
+from dj_diabetes.tools import page_it
+
+from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.meals import Meals
 from dj_diabetes.forms.base import MealsForm
 
@@ -17,35 +16,25 @@ from dj_diabetes.forms.base import MealsForm
 logger = logging.getLogger(__name__)
 
 
-class MealsCreateView(CreateView):
+class MealsMixin(SuccessMixin):
+    form_class = MealsForm
+    model = Meals
+
+
+class MealsCreateView(InitMixin, MealsMixin, LoginRequiredMixin, CreateView):
     """
         to Create Meals
     """
-    form_class = MealsForm
     template_name = "dj_diabetes/meals_form.html"
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MealsCreateView, self).dispatch(*args, **kwargs)
-
-    def get_initial(self):
-        """
-            set the default date and hour of the date_xxx and hour_xxx
-            property of the current model
-        """
-        return right_now("meal")
-
-    def form_valid(self, form):
-        meals = form.save(commit=False)
-        if form.is_valid():
-            meals.user = self.request.user
-            meals.save()
-
-        return HttpResponseRedirect(reverse('meals'))
+    def get_form(self, form_class):
+        form = super(MealsCreateView, self).get_form(form_class)
+        form.instance.user = self.request.user
+        return form
 
     def get_context_data(self, **kw):
         data = Meals.objects.all()
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -57,27 +46,15 @@ class MealsCreateView(CreateView):
         return context
 
 
-class MealsUpdateView(UpdateView):
+class MealsUpdateView(MealsMixin, LoginRequiredMixin, UpdateView):
     """
         to Edit Meals
     """
-    model = Meals
-    form_class = MealsForm
     template_name = "dj_diabetes/meals_form.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MealsUpdateView, self).dispatch(*args, **kwargs)
-
-    def form_valid(self, form):
-        if form.is_valid():
-            form.save()
-
-        return HttpResponseRedirect(reverse('meals'))
 
     def get_context_data(self, **kw):
         data = Meals.objects.all()
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -88,10 +65,9 @@ class MealsUpdateView(UpdateView):
         return context
 
 
-class MealsDeleteView(DeleteView):
+class MealsDeleteView(MealsMixin, DeleteView):
     """
         to Delete Meals
     """
-    model = Meals
-    success_url = reverse_lazy('meals')
+    # success_url = reverse_lazy('meals')
     template_name = 'dj_diabetes/confirm_delete.html'

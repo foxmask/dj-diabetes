@@ -35,4 +35,3 @@ def right_now(model):
     my_hour = 'hour_' + model
     return {my_date: now_date, my_hour: now_hour}
 
-

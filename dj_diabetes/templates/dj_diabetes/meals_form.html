@@ -108,7 +108,7 @@
             <tr>
                 <td>{{ line.food }}</td>
                 <td>{{ line.breakfast_lunch_diner|which_value:'meal' }}</td>                
-                <td>{{ line.date_mea }} {{ line.hour_meal }}</td>
+                <td>{{ line.date_meal }} {{ line.hour_meal }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" href="{% url 'meal_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'meal_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}

@@ -54,3 +54,10 @@ class UserProfileUpdateView(UpdateView):
     form_class = UserProfileForm
     template_name = "dj_diabetes/userprofile_form.html"
     success_url = reverse_lazy('home')
+
+
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)

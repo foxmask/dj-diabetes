@@ -3,6 +3,10 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.urlresolvers import reverse
+from django.views.generic.edit import ModelFormMixin
+
+from dj_diabetes.tools import right_now
 
 from appointments import AppointmentTypes, Appointments
 from exams import Examinations, ExaminationTypes, ExaminationDetails
@@ -73,3 +77,23 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 
+
+"""
+    Common mixin for all models of the app
+"""
+
+
+class InitMixin(ModelFormMixin):
+
+    def get_initial(self):
+        """
+            set the default date and hour of the date_xxx and hour_xxx
+            property of the current model
+        """
+        return right_now(self.model.__name__.lower())
+
+
+class SuccessMixin(object):
+
+    def get_success_url(self):
+        return reverse(self.model.__name__.lower())

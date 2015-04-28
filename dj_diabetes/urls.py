@@ -1,13 +1,25 @@
 from django.conf.urls import patterns, include, url
 
 from dj_diabetes.views import UserProfileUpdateView
-from dj_diabetes.views.glucoses import GlucosesCreateView, GlucosesUpdateView, GlucosesDeleteView
-from dj_diabetes.views.appointments import AppointmentsCreateView, AppointmentsUpdateView, AppointmentsDeleteView
-from dj_diabetes.views.exams import ExamsCreateView, ExamsUpdateView, ExamsDeleteView
-from dj_diabetes.views.exercises import ExercisesCreateView, ExercisesUpdateView, ExercisesDeleteView
-from dj_diabetes.views.issues import IssuesCreateView, IssuesUpdateView, IssuesDeleteView
-from dj_diabetes.views.meals import MealsCreateView, MealsUpdateView, MealsDeleteView
-from dj_diabetes.views.weights import WeightsCreateView, WeightsUpdateView, WeightsDeleteView
+from dj_diabetes.views.glucoses import GlucosesCreateView, GlucosesUpdateView,\
+                                       GlucosesDeleteView
+from dj_diabetes.views.appointments import AppointmentsCreateView,\
+                                           AppointmentsUpdateView,\
+                                           AppointmentsDeleteView
+from dj_diabetes.views.exams import ExamsCreateView, ExamsUpdateView,\
+                                    ExamsDeleteView
+from dj_diabetes.views.exercises import ExercisesCreateView,\
+                                        ExercisesUpdateView,\
+                                        ExercisesDeleteView
+from dj_diabetes.views.issues import IssuesCreateView,\
+                                     IssuesUpdateView,\
+                                     IssuesDeleteView
+from dj_diabetes.views.meals import MealsCreateView,\
+                                    MealsUpdateView,\
+                                    MealsDeleteView
+from dj_diabetes.views.weights import WeightsCreateView,\
+                                      WeightsUpdateView,\
+                                      WeightsDeleteView
 
 from django.contrib import admin
 

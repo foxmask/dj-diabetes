@@ -1,21 +1,19 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from django.contrib import admin
 
 from dj_diabetes.forms import SportsAdminForm, ExaminationTypesAdminForm
-from dj_diabetes.forms import AppointmentTypesAdminForm, FoodsAdminForm, PrefAdminForm
-from dj_diabetes.models import Sports, UserProfile, Foods, Preferences
-from dj_diabetes.models import ExaminationTypes, AppointmentTypes
+from dj_diabetes.forms import AppointmentTypesAdminForm, FoodsAdminForm
+from dj_diabetes.forms import PrefAdminForm
+from dj_diabetes.models import UserProfile, Preferences
+from dj_diabetes.models.foods import Foods
+from dj_diabetes.models.sports import Sports
+from dj_diabetes.models.exams import ExaminationTypes
+from dj_diabetes.models.appointments import AppointmentTypes
 
 
-class SportsAdmin(admin.ModelAdmin):
+class DiabetesAdmin(admin.ModelAdmin):
 
-    """
-        get the list of the sports
-    """
     list_display = ('title', 'created', 'modified')
-
-    add_form = SportsAdminForm
-    view_form = SportsAdminForm
 
     def get_form(self, request, obj=None, **args):
         defaults = {}
@@ -24,7 +22,16 @@ class SportsAdmin(admin.ModelAdmin):
         else:
             defaults.update({'form': self.view_form, })
         defaults.update(args)
-        return super(SportsAdmin, self).get_form(request, obj, **defaults)
+        return super(DiabetesAdmin, self).get_form(request, obj, **defaults)
+
+
+class SportsAdmin(DiabetesAdmin):
+
+    """
+        get the list of the sports
+    """
+    add_form = SportsAdminForm
+    view_form = SportsAdminForm
 
 
 class FoodsAdmin(admin.ModelAdmin):

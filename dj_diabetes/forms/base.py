@@ -1,13 +1,16 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from django import forms
 from django.conf import settings
 from django.forms.models import inlineformset_factory
 
-from dj_diabetes.models import UserProfile
-from dj_diabetes.models import Glucoses, Appointments, Sports, Foods, Meals
-from dj_diabetes.models import ExaminationTypes, AppointmentTypes, Issues
-from dj_diabetes.models import Weights, Exercises, Preferences
-from dj_diabetes.models import Examinations, ExaminationDetails
+from dj_diabetes.models import UserProfile, Preferences
+from dj_diabetes.models.glucoses import Glucoses
+from dj_diabetes.models.appointments import Appointments
+from dj_diabetes.models.meals import Meals
+from dj_diabetes.models.issues import Issues
+from dj_diabetes.models.weights import Weights
+from dj_diabetes.models.sports import Exercises
+from dj_diabetes.models.exams import Examinations, ExaminationDetails
 
 # Function
 
@@ -25,7 +28,6 @@ def pref_filter(filter):
     return all_data
 
 
-# Non-ADMIN FORMS Part
 class UserProfileForm(forms.ModelForm):
 
     name = forms.CharField(widget=forms.TextInput(
@@ -241,52 +243,3 @@ ExamDetailsFormSet = inlineformset_factory(Examinations,
                                            ExaminationDetails,
                                            fields=('title', 'value'), extra=2)
 
-
-# ADMIN FORMS Part
-class ExaminationTypesAdminForm(forms.ModelForm):
-    """
-        Manage the examination types
-    """
-    class Meta:
-        model = ExaminationTypes
-        fields = ['title']
-
-
-class AppointmentTypesAdminForm(forms.ModelForm):
-
-    """
-        Manage the appointment types
-    """
-    class Meta:
-        model = AppointmentTypes
-        fields = ['title']
-
-
-class FoodsAdminForm(forms.ModelForm):
-
-    """
-        Manage the Foods
-    """
-    class Meta:
-        model = Foods
-        fields = ['title']
-
-
-class SportsAdminForm(forms.ModelForm):
-
-    """
-        Manage the sports
-    """
-    class Meta:
-        model = Sports
-        fields = ['title']
-
-
-class PrefAdminForm(forms.ModelForm):
-
-    """
-        Manage the preferences
-    """
-    class Meta:
-        model = Preferences
-        fields = ['key', 'title', 'value']

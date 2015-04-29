@@ -25,18 +25,6 @@ class DiabetesAdminMixin(object):
                                                         **defaults)
 
 
-class DiabetesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
-
-    def get_form(self, request, obj=None, **args):
-        defaults = {}
-        if obj is None:
-            defaults.update({'form': self.add_form, })
-        else:
-            defaults.update({'form': self.view_form, })
-        defaults.update(args)
-        return super(DiabetesAdmin, self).get_form(request, obj, **defaults)
-
-
 class SportsAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     """

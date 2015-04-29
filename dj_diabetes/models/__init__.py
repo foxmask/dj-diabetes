@@ -21,12 +21,6 @@ class HatModel(models.Model):
     class Meta:
         abstract = True
 
-    def show(self):
-        return "%s %s %s %s" % (self._meta.model_name,
-                                self.title,
-                                self.created,
-                                self.modified)
-
     def __str__(self):
         return "%s" % (self.title)
 
@@ -47,10 +41,6 @@ class UserProfile(models.Model):
     role = models.CharField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    # active = models.BooleanField()
-
-    def show(self):
-        return "User profile %s" % (self.user_id)
 
     def __str__(self):
         return "%s" % (self.user)
@@ -70,11 +60,6 @@ class Preferences(models.Model):
     class Meta:
         verbose_name = 'Preference'
         verbose_name_plural = 'Preferences'
-
-    def show(self):
-        return "Preferences %s %s %s %s %s" % (self.key, self.title,
-                                               self.value,
-                                               self.created, self.modified)
 
     def __str__(self):
         return "%s %s %s" % (self.key, self.title, self.value)

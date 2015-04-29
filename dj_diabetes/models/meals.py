@@ -22,11 +22,5 @@ class Meals(models.Model):
         verbose_name = 'Meal'
         verbose_name_plural = 'Meals'
 
-    def show(self):
-        return "Meals %s %s %s %s %s %s" % (self.user_id, self.food,
-                                            self.breakfast_lunch_diner,
-                                            self.date_meals,
-                                            self.created, self.modified)
-
     def __str__(self):
         return "%s (date: %s)" % (self.food, self.date_meals)

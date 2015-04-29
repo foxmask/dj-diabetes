@@ -31,10 +31,5 @@ class Exercises(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def show(self):
-        return "Exercises %s %s %s %s %s" % (self.user_id, self.sports,
-                                             self.comment, self.created,
-                                             self.modified)
-
     def __str__(self):
         return "%s (duration: %s)" % (self.sports, self.duration)

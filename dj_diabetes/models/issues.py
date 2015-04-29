@@ -22,11 +22,5 @@ class Issues(models.Model):
         verbose_name = 'Issues'
         verbose_name_plural = 'Issues'
 
-    def show(self):
-        return "Issues %s %s %s %s %s %s %s" % (self.user_id, self.question,
-                                                self.answer, self.date_answer,
-                                                self.created, self.modified)
-
     def __str__(self):
         return "%s" % (self.question)
-

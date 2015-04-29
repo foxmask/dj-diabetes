@@ -14,9 +14,6 @@ from dj_diabetes.models.appointments import AppointmentTypes
 class DiabetesAdminMixin(object):
     list_display = ('title', 'created', 'modified')
 
-
-class DiabetesAdminFormMixin(object):
-
     def get_form(self, request, obj=None, **args):
         defaults = {}
         if obj is None:
@@ -24,8 +21,8 @@ class DiabetesAdminFormMixin(object):
         else:
             defaults.update({'form': self.view_form, })
         defaults.update(args)
-        return super(DiabetesAdminFormMixin, self).get_form(request, obj,
-                                                            **defaults)
+        return super(DiabetesAdminMixin, self).get_form(request, obj,
+                                                        **defaults)
 
 
 class DiabetesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
@@ -40,7 +37,7 @@ class DiabetesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
         return super(DiabetesAdmin, self).get_form(request, obj, **defaults)
 
 
-class SportsAdmin(DiabetesAdmin):
+class SportsAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     """
         get the list of the sports
@@ -49,7 +46,7 @@ class SportsAdmin(DiabetesAdmin):
     view_form = SportsAdminForm
 
 
-class FoodsAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin, admin.ModelAdmin):
+class FoodsAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     """
         get the list of the Foods
@@ -58,7 +55,7 @@ class FoodsAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin, admin.ModelAdmin):
     view_form = FoodsAdminForm
 
 
-class ExaminationTypesAdmin(DiabetesAdminFormMixin, admin.ModelAdmin):
+class ExaminationTypesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     """
         get the list of the examination types
@@ -68,8 +65,7 @@ class ExaminationTypesAdmin(DiabetesAdminFormMixin, admin.ModelAdmin):
     view_form = ExaminationTypesAdminForm
 
 
-class AppointmentTypesAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin,
-                            admin.ModelAdmin):
+class AppointmentTypesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     """
         get the list of the appointment types
@@ -79,7 +75,7 @@ class AppointmentTypesAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin,
     view_form = AppointmentTypesAdminForm
 
 
-class PrefAdmin(DiabetesAdminFormMixin, admin.ModelAdmin):
+class PrefAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     list_display = ('key', 'title', 'value', 'created', 'modified')
 

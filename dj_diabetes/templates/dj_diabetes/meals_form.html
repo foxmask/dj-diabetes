@@ -115,7 +115,7 @@
         <div class="col-md-12">
             <ul class="pagination">
                 {% if data.has_previous %}
-                    <li><a href="{% url 'glucoses' %}?page={{ data.previous_page_number }}">{% trans "previous" %}</a></li>
+                    <li><a href="{% url 'meals' %}?page={{ data.previous_page_number }}">{% trans "previous" %}</a></li>
                 {% endif %}
                     <li class="active"><a >
                     {% blocktrans with page_number=data.number total_of_pages=data.paginator.num_pages %}
@@ -123,7 +123,7 @@
                     {% endblocktrans %}</a>
                     </li>
                 {% if data.has_next %}
-                    <li><a href="{% url 'glucoses' %}?page={{ data.next_page_number }}">{% trans "next" %}</a></li>
+                    <li><a href="{% url 'meals' %}?page={{ data.next_page_number }}">{% trans "next" %}</a></li>
                 {% endif %}
             </ul>
         </div>        

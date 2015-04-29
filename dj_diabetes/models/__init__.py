@@ -6,7 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import ModelFormMixin
 
-from dj_diabetes.tools import right_now
+from dj_diabetes.tools import page_it, right_now
 
 
 @python_2_unicode_compatible
@@ -81,7 +81,9 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class InitMixin(ModelFormMixin):
-
+    """
+        Mixin to initialize the date/hour attribute of the model
+    """
     def get_initial(self):
         """
             set the default date and hour of the date_xxx and hour_xxx
@@ -91,10 +93,29 @@ class InitMixin(ModelFormMixin):
 
 
 class SuccessMixin(object):
-
+    """
+        Mixin to just return to the expected page
+        where the name is based on the model name
+    """
     def get_success_url(self):
-        print(self.model.__name__.lower())
         return reverse(self.model.__name__.lower())
+
+
+class PaginateMixin(object):
+    """
+        Mixin to just handle the Paginate behavior
+    """
+    def get_context_data(self, **kw):
+        data = self.model.objects.all()
+        # paginator vars
+        record_per_page = 3
+        page = self.request.GET.get('page')
+        # paginator call
+        data = page_it(data, record_per_page, page)
+        context = super(PaginateMixin, self).get_context_data(**kw)
+        context['data'] = data
+        return context
+
 
 
 from appointments import AppointmentTypes, Appointments

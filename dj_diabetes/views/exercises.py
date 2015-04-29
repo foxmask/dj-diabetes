@@ -5,9 +5,7 @@ import logging
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
-from dj_diabetes.tools import page_it
-
-from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.models import InitMixin, SuccessMixin, PaginateMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.sports import Exercises
 from dj_diabetes.forms.base import ExercisesForm, UserInstanceMixin
@@ -22,43 +20,24 @@ class ExercisesMixin(SuccessMixin):
 
 
 class ExercisesCreateView(InitMixin, ExercisesMixin, LoginRequiredMixin,
-                          UserInstanceMixin, CreateView):
+                          UserInstanceMixin, PaginateMixin, CreateView):
     """
         to Create Exercises
     """
     template_name = "dj_diabetes/exercises_form.html"
 
     def get_context_data(self, **kw):
-        data = Exercises.objects.all()
-        # paginator vars
-        record_per_page = 15
-        page = self.request.GET.get('page')
-        # paginator call
-        data = page_it(data, record_per_page, page)
-
         context = super(ExercisesCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exercise'
-        context['data'] = data
         return context
 
 
-class ExercisesUpdateView(ExercisesMixin, LoginRequiredMixin, UpdateView):
+class ExercisesUpdateView(ExercisesMixin, LoginRequiredMixin,
+                          PaginateMixin, UpdateView):
     """
         to Edit Exercises
     """
     template_name = "dj_diabetes/exercises_form.html"
-
-    def get_context_data(self, **kw):
-        data = Exercises.objects.all()
-        # paginator vars
-        record_per_page = 15
-        page = self.request.GET.get('page')
-        # paginator call
-        data = page_it(data, record_per_page, page)
-
-        context = super(ExercisesUpdateView, self).get_context_data(**kw)
-        context['data'] = data
-        return context
 
 
 class ExercisesDeleteView(ExercisesMixin, DeleteView):

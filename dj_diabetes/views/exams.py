@@ -7,9 +7,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
-from dj_diabetes.tools import page_it
-
-from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.models import InitMixin, SuccessMixin, PaginateMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.exams import Examinations
 from dj_diabetes.forms.base import ExamsForm, ExamDetailsFormSet
@@ -23,7 +21,8 @@ class ExamsMixin(SuccessMixin):
     model = Examinations
 
 
-class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin, CreateView):
+class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin,
+                      PaginateMixin, CreateView):
     """
         to Create Exams
     """
@@ -44,16 +43,8 @@ class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
-        data = Examinations.objects.all().order_by('-created')
-        # paginator vars
-        record_per_page = 15
-        page = self.request.GET.get('page')
-        # paginator call
-        data = page_it(data, record_per_page, page)
-
         context = super(ExamsCreateView, self).get_context_data(**kw)
         context['action'] = 'add_exam'
-        context['data'] = data
 
         if self.request.POST:
             context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
@@ -62,7 +53,8 @@ class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin, CreateView):
         return context
 
 
-class ExamsUpdateView(ExamsMixin, LoginRequiredMixin, UpdateView):
+class ExamsUpdateView(ExamsMixin, LoginRequiredMixin,
+                      PaginateMixin, UpdateView):
     """
         to Edit Exams
     """
@@ -79,15 +71,7 @@ class ExamsUpdateView(ExamsMixin, LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(reverse('exams'))
 
     def get_context_data(self, **kw):
-        data = Examinations.objects.all().order_by('-created')
-        # paginator vars
-        record_per_page = 15
-        page = self.request.GET.get('page')
-        # paginator call
-        data = page_it(data, record_per_page, page)
-
         context = super(ExamsUpdateView, self).get_context_data(**kw)
-        context['data'] = data
 
         if self.request.POST:
             context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)

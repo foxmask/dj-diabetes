@@ -27,11 +27,6 @@ class AppointmentsCreateView(InitMixin, AppointmentsMixin,
     """
     template_name = "dj_diabetes/appointments_form.html"
 
-    def get_context_data(self, **kw):
-        context = super(AppointmentsCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_appointments'
-        return context
-
 
 class AppointmentsUpdateView(AppointmentsMixin, LoginRequiredMixin,
                              PaginateMixin, UpdateView):

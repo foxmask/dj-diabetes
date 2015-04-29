@@ -7,11 +7,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
-        {% if action = 'add_weight' %}
-        <legend><span class="glyphicon glyphicon-eye-open"></span> {% trans "Weight" %}</legend>
-        {% else %}
-        <legend><span class="glyphicon glyphicon-eye-open"></span> {% trans 'Edition of the weight' %}</legend>
-        {% endif %}
+        <legend><span class="glyphicon glyphicon-eye-open"></span> {% trans "Weights" %}</legend>
         <div class="panel panel-default">
             <br/>
 

@@ -26,11 +26,6 @@ class GlucosesCreateView(InitMixin, GlucosesMixin, LoginRequiredMixin,
     """
     template_name = "dj_diabetes/glucoses_form.html"
 
-    def get_context_data(self, **kw):
-        context = super(GlucosesCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_glucoses'
-        return context
-
 
 class GlucosesUpdateView(GlucosesMixin, LoginRequiredMixin,
                          PaginateMixin, UpdateView):

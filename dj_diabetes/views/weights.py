@@ -32,11 +32,6 @@ class WeightsCreateView(WeightsMixin, LoginRequiredMixin, UserInstanceMixin,
         return {'date_weights': arrow.utcnow().to(
             settings.TIME_ZONE).format('YYYY-MM-DD')}
 
-    def get_context_data(self, **kw):
-        context = super(WeightsCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_weight'
-        return context
-
 
 class WeightsUpdateView(WeightsMixin, LoginRequiredMixin,
                         PaginateMixin, UpdateView):

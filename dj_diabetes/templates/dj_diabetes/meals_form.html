@@ -8,11 +8,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
-        {% if action = 'add_meal' %}
-        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans "Meal" %}</legend>
-        {% else %}
-        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans 'Edition of the meal' %}</legend>
-        {% endif %}
+        <legend><span class="glyphicon glyphicon-cutlery"></span> {% trans "Meals" %}</legend>
         <div class="panel panel-default">
             <br/>
 

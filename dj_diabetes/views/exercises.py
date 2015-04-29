@@ -26,11 +26,6 @@ class ExercisesCreateView(InitMixin, ExercisesMixin, LoginRequiredMixin,
     """
     template_name = "dj_diabetes/exercises_form.html"
 
-    def get_context_data(self, **kw):
-        context = super(ExercisesCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_exercise'
-        return context
-
 
 class ExercisesUpdateView(ExercisesMixin, LoginRequiredMixin,
                           PaginateMixin, UpdateView):

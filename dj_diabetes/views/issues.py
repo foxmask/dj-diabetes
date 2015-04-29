@@ -31,11 +31,6 @@ class IssuesCreateView(InitMixin, IssuesMixin, LoginRequiredMixin,
         return {'date_answer': arrow.utcnow().to(
             settings.TIME_ZONE).format('YYYY-MM-DD')}
 
-    def get_context_data(self, **kw):
-        context = super(IssuesCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_issue'
-        return context
-
 
 class IssuesUpdateView(IssuesMixin, LoginRequiredMixin, PaginateMixin,
                        UpdateView):

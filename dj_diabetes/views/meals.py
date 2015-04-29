@@ -26,11 +26,6 @@ class MealsCreateView(InitMixin, MealsMixin, LoginRequiredMixin,
     """
     template_name = "dj_diabetes/meals_form.html"
 
-    def get_context_data(self, **kw):
-        context = super(MealsCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_meal'
-        return context
-
 
 class MealsUpdateView(MealsMixin, LoginRequiredMixin, PaginateMixin,
                       UpdateView):

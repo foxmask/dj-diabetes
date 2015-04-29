@@ -7,11 +7,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
-        {% if action = 'add_issue' %}
         <legend><span class="glyphicon glyphicon-question-sign"></span> {% trans "Issues" %}</legend>
-        {% else %}
-        <legend><span class="glyphicon glyphicon-question-sign"></span> {% trans 'Edition of the issue' %}</legend>
-        {% endif %}
         <div class="panel panel-default">
             <br/>
 

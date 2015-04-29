@@ -9,11 +9,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
-        {% if action = 'add_glucoses' %}
         <legend><span class="glyphicon glyphicon-tint"></span> {% trans "Glucoses" %}</legend>
-        {% else %}
-        <legend><span class="glyphicon glyphicon-tint"></span> {% trans 'Edition of the glucose' %}</legend>
-        {% endif %}
         <div class="panel panel-default">
             <br/>
 

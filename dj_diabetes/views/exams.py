@@ -21,8 +21,19 @@ class ExamsMixin(SuccessMixin):
     model = Examinations
 
 
+class ExamsContextDataMixin(PaginateMixin):
+
+    def get_context_data(self, **kw):
+        context = super(ExamsContextDataMixin, self).get_context_data(**kw)
+        if self.request.POST:
+            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
+        else:
+            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
+        return context
+
+
 class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin,
-                      PaginateMixin, CreateView):
+                      ExamsContextDataMixin, CreateView):
     """
         to Create Exams
     """
@@ -42,19 +53,9 @@ class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin,
 
         return HttpResponseRedirect(reverse('exams'))
 
-    def get_context_data(self, **kw):
-        context = super(ExamsCreateView, self).get_context_data(**kw)
-        context['action'] = 'add_exam'
-
-        if self.request.POST:
-            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
-        else:
-            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
-        return context
-
 
 class ExamsUpdateView(ExamsMixin, LoginRequiredMixin,
-                      PaginateMixin, UpdateView):
+                      ExamsContextDataMixin, UpdateView):
     """
         to Edit Exams
     """
@@ -69,15 +70,6 @@ class ExamsUpdateView(ExamsMixin, LoginRequiredMixin,
             formset.save()
 
         return HttpResponseRedirect(reverse('exams'))
-
-    def get_context_data(self, **kw):
-        context = super(ExamsUpdateView, self).get_context_data(**kw)
-
-        if self.request.POST:
-            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
-        else:
-            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
-        return context
 
 
 class ExamsDeleteView(ExamsMixin, DeleteView):

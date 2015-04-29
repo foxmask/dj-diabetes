@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load url from future %}
 {% load i18n %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
 {% block content %}
@@ -121,23 +120,23 @@
                 {% endif %}            
             </div>
 
-            <div class="form-group{% if form.id_date_appointment.errors %} has-error has-feedback{% endif %}">
-                {% if form.id_date_appointment.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.id_date_appointment.errors }}</div>
+            <div class="form-group{% if form.id_date_appointments.errors %} has-error has-feedback{% endif %}">
+                {% if form.id_date_appointments.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.id_date_appointments.errors }}</div>
                 {% endif %}
-                <label for="id_date_appointment" class="col-sm-4 control-label">{% trans "Date" %}</label>
+                <label for="id_date_appointments" class="col-sm-4 control-label">{% trans "Date" %}</label>
                 <div class="col-sm-4">              
-                  {{ form.date_appointment }}
+                  {{ form.date_appointments }}
                 </div>
             </div>
 
-            <div class="form-group{% if form.id_hour_appointment.errors %} has-error has-feedback{% endif %}">
-                {% if form.hour_appointment.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_appointment.errors }}</div>
+            <div class="form-group{% if form.id_hour_appointments.errors %} has-error has-feedback{% endif %}">
+                {% if form.hour_appointments.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_appointments.errors }}</div>
                 {% endif %}
-                <label for="id_hour_appointment" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+                <label for="id_hour_appointments" class="col-sm-4 control-label">{% trans "Hour" %}</label>
                 <div class="col-sm-4">              
-                  {{ form.hour_appointment }}
+                  {{ form.hour_appointments }}
                 </div>
             </div>
 
@@ -164,7 +163,7 @@
             </tr>
         {% for line in data %}
             <tr>
-                <td>{{ line.date_appointment }}</td>
+                <td>{{ line.date_appointments }}</td>
                 <td>{{ line.title }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" href="{% url 'appointment_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'appointment_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
             </tr>
@@ -192,7 +191,7 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function(){
-    $('#id_date_appointment').datepicker({
+    $('#id_date_appointments').datepicker({
             format: 'yyyy-mm-dd'
     });
 });

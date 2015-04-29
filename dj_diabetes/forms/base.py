@@ -63,9 +63,9 @@ class GlucosesForm(forms.ModelForm):
     # to " suit " the HTML textearea
     comment = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
-    date_glucose = forms.DateField(widget=forms.TextInput(
+    date_glucoses = forms.DateField(widget=forms.TextInput(
         {'class': 'form-control'}))
-    hour_glucose = forms.TimeField(widget=forms.TextInput(
+    hour_glucoses = forms.TimeField(widget=forms.TextInput(
         {'class': 'form-control'}))
 
     class Meta:
@@ -73,10 +73,10 @@ class GlucosesForm(forms.ModelForm):
         # Do the user uses insulin ?
         if settings.DJ_DIABETES['insulin'] is True:
             fields = ['moment', 'comment', 'glucose', 'insulin',
-                      'date_glucose', 'hour_glucose']
+                      'date_glucoses', 'hour_glucoses']
         else:
             fields = ['moment', 'comment', 'glucose',
-                      'date_glucose', 'hour_glucose']
+                      'date_glucoses', 'hour_glucoses']
 
     def __init__(self, *args, **kwargs):
         super(GlucosesForm, self).__init__(*args, **kwargs)
@@ -100,15 +100,15 @@ class AppointmentsForm(forms.ModelForm):
         attrs={'class': 'form-control', 'type': 'number'}))
     recall_two_unit = forms.IntegerField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'number'}))
-    date_appointment = forms.DateField(widget=forms.TextInput(
+    date_appointments = forms.DateField(widget=forms.TextInput(
         {'class': 'form-control'}))
-    hour_appointment = forms.TimeField(widget=forms.TextInput(
+    hour_appointments = forms.TimeField(widget=forms.TextInput(
         {'class': 'form-control'}))
 
     class Meta:
         model = Appointments
         fields = ['appointment_types', 'title', 'body',
-                  'date_appointment', 'hour_appointment',
+                  'date_appointments', 'hour_appointments',
                   'recall_one_duration', 'recall_two_duration',
                   'recall_one_unit', 'recall_two_unit']
 
@@ -143,12 +143,12 @@ class WeightsForm(forms.ModelForm):
     """
     weight = forms.IntegerField(widget=forms.TextInput(
         {'class': 'form-control', 'type': 'number'}))
-    date_weight = forms.DateField(widget=forms.TextInput(
+    date_weights = forms.DateField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
     class Meta:
         model = Weights
-        fields = ['weight', 'date_weight']
+        fields = ['weight', 'date_weights']
 
 
 class MealsForm(forms.ModelForm):
@@ -160,14 +160,14 @@ class MealsForm(forms.ModelForm):
         attrs={'class': 'form-control'}))
     food = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
-    date_meal = forms.DateField(widget=forms.TextInput(
+    date_meals = forms.DateField(widget=forms.TextInput(
         {'class': 'form-control'}))
-    hour_meal = forms.TimeField(widget=forms.TextInput(
+    hour_meals = forms.TimeField(widget=forms.TextInput(
         {'class': 'form-control'}))
 
     class Meta:
         model = Meals
-        fields = ['food', 'breakfast_lunch_diner', 'date_meal', 'hour_meal']
+        fields = ['food', 'breakfast_lunch_diner', 'date_meals', 'hour_meals']
 
     def __init__(self, *args, **kwargs):
         super(MealsForm, self).__init__(*args, **kwargs)
@@ -182,15 +182,15 @@ class ExercisesForm(forms.ModelForm):
         {'class': 'form-control', 'rows': '3'}))
     duration = forms.IntegerField(widget=forms.TextInput(
         {'class': 'form-control', 'type': 'number'}))
-    date_exercise = forms.DateField(widget=forms.TextInput(
+    date_exercises = forms.DateField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
-    hour_exercise = forms.TimeField(widget=forms.TextInput(
+    hour_exercises = forms.TimeField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
     class Meta:
         model = Exercises
         fields = ['sports', 'comment', 'duration',
-                  'date_exercise', 'hour_exercise']
+                  'date_exercises', 'hour_exercises']
 
     def __init__(self, *args, **kwargs):
         super(ExercisesForm, self).__init__(*args, **kwargs)
@@ -204,9 +204,9 @@ class ExamsForm(forms.ModelForm):
     # to " suit " the HTML textearea
     comments = forms.CharField(widget=forms.Textarea(
         {'class': 'form-control', 'rows': '3'}))
-    date_examination = forms.DateField(widget=forms.TextInput(
+    date_examinations = forms.DateField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
-    hour_examination = forms.TimeField(widget=forms.TextInput(
+    hour_examinations = forms.TimeField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
     def save(self, user=None):
@@ -217,7 +217,7 @@ class ExamsForm(forms.ModelForm):
     class Meta:
         model = Examinations
         fields = ['examination_types', 'comments',
-                  'date_examination', 'hour_examination']
+                  'date_examinations', 'hour_examinations']
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
@@ -242,4 +242,3 @@ class ExamDetailsForm(forms.ModelForm):
 ExamDetailsFormSet = inlineformset_factory(Examinations,
                                            ExaminationDetails,
                                            fields=('title', 'value'), extra=2)
-

@@ -34,7 +34,8 @@ and at least :
 
 .. code:: python
 
-    python manage.py syncdb
+    python manage.py makemigrations dj_diabetes
+    python manage.py migrate dj_diabetes
     python manage.py loaddata dj_diabetes_preferences.json
 
 to startup the database and load the data

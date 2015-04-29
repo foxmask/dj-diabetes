@@ -26,8 +26,8 @@ class Exercises(models.Model):
     sports = models.ForeignKey(Sports)
     comment = models.TextField()
     duration = models.FloatField()
-    date_exercise = models.DateField(null=True)
-    hour_exercise = models.TimeField(null=True)
+    date_exercises = models.DateField(null=True)
+    hour_exercises = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

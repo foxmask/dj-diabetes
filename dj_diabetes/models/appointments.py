@@ -28,8 +28,8 @@ class Appointments(models.Model):
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    date_appointment = models.DateField(null=True)
-    hour_appointment = models.TimeField(null=True)
+    date_appointments = models.DateField(null=True)
+    hour_appointments = models.TimeField(null=True)
     recall_one_duration = models.IntegerField(null=True)
     recall_two_duration = models.IntegerField(null=True)
     recall_one_unit = models.IntegerField(null=True)
@@ -41,8 +41,8 @@ class Appointments(models.Model):
 
     def show(self):
         return "Appointments %s %s %s %s %s" % (self.user_id, self.title,
-                                                self.date_appointment,
+                                                self.date_appointments,
                                                 self.created, self.modified)
 
     def __str__(self):
-        return "%s (date: %s)" % (self.title, self.date_appointment)
+        return "%s (date: %s)" % (self.title, self.date_appointments)

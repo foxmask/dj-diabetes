@@ -2,38 +2,32 @@
 from __future__ import unicode_literals
 import logging
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
-from dj_diabetes.tools import page_it, right_now
-from dj_diabetes.models.exams import Examinations, ExaminationTypes
+from dj_diabetes.tools import page_it
+
+from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.views import LoginRequiredMixin
+from dj_diabetes.models.exams import Examinations
 from dj_diabetes.forms.base import ExamsForm, ExamDetailsFormSet
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
 
-#************************
-# Classe Based View
-#************************
+class ExamsMixin(SuccessMixin):
+    form_class = ExamsForm
+    model = Examinations
 
-class ExamsCreateView(CreateView):
+
+class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin, CreateView):
     """
         to Create Exams
     """
-    form_class = ExamsForm
     template_name = "dj_diabetes/exams_form.html"
-
-    def get_initial(self):
-        """
-            set the default date and hour of the date_xxx and hour_xxx
-            property of the current model
-        """
-        return right_now("examination")
 
     def form_valid(self, form):
         if self.request.POST:
@@ -51,7 +45,7 @@ class ExamsCreateView(CreateView):
 
     def get_context_data(self, **kw):
         data = Examinations.objects.all().order_by('-created')
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -68,17 +62,11 @@ class ExamsCreateView(CreateView):
         return context
 
 
-class ExamsUpdateView(UpdateView):
+class ExamsUpdateView(ExamsMixin, LoginRequiredMixin, UpdateView):
     """
         to Edit Exams
     """
-    model = Examinations
-    form_class = ExamsForm
     template_name = "dj_diabetes/exams_form.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ExamsUpdateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         formset = ExamDetailsFormSet((self.request.POST or None),
@@ -92,7 +80,7 @@ class ExamsUpdateView(UpdateView):
 
     def get_context_data(self, **kw):
         data = Examinations.objects.all().order_by('-created')
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -108,10 +96,8 @@ class ExamsUpdateView(UpdateView):
         return context
 
 
-class ExamsDeleteView(DeleteView):
+class ExamsDeleteView(ExamsMixin, DeleteView):
     """
         to Delete Examination Details
     """
-    model = Examinations
-    success_url = reverse_lazy('exams')
     template_name = 'dj_diabetes/confirm_delete.html'

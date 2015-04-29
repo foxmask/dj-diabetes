@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load url from future %}
 {% load i18n %}
 {% load dj_diabetes_extras %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
@@ -78,23 +77,23 @@
                 </div>                
             </div>            
             
-            <div class="form-group{% if form.date_glucose.errors %} has-error has-feedback{% endif %}">
-                {% if form.date_glucose.errors %}            
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_glucose.errors }}</div>
+            <div class="form-group{% if form.date_glucoses.errors %} has-error has-feedback{% endif %}">
+                {% if form.date_glucoses.errors %}            
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_glucoses.errors }}</div>
                 {% endif %}
-                <label for="id_date_glucose" class="col-sm-4 control-label">{% trans "Date" %}</label>
+                <label for="id_date_glucoses" class="col-sm-4 control-label">{% trans "Date" %}</label>
                 <div class="col-sm-4">
-                  {{ form.date_glucose }}
+                  {{ form.date_glucoses }}
                 </div>
             </div>
 
-            <div class="form-group{% if form.hour_glucose.errors %} has-error has-feedback{% endif %}">
-                {% if form.hour_glucose.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_glucose.errors }}</div>
+            <div class="form-group{% if form.hour_glucoses.errors %} has-error has-feedback{% endif %}">
+                {% if form.hour_glucoses.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_glucoses.errors }}</div>
                 {% endif %}
-                <label for="id_hour_glucose" class="col-sm-4 control-label">{% trans "Hour" %}</label>
+                <label for="id_hour_glucoses" class="col-sm-4 control-label">{% trans "Hour" %}</label>
                 <div class="col-sm-4">
-                  {{ form.hour_glucose }}
+                  {{ form.hour_glucoses }}
                 </div>
             </div>
 
@@ -126,7 +125,7 @@
             </tr>
         {% for line in data %}
             <tr>
-                <td>{{ line.date_glucose }} {{ line.hour_glucose }}</td>
+                <td>{{ line.date_glucoses }} {{ line.hour_glucoses }}</td>
                 <td>{{ line.glucose }}</td>
                 <td>{{ line.insulin }}</td>
                 <td>{{ line.moment|which_value:'moment' }}</td>
@@ -176,14 +175,14 @@ $(document).ready(function() {
     var chartDataUrl = "{% url 'chart_data_json' %}";
     $.getJSON(chartDataUrl,
         function(data) {
-            dataByDayOptions.xAxis.categories = data['chart_data']['date_glucose'];
+            dataByDayOptions.xAxis.categories = data['chart_data']['date_glucoses'];
             dataByDayOptions.series[0].name = 'Glucose (mg/dL)';
             dataByDayOptions.series[0].data = data['chart_data']['glucose'];
             var chart = new Highcharts.Chart(dataByDayOptions);
     });
 } );
 $(function(){
-    $('#id_date_glucose').datepicker({
+    $('#id_date_glucoses').datepicker({
             format: 'yyyy-mm-dd'
     });
 });

@@ -11,9 +11,24 @@ from dj_diabetes.models.exams import ExaminationTypes
 from dj_diabetes.models.appointments import AppointmentTypes
 
 
-class DiabetesAdmin(admin.ModelAdmin):
-
+class DiabetesAdminMixin(object):
     list_display = ('title', 'created', 'modified')
+
+
+class DiabetesAdminFormMixin(object):
+
+    def get_form(self, request, obj=None, **args):
+        defaults = {}
+        if obj is None:
+            defaults.update({'form': self.add_form, })
+        else:
+            defaults.update({'form': self.view_form, })
+        defaults.update(args)
+        return super(DiabetesAdminFormMixin, self).get_form(request, obj,
+                                                            **defaults)
+
+
+class DiabetesAdmin(DiabetesAdminMixin, admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **args):
         defaults = {}
@@ -34,81 +49,42 @@ class SportsAdmin(DiabetesAdmin):
     view_form = SportsAdminForm
 
 
-class FoodsAdmin(admin.ModelAdmin):
+class FoodsAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin, admin.ModelAdmin):
 
     """
         get the list of the Foods
     """
-    list_display = ('title', 'created', 'modified')
-
     add_form = FoodsAdminForm
     view_form = FoodsAdminForm
 
-    def get_form(self, request, obj=None, **args):
-        defaults = {}
-        if obj is None:
-            defaults.update({'form': self.add_form, })
-        else:
-            defaults.update({'form': self.view_form, })
-        defaults.update(args)
-        return super(FoodsAdmin, self).get_form(request, obj, **defaults)
 
-
-class ExaminationTypesAdmin(admin.ModelAdmin):
+class ExaminationTypesAdmin(DiabetesAdminFormMixin, admin.ModelAdmin):
 
     """
         get the list of the examination types
     """
-    list_display = ('title', 'created', 'modified')
 
     add_form = ExaminationTypesAdminForm
     view_form = ExaminationTypesAdminForm
 
-    def get_form(self, request, obj=None, **args):
-        defaults = {}
-        if obj is None:
-            defaults.update({'form': self.add_form, })
-        else:
-            defaults.update({'form': self.view_form, })
-        defaults.update(args)
-        return super(ExaminationTypesAdmin, self).get_form(request, obj,
-                                                           **defaults)
 
-
-class AppointmentTypesAdmin(admin.ModelAdmin):
+class AppointmentTypesAdmin(DiabetesAdminMixin, DiabetesAdminFormMixin,
+                            admin.ModelAdmin):
 
     """
         get the list of the appointment types
     """
-    list_display = ('title', 'created', 'modified')
 
     add_form = AppointmentTypesAdminForm
     view_form = AppointmentTypesAdminForm
 
-    def get_form(self, request, obj=None, **args):
-        defaults = {}
-        if obj is None:
-            defaults.update({'form': self.add_form, })
-        else:
-            defaults.update({'form': self.view_form, })
-        defaults.update(args)
-        return super(AppointmentTypesAdmin, self).get_form(request, obj,
-                                                           **defaults)
 
+class PrefAdmin(DiabetesAdminFormMixin, admin.ModelAdmin):
 
-class PrefAdmin(admin.ModelAdmin):
     list_display = ('key', 'title', 'value', 'created', 'modified')
+
     add_form = PrefAdminForm
     view_form = PrefAdminForm
-
-    def get_form(self, request, obj=None, **args):
-        defaults = {}
-        if obj is None:
-            defaults.update({'form': self.add_form, })
-        else:
-            defaults.update({'form': self.view_form, })
-        defaults.update(args)
-        return super(PrefAdmin, self).get_form(request, obj, **defaults)
 
 
 class UserProfileAdmin(admin.ModelAdmin):

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load url from future %}
 {% load i18n %}
 {% load dj_diabetes_extras %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
@@ -50,34 +49,34 @@
             </div>
 
 
-            <div class="form-group{% if form.date_meal.errors %} has-error has-feedback{% endif %}">    
-                {% if form.date_meal.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_meal.errors }}</div>>
-                <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
+            <div class="form-group{% if form.date_meals.errors %} has-error has-feedback{% endif %}">    
+                {% if form.date_meals.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_meals.errors }}</div>>
+                <label for="id_date_meals" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
                 <div class="col-sm-4">
-                {{ form.date_meal }}
+                {{ form.date_meals }}
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 </div>
                 {% else %}
-                <label for="id_date_meal" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
+                <label for="id_date_meals" class="col-sm-4 control-label">{% trans "Date ?" %}</label>
                 <div class="col-sm-4">
-                {{ form.date_meal }}
+                {{ form.date_meals }}
                 </div>
                 {% endif %}
             </div>
 
-            <div class="form-group{% if form.hour_meal.errors %} has-error has-feedback{% endif %}">    
-                {% if form.hour_meal.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_meal.errors }}</div>>
-                <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
+            <div class="form-group{% if form.hour_meals.errors %} has-error has-feedback{% endif %}">    
+                {% if form.hour_meals.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.hour_meals.errors }}</div>>
+                <label for="id_hour_meals" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
                 <div class="col-sm-4">
-                {{ form.hour_meal }}
+                {{ form.hour_meals }}
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 </div>
                 {% else %}
-                <label for="id_hour_meal" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
+                <label for="id_hour_meals" class="col-sm-4 control-label">{% trans "Hour ?" %}</label>
                 <div class="col-sm-4">
-                {{ form.hour_meal }}
+                {{ form.hour_meals }}
                 </div>
                 {% endif %}
             </div>            
@@ -108,7 +107,7 @@
             <tr>
                 <td>{{ line.food }}</td>
                 <td>{{ line.breakfast_lunch_diner|which_value:'meal' }}</td>                
-                <td>{{ line.date_meal }} {{ line.hour_meal }}</td>
+                <td>{{ line.date_meals }} {{ line.hour_meals }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" href="{% url 'meal_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'meal_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>
             </tr>
         {% endfor %}
@@ -134,7 +133,7 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function(){
-    $('#id_date_meal').datepicker({
+    $('#id_date_meals').datepicker({
             format: 'yyyy-mm-dd'
     });
 });

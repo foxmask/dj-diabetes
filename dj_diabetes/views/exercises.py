@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 import logging
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
-from dj_diabetes.tools import page_it, right_now
+from dj_diabetes.tools import page_it
+
+from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.sports import Exercises
 from dj_diabetes.forms.base import ExercisesForm
 
@@ -17,40 +16,26 @@ from dj_diabetes.forms.base import ExercisesForm
 logger = logging.getLogger(__name__)
 
 
-#************************
-# Classe Based View
-#************************
+class ExercisesMixin(SuccessMixin):
+    form_class = ExercisesForm
+    model = Exercises
 
 
-class ExercisesCreateView(CreateView):
+class ExercisesCreateView(InitMixin, ExercisesMixin, LoginRequiredMixin,
+                          CreateView):
     """
         to Create Exercises
     """
-    form_class = ExercisesForm
     template_name = "dj_diabetes/exercises_form.html"
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ExercisesCreateView, self).dispatch(*args, **kwargs)
-
-    def get_initial(self):
-        """
-            set the default date and hour of the date_xxx and hour_xxx
-            property of the current model
-        """
-        return right_now("exercise")
-
-    def form_valid(self, form):
-        exercise = form.save(commit=False)
-        if form.is_valid():
-            exercise.user = self.request.user
-            exercise.save()
-
-        return HttpResponseRedirect(reverse('exercises'))
+    def get_form(self, form_class):
+        form = super(ExercisesCreateView, self).get_form(form_class)
+        form.instance.user = self.request.user
+        return form
 
     def get_context_data(self, **kw):
         data = Exercises.objects.all()
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -62,27 +47,15 @@ class ExercisesCreateView(CreateView):
         return context
 
 
-class ExercisesUpdateView(UpdateView):
+class ExercisesUpdateView(ExercisesMixin, LoginRequiredMixin, UpdateView):
     """
         to Edit Exercises
     """
-    model = Exercises
-    form_class = ExercisesForm
     template_name = "dj_diabetes/exercises_form.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ExercisesUpdateView, self).dispatch(*args, **kwargs)
-
-    def form_valid(self, form):
-        if form.is_valid():
-            form.save()
-
-        return HttpResponseRedirect(reverse('exercises'))
 
     def get_context_data(self, **kw):
         data = Exercises.objects.all()
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -93,10 +66,8 @@ class ExercisesUpdateView(UpdateView):
         return context
 
 
-class ExercisesDeleteView(DeleteView):
+class ExercisesDeleteView(ExercisesMixin, DeleteView):
     """
         to Delete Exercises
     """
-    model = Exercises
-    success_url = reverse_lazy('exercises')
     template_name = 'dj_diabetes/confirm_delete.html'

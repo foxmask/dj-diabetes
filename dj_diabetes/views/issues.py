@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 import logging
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 # dj_diabetes
 from dj_diabetes.tools import page_it
+
+from dj_diabetes.models import InitMixin, SuccessMixin
+from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.issues import Issues
 from dj_diabetes.forms.base import IssuesForm
 
@@ -17,33 +16,25 @@ from dj_diabetes.forms.base import IssuesForm
 logger = logging.getLogger(__name__)
 
 
-#************************
-# Classe Based View
-#************************
+class IssuesMixin(SuccessMixin):
+    form_class = IssuesForm
+    model = Issues
 
 
-class IssuesCreateView(CreateView):
+class IssuesCreateView(InitMixin, IssuesMixin, LoginRequiredMixin, CreateView):
     """
         to Create Issues
     """
-    form_class = IssuesForm
     template_name = "dj_diabetes/issues_form.html"
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(IssuesCreateView, self).dispatch(*args, **kwargs)
-
-    def form_valid(self, form):
-        appointments = form.save(commit=False)
-        if form.is_valid():
-            appointments.user = self.request.user
-            appointments.save()
-
-        return HttpResponseRedirect(reverse('issues'))
+    def get_form(self, form_class):
+        form = super(IssuesCreateView, self).get_form(form_class)
+        form.instance.user = self.request.user
+        return form
 
     def get_context_data(self, **kw):
         data = Issues.objects.all().order_by('-created')
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -55,27 +46,15 @@ class IssuesCreateView(CreateView):
         return context
 
 
-class IssuesUpdateView(UpdateView):
+class IssuesUpdateView(IssuesMixin, LoginRequiredMixin, UpdateView):
     """
         to Edit Issues
     """
-    model = Issues
-    form_class = IssuesForm
     template_name = "dj_diabetes/issues_form.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(IssuesUpdateView, self).dispatch(*args, **kwargs)
-
-    def form_valid(self, form):
-        if form.is_valid():
-            form.save()
-
-        return HttpResponseRedirect(reverse('issues'))
 
     def get_context_data(self, **kw):
         data = Issues.objects.all().order_by('-created')
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call
@@ -86,10 +65,8 @@ class IssuesUpdateView(UpdateView):
         return context
 
 
-class IssuesDeleteView(DeleteView):
+class IssuesDeleteView(IssuesMixin, DeleteView):
     """
         to Delete Issues
     """
-    model = Issues
-    success_url = reverse_lazy('issues')
     template_name = 'dj_diabetes/confirm_delete.html'

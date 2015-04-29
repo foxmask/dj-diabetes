@@ -13,8 +13,8 @@ class Meals(models.Model):
     user = models.ForeignKey(User)
     food = models.TextField()
     breakfast_lunch_diner = models.CharField(max_length=2)
-    date_meal = models.DateField(null=True)
-    hour_meal = models.TimeField(null=True)
+    date_meals = models.DateField(null=True)
+    hour_meals = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -25,8 +25,8 @@ class Meals(models.Model):
     def show(self):
         return "Meals %s %s %s %s %s %s" % (self.user_id, self.food,
                                             self.breakfast_lunch_diner,
-                                            self.date_meal,
+                                            self.date_meals,
                                             self.created, self.modified)
 
     def __str__(self):
-        return "%s (date: %s)" % (self.food, self.date_meal)
+        return "%s (date: %s)" % (self.food, self.date_meals)

@@ -36,11 +36,11 @@ class ChartData(object):
 
     @classmethod
     def get_datas(cls):
-        glucose_data = Glucoses.objects.all().order_by('-date_glucose')[:14]
+        glucose_data = Glucoses.objects.all().order_by('-date_glucoses')[:14]
 
-        data = {'date_glucose': [], 'glucose': []}
+        data = {'date_glucoses': [], 'glucose': []}
         for g in glucose_data:
-            data['date_glucose'].append(g.date_glucose.strftime('%m/%d'))
+            data['date_glucoses'].append(g.date_glucoses.strftime('%m/%d'))
             data['glucose'].append(round_value(g.glucose))
 
         return data

@@ -25,8 +25,8 @@ class Examinations(models.Model):
     user = models.ForeignKey(User)
     examination_types = models.ForeignKey(ExaminationTypes)
     comments = models.TextField()
-    date_examination = models.DateField()
-    hour_examination = models.TimeField(null=True)
+    date_examinations = models.DateField()
+    hour_examinations = models.TimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -37,14 +37,14 @@ class Examinations(models.Model):
     def show(self):
         return "Examinations %s %s %s" % (self.examination_types,
                                           self.comments,
-                                          self.date_examination,
+                                          self.date_examinations,
                                           self.created,
                                           self.modified)
 
     def __str__(self):
         return "%s (date %s) (comment: %s)" % (
             self.examination_types,
-            self.date_examination,
+            self.date_examinations,
             self.comments)
 
 

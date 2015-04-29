@@ -12,7 +12,7 @@ class Weights(models.Model):
     """
     user = models.ForeignKey(User)
     weight = models.FloatField()
-    date_weight = models.DateField()
+    date_weights = models.DateField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -22,8 +22,8 @@ class Weights(models.Model):
 
     def show(self):
         return "Weights %s %s %s %s %s" % (self.user_id, self.weigth,
-                                           self.date_weight,
+                                           self.date_weights,
                                            self.created, self.modified)
 
     def __str__(self):
-        return "%s (date: %s)" % (self.weight, self.date_weight)
+        return "%s (date: %s)" % (self.weight, self.date_weights)

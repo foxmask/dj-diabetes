@@ -64,6 +64,7 @@ urlpatterns =\
         url(r'^meals/delete/(?P<pk>\d+)$', MealsDeleteView.as_view(),
             name='meal_delete'),
         url(r'^exams/$', ExamsCreateView.as_view(), name='exams'),
+        url(r'^exams/$', ExamsCreateView.as_view(), name='examinations'),
         url(r'^exams/edit/(?P<pk>\d+)$', ExamsUpdateView.as_view(),
             name='exam_edit'),
         url(r'^exams/delete/(?P<pk>\d+)$', ExamsDeleteView.as_view(),

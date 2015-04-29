@@ -69,5 +69,4 @@ class MealsDeleteView(MealsMixin, DeleteView):
     """
         to Delete Meals
     """
-    # success_url = reverse_lazy('meals')
     template_name = 'dj_diabetes/confirm_delete.html'

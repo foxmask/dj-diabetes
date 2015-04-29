@@ -108,8 +108,8 @@ class InitMixin(ModelFormMixin):
 class SuccessMixin(object):
 
     def get_success_url(self):
+        print(self.model.__name__.lower())
         return reverse(self.model.__name__.lower())
-
 
 
 from appointments import AppointmentTypes, Appointments

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load url from future %}
 {% load i18n %}
 {% block title %}{% trans "My Glucose Manager" %}{% endblock %}
 {% block content %}
@@ -32,18 +31,18 @@
                 {% endif %}
             </div>
 
-            <div class="form-group{% if form.date_weight.errors %} has-error has-feedback{% endif %}">    
-                {% if form.date_weight.errors %}
-                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_weight.errors }}</div>
-                <label for="id_date_weight" class="col-sm-4 control-label">{% trans "Weight Date" %}</label>
+            <div class="form-group{% if form.date_weights.errors %} has-error has-feedback{% endif %}">    
+                {% if form.date_weights.errors %}
+                <div class="col-sm-offset-1 col-sm-10 alert alert-danger" role="alert">{{ form.date_weights.errors }}</div>
+                <label for="id_date_weights" class="col-sm-4 control-label">{% trans "Weight Date" %}</label>
                 <div class="col-sm-4">
-                {{ form.date_weight }}
+                {{ form.date_weights }}
                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                 </div>
                 {% else %}
-                <label for="id_date_weight" class="col-sm-4 control-label">{% trans "Weight Date" %}</label>
+                <label for="id_date_weights" class="col-sm-4 control-label">{% trans "Weight Date" %}</label>
                 <div class="col-sm-4">
-                {{ form.date_weight }}
+                {{ form.date_weights }}
                 </div>
                 {% endif %}
             </div>
@@ -73,7 +72,7 @@
         {% for line in data %}
             <tr>
                 <td>{{ line.weight }}</td>
-                <td>{{ line.date_weight }}</td>
+                <td>{{ line.date_weights }}</td>
                 <td><a class="btn btn-sm btn-info" role="button" href="{% url 'weight_edit' line.id %}"><span class="glyphicon glyphicon-pencil icon-white"></span></a> <a class="btn btn-sm btn-danger" role="button"  href="{% url 'weight_delete' line.id %}"><span class="glyphicon glyphicon-trash icon-white"></span></a></td>                
             </tr>
         {% endfor %}

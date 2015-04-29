@@ -21,6 +21,18 @@ class ExamsMixin(SuccessMixin):
     model = Examinations
 
 
+class ExamsFormSetValid(object):
+
+    def form_valid(self, form):
+        formset = ExamDetailsFormSet((self.request.POST or None),
+                                     instance=self.object)
+        if formset.is_valid():
+            self.object = form.save(user=self.request.user)
+            formset.instance = self.object
+            formset.save()
+
+        return HttpResponseRedirect(reverse('exams'))
+
 class ExamsContextDataMixin(PaginateMixin):
 
     def get_context_data(self, **kw):
@@ -33,43 +45,19 @@ class ExamsContextDataMixin(PaginateMixin):
 
 
 class ExamsCreateView(InitMixin, ExamsMixin, LoginRequiredMixin,
-                      ExamsContextDataMixin, CreateView):
+                      ExamsContextDataMixin, ExamsFormSetValid, CreateView):
     """
         to Create Exams
     """
     template_name = "dj_diabetes/exams_form.html"
 
-    def form_valid(self, form):
-        if self.request.POST:
-            formset = ExamDetailsFormSet((self.request.POST or None),
-                                         instance=self.object)
-            if formset.is_valid():
-                self.object = form.save(user=self.request.user)
-                formset.instance = self.object
-                formset.save()
-
-        else:
-            formset = ExamDetailsFormSet(instance=self.object)
-
-        return HttpResponseRedirect(reverse('exams'))
-
 
 class ExamsUpdateView(ExamsMixin, LoginRequiredMixin,
-                      ExamsContextDataMixin, UpdateView):
+                      ExamsContextDataMixin, ExamsFormSetValid, UpdateView):
     """
         to Edit Exams
     """
     template_name = "dj_diabetes/exams_form.html"
-
-    def form_valid(self, form):
-        formset = ExamDetailsFormSet((self.request.POST or None),
-                                     instance=self.object)
-        if formset.is_valid():
-            self.object = form.save(user=self.request.user)
-            formset.instance = self.object
-            formset.save()
-
-        return HttpResponseRedirect(reverse('exams'))
 
 
 class ExamsDeleteView(ExamsMixin, DeleteView):

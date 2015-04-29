@@ -2,6 +2,7 @@
 from django import forms
 from django.conf import settings
 from django.forms.models import inlineformset_factory
+from django.views.generic.edit import FormMixin
 
 from dj_diabetes.models import UserProfile, Preferences
 from dj_diabetes.models.glucoses import Glucoses
@@ -242,3 +243,11 @@ class ExamDetailsForm(forms.ModelForm):
 ExamDetailsFormSet = inlineformset_factory(Examinations,
                                            ExaminationDetails,
                                            fields=('title', 'value'), extra=2)
+
+
+class UserInstanceMixin(FormMixin):
+
+    def get_form(self, form_class):
+        form = super(UserInstanceMixin, self).get_form(form_class)
+        form.instance.user = self.request.user
+        return form

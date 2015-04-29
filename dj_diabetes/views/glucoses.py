@@ -10,7 +10,7 @@ from dj_diabetes.tools import page_it
 from dj_diabetes.models import InitMixin, SuccessMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.glucoses import Glucoses
-from dj_diabetes.forms.base import GlucosesForm
+from dj_diabetes.forms.base import GlucosesForm, UserInstanceMixin
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -22,16 +22,11 @@ class GlucosesMixin(SuccessMixin):
 
 
 class GlucosesCreateView(InitMixin, GlucosesMixin, LoginRequiredMixin,
-                         CreateView):
+                         UserInstanceMixin, CreateView):
     """
         to Create Glucoses
     """
     template_name = "dj_diabetes/glucoses_form.html"
-
-    def get_form(self, form_class):
-        form = super(GlucosesCreateView, self).get_form(form_class)
-        form.instance.user = self.request.user
-        return form
 
     def get_context_data(self, **kw):
         data = Glucoses.objects.all().order_by('-date_glucoses')

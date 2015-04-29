@@ -10,7 +10,7 @@ from dj_diabetes.tools import page_it
 from dj_diabetes.models import InitMixin, SuccessMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.issues import Issues
-from dj_diabetes.forms.base import IssuesForm
+from dj_diabetes.forms.base import IssuesForm, UserInstanceMixin
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -21,16 +21,12 @@ class IssuesMixin(SuccessMixin):
     model = Issues
 
 
-class IssuesCreateView(InitMixin, IssuesMixin, LoginRequiredMixin, CreateView):
+class IssuesCreateView(InitMixin, IssuesMixin, LoginRequiredMixin,
+                       UserInstanceMixin, CreateView):
     """
         to Create Issues
     """
     template_name = "dj_diabetes/issues_form.html"
-
-    def get_form(self, form_class):
-        form = super(IssuesCreateView, self).get_form(form_class)
-        form.instance.user = self.request.user
-        return form
 
     def get_context_data(self, **kw):
         data = Issues.objects.all().order_by('-created')

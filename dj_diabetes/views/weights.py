@@ -12,7 +12,7 @@ from dj_diabetes.tools import page_it
 from dj_diabetes.models import SuccessMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.weights import Weights
-from dj_diabetes.forms.base import WeightsForm
+from dj_diabetes.forms.base import WeightsForm, UserInstanceMixin
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -23,16 +23,12 @@ class WeightsMixin(SuccessMixin):
     model = Weights
 
 
-class WeightsCreateView(WeightsMixin, LoginRequiredMixin, CreateView):
+class WeightsCreateView(WeightsMixin, LoginRequiredMixin, UserInstanceMixin,
+                        CreateView):
     """
         to Create Weights
     """
     template_name = "dj_diabetes/weights_form.html"
-
-    def get_form(self, form_class):
-        form = super(WeightsCreateView, self).get_form(form_class)
-        form.instance.user = self.request.user
-        return form
 
     def get_initial(self):
         return {'date_weight': arrow.utcnow().to(
@@ -60,7 +56,7 @@ class WeightsUpdateView(WeightsMixin, LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kw):
         data = Weights.objects.all()
-        #paginator vars
+        # paginator vars
         record_per_page = 15
         page = self.request.GET.get('page')
         # paginator call

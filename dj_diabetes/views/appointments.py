@@ -10,7 +10,7 @@ from dj_diabetes.tools import page_it
 from dj_diabetes.models import InitMixin, SuccessMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.appointments import Appointments
-from dj_diabetes.forms.base import AppointmentsForm
+from dj_diabetes.forms.base import AppointmentsForm, UserInstanceMixin
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -22,16 +22,12 @@ class AppointmentsMixin(SuccessMixin):
 
 
 class AppointmentsCreateView(InitMixin, AppointmentsMixin,
-                             LoginRequiredMixin, CreateView):
+                             LoginRequiredMixin, UserInstanceMixin,
+                             CreateView):
     """
         to Create Appointments
     """
     template_name = "dj_diabetes/appointments_form.html"
-
-    def get_form(self, form_class):
-        form = super(AppointmentsCreateView, self).get_form(form_class)
-        form.instance.user = self.request.user
-        return form
 
     def get_context_data(self, **kw):
         data = Appointments.objects.all().order_by('-date_appointments')

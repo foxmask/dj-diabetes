@@ -1,3 +1,7 @@
+.. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/gpa.svg
+   :target: https://codeclimate.com/github/foxmask/dj-diabetes
+   :alt: Code Climate
+
 =================
  Django Diabetes
 =================

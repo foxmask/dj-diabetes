@@ -1,10 +1,41 @@
 .. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/gpa.svg
-   :target: https://codeclimate.com/github/foxmask/dj-diabetes
-   :alt: Code Climate
+    :target: https://codeclimate.com/github/foxmask/dj-diabetes
+    :alt: Code Climate
 
 .. image:: https://travis-ci.org/foxmask/dj-diabetes.svg?branch=master
     :target: https://travis-ci.org/foxmask/dj-diabetes
     :alt: Travis Status
+
+
+.. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/gpa.svg
+    :target: https://codeclimate.com/github/foxmask/dj-diabetes
+    :alt: Code Climate
+
+
+.. image:: https://travis-ci.org/foxmask/dj-diabetes.svg?branch=master
+    :target: https://travis-ci.org/foxmask/dj-diabetes
+    :alt: Travis Status
+
+
+.. image:: http://img.shields.io/pypi/v/dj-diabetes.svg
+    :target: https://pypi.python.org/pypi/dj-diabetes/
+    :alt: Latest version
+
+
+.. image:: http://img.shields.io/badge/python-3.4-orange.svg
+    :target: https://pypi.python.org/pypi/dj-diabetes/
+    :alt: Python version supported
+
+
+.. image:: http://img.shields.io/badge/license-BSD-blue.svg
+    :target: https://pypi.python.org/pypi/dj-diabetes/
+    :alt: License
+
+
+.. image:: http://img.shields.io/pypi/dm/dj-diabetes.svg
+   :target: https://pypi.python.org/pypi/dj-diabetes/
+   :alt: Downloads per month
+
 
 =================
  Django Diabetes

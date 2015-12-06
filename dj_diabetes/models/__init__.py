@@ -2,14 +2,12 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import ModelFormMixin
 
 from dj_diabetes.tools import page_it, right_now
 
 
-@python_2_unicode_compatible
 class HatModel(models.Model):
     """
         HatModel
@@ -22,10 +20,9 @@ class HatModel(models.Model):
         abstract = True
 
     def __str__(self):
-        return "%s" % (self.title)
+        return "%s" % self.title
 
 
-@python_2_unicode_compatible
 class UserProfile(models.Model):
 
     """
@@ -42,8 +39,11 @@ class UserProfile(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    def show(self):
+        return "%s" % self.user
+
     def __str__(self):
-        return "%s" % (self.user)
+        return self.show()
 
 
 class Preferences(models.Model):
@@ -115,14 +115,3 @@ class PaginateMixin(object):
         context = super(PaginateMixin, self).get_context_data(**kw)
         context['data'] = data
         return context
-
-
-
-from appointments import AppointmentTypes, Appointments
-from exams import Examinations, ExaminationTypes, ExaminationDetails
-from foods import Foods
-from glucoses import Glucoses
-from issues import Issues
-from meals import Meals
-from sports import Sports, Exercises
-from weights import Weights

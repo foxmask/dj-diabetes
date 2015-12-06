@@ -1,10 +1,8 @@
 # coding: utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Weights(models.Model):
 
     """
@@ -20,5 +18,8 @@ class Weights(models.Model):
         verbose_name = 'Weight'
         verbose_name_plural = 'Weights'
 
-    def __str__(self):
+    def show(self):
         return "%s (date: %s)" % (self.weight, self.date_weights)
+
+    def __str__(self):
+        return self.show()

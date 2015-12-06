@@ -14,8 +14,8 @@ It permits to follow your daily health
 requirements:
 =============
 
-* Python 2.7.x / 3.x
-* Django >= 1.8
+* Python 3.4
+* Django 1.9
 * arrow 0.4.2
 
 

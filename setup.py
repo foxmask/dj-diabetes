@@ -20,8 +20,7 @@ setup(
     author='Olivier Demah',
     author_email='olivier@foxmask.info',
     url='https://github.com/foxmask/dj-diabetes',
-    download_url="https://github.com/foxmask/dj-diabetes/archive/dj-diabetes-"
-    + version + ".zip",
+    download_url="https://github.com/foxmask/dj-diabetes/archive/dj-diabetes-" + version + ".zip",
     packages=find_packages(exclude=['dj_diabetes/local_settings']),
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -30,7 +29,7 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
         'Framework :: Django',
     ],
     install_requires=install_requires,

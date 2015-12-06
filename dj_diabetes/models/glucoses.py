@@ -1,10 +1,8 @@
 # coding: utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Glucoses(models.Model):
 
     """
@@ -24,8 +22,11 @@ class Glucoses(models.Model):
         verbose_name = 'Glucose'
         verbose_name_plural = 'Glucoses'
 
-    def __str__(self):
+    def show(self):
         return "Glucose: %s Insulin: %s (date: %s)" % (
                                                 self.glucose,
                                                 self.insulin,
                                                 self.date_glucoses)
+
+    def __str__(self):
+        return self.show()

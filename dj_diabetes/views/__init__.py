@@ -25,6 +25,7 @@ def round_value(value):
     else:
         return 0
 
+
 @login_required
 def chart_data_json(request):
     data = {}

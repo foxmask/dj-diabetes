@@ -56,7 +56,7 @@ class GlucosesForm(forms.ModelForm):
     """
     glucose = forms.IntegerField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'number'}))
-    # get the list of pref to get the value in the dropdow
+    # get the list of pref to get the value in the dropdown
     insulin = forms.IntegerField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'number'}))
     moment = forms.ChoiceField(widget=forms.Select(
@@ -247,7 +247,7 @@ ExamDetailsFormSet = inlineformset_factory(Examinations,
 
 class UserInstanceMixin(FormMixin):
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(UserInstanceMixin, self).get_form(form_class)
         form.instance.user = self.request.user
         return form

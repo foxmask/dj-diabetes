@@ -1,7 +1,6 @@
 # coding: utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 
 from dj_diabetes.models import HatModel
 
@@ -16,7 +15,6 @@ class AppointmentTypes(HatModel):
         verbose_name_plural = 'Appointment Types'
 
 
-@python_2_unicode_compatible
 class Appointments(models.Model):
 
     """
@@ -39,5 +37,8 @@ class Appointments(models.Model):
         verbose_name = 'Appointments'
         verbose_name_plural = 'Appointments'
 
-    def __str__(self):
+    def show(self):
         return "%s (date: %s)" % (self.title, self.date_appointments)
+
+    def __str__(self):
+        return self.show()

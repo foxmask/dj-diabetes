@@ -1,10 +1,8 @@
 # coding: utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Issues(models.Model):
 
     """
@@ -22,5 +20,8 @@ class Issues(models.Model):
         verbose_name = 'Issues'
         verbose_name_plural = 'Issues'
 
+    def show(self):
+        return "%s" % self.question
+
     def __str__(self):
-        return "%s" % (self.question)
+        return self.show()

@@ -10,3 +10,9 @@ class Foods(HatModel):
     class Meta:
         verbose_name = 'Foods'
         verbose_name_plural = 'Foods'
+
+    def show(self):
+        return "%s" % self.title
+
+    def __str__(self):
+        return self.show()

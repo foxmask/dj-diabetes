@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+
+from dj_diabetes import views
 from dj_diabetes.views import UserProfileUpdateView
 from dj_diabetes.views.glucoses import GlucosesCreateView, GlucosesUpdateView,\
                                        GlucosesDeleteView
@@ -25,8 +27,7 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns =\
-    patterns('',
+urlpatterns = [
         url(r'^admin/', include(admin.site.urls)),
         # ****************************************
         # auth module
@@ -35,7 +36,7 @@ urlpatterns =\
         # ****************************************
         # customized lgout action
         # ****************************************
-        url(r'^logout/$', 'dj_diabetes.views.logout_view', name='logout'),
+        url(r'^logout/$', views.logout_view, name='logout'),
         url(r'^$', GlucosesCreateView.as_view(), name='home'),
         url(r'^glucoses/$', GlucosesCreateView.as_view(), name='glucoses'),
         url(r'^glucoses/edit/(?P<pk>\d+)$', GlucosesUpdateView.as_view(),
@@ -79,8 +80,8 @@ urlpatterns =\
         # url(r'^blog/', include('blog.urls')),
         url(
             regex=r'^chart_data_json/$',
-            view='dj_diabetes.views.chart_data_json',
+            view=views.chart_data_json,
             name='chart_data_json',
         ),
         url(r'my_profile/(?P<pk>\d+)$', UserProfileUpdateView.as_view(), name='my_profile'),
-)
+]

@@ -4,10 +4,10 @@ python:
   - "3.4"
 
 script:
-  - python --version
+- tox
 
 install:
-  - pip install -r requirements.txt
+- pip install tox
 
 deploy:
   provider: pypi

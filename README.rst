@@ -2,6 +2,10 @@
    :target: https://codeclimate.com/github/foxmask/dj-diabetes
    :alt: Code Climate
 
+.. image:: https://travis-ci.org/foxmask/dj-diabetes.svg?branch=master
+    :target: https://travis-ci.org/foxmask/dj-diabetes
+    :alt: Travis Status
+
 =================
  Django Diabetes
 =================

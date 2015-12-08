@@ -1,0 +1,39 @@
+# coding: utf-8
+from datetime import datetime, time
+from django.test import TestCase
+from django.contrib.auth.models import User
+
+from dj_diabetes.models import UserProfile, Preferences
+from dj_diabetes.forms.base import UserProfileForm
+
+
+class UserProfileFormTest(TestCase):
+
+    def setUp(self):
+        try:
+            self.user = User.objects.get(username='john')
+        except User.DoesNotExist:
+            self.user = User.objects.create_user(
+                username='john', email='john@doe.info', password='doe')
+
+    def create_user(self):
+        return UserProfile(user=self.user)
+
+    def test_valid_form(self):
+        u = self.create_user()
+        data = {'user': u.user,
+                'name': 'jane',
+                'birth_date': datetime.now(),
+                'address': 'place de l etoile',
+                'zipcode': '75008',
+                'phone': '12',
+                'town': 'paris'}
+        initial = {'user': self.user}
+        form = UserProfileForm(data=data, initial=initial)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_form(self):
+        data = {'user': '', 'name': ''}
+        initial = {'user': self.user}
+        form = UserProfileForm(data=data, initial=initial)
+        self.assertFalse(form.is_valid())

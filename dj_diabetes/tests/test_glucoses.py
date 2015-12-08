@@ -1,23 +1,19 @@
 # coding: utf-8
 from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
+
 from django.conf import settings
 from dj_diabetes.models import UserProfile, Preferences
 from dj_diabetes.models.glucoses import Glucoses
 
 from dj_diabetes.forms.base import GlucosesForm
 
+from dj_diabetes.tests import MainTest
 
-class GlucosesTest(TestCase):
+
+class GlucosesTest(MainTest):
 
     def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
-
+        super(GlucosesTest, self).setUp()
         Preferences.objects.create(key="moment", value="5", title="Midi", created=datetime.now())
 
     def create_glucoses(self):
@@ -60,8 +56,6 @@ class GlucosesTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = GlucosesForm(data=data, initial=initial)
+        form = GlucosesForm()
         self.assertFalse(form.is_valid())
 

@@ -1,22 +1,17 @@
 # coding: utf-8
 from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
 
 from dj_diabetes.models import UserProfile, Preferences
 from dj_diabetes.models.meals import Meals
 from dj_diabetes.forms.base import MealsForm
 
+from dj_diabetes.tests import MainTest
 
-class MealsTest(TestCase):
+
+class MealsTest(MainTest):
 
     def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
-
+        super(MealsTest, self).setUp()
         Preferences.objects.create(key="meal", value="4", title="Lunch", created=datetime.now())
 
     def create_meals(self):
@@ -38,9 +33,7 @@ class MealsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = MealsForm(data=data, initial=initial)
+        form = MealsForm()
         self.assertFalse(form.is_valid())
 
 

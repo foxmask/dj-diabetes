@@ -1,5 +1,5 @@
 # coding: utf-8
-from datetime import datetime, time
+from datetime import datetime
 from django.test import TestCase
 from django.contrib.auth.models import User
 
@@ -7,7 +7,7 @@ from dj_diabetes.models import UserProfile, Preferences
 from dj_diabetes.forms.base import UserProfileForm
 
 
-class UserProfileFormTest(TestCase):
+class MainTest(TestCase):
 
     def setUp(self):
         try:
@@ -15,6 +15,9 @@ class UserProfileFormTest(TestCase):
         except User.DoesNotExist:
             self.user = User.objects.create_user(
                 username='john', email='john@doe.info', password='doe')
+
+
+class UserProfileFormTest(MainTest):
 
     def create_user(self):
         return UserProfile(user=self.user)
@@ -33,7 +36,5 @@ class UserProfileFormTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': '', 'name': ''}
-        initial = {'user': self.user}
-        form = UserProfileForm(data=data, initial=initial)
+        form = UserProfileForm()
         self.assertFalse(form.is_valid())

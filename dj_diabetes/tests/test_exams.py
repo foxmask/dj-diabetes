@@ -1,20 +1,17 @@
 # coding: utf-8
 from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
 
 from dj_diabetes.models.exams import Examinations, ExaminationDetails, ExaminationTypes
 from dj_diabetes.forms.base import ExamsForm
 
+from dj_diabetes.tests import MainTest
 
-class ExamsTest(TestCase):
+
+class ExamsTest(MainTest):
+
     def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
-            self.examtypes = ExaminationTypes.objects.create(title='checkup')
+        super(ExamsTest, self).setUp()
+        self.examtypes = ExaminationTypes.objects.create(title='checkup')
 
     def create_exams(self):
         return Examinations.objects.create(user=self.user, examination_types=self.examtypes, comments='Everything is ok',
@@ -47,7 +44,5 @@ class ExamsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = ExamsForm(data=data, initial=initial)
+        form = ExamsForm()
         self.assertFalse(form.is_valid())

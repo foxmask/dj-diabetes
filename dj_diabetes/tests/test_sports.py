@@ -1,20 +1,13 @@
 # coding: utf-8
 from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
 
 from dj_diabetes.models.sports import Sports, Exercises
 from dj_diabetes.forms.base import ExercisesForm
 
+from dj_diabetes.tests import MainTest
 
-class SportsTest(TestCase):
 
-    def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
+class SportsTest(MainTest):
 
     def create_sports(self):
         return Sports.objects.create(title='tennis')
@@ -45,8 +38,5 @@ class SportsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = ExercisesForm(data=data, initial=initial)
+        form = ExercisesForm()
         self.assertFalse(form.is_valid())
-

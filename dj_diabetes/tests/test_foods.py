@@ -1,10 +1,11 @@
 # coding: utf-8
-from datetime import datetime, time
-from django.test import TestCase
 
 from dj_diabetes.models.foods import Foods
 
-class FoodsTest(TestCase):
+from dj_diabetes.tests import MainTest
+
+
+class FoodsTest(MainTest):
 
     def create_foods(self):
         title = 'Chocolate'

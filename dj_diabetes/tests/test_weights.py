@@ -6,15 +6,10 @@ from django.contrib.auth.models import User
 from dj_diabetes.models.weights import Weights
 from dj_diabetes.forms.base import WeightsForm
 
+from dj_diabetes.tests import MainTest
 
-class WeightsTest(TestCase):
 
-    def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
+class WeightsTest(MainTest):
 
     def create_weights(self):
         user = self.user
@@ -35,7 +30,5 @@ class WeightsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = WeightsForm(data=data, initial=initial)
+        form = WeightsForm( )
         self.assertFalse(form.is_valid())

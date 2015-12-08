@@ -1,21 +1,17 @@
 # coding: utf-8
 from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
 
 from dj_diabetes.models.appointments import Appointments, AppointmentTypes
 from dj_diabetes.forms.base import AppointmentsForm
 
+from dj_diabetes.tests import MainTest
 
-class AppointmentsTest(TestCase):
+
+class AppointmentsTest(MainTest):
 
     def setUp(self):
-        try:
-            self.user = User.objects.get(username='john')
-        except User.DoesNotExist:
-            self.user = User.objects.create_user(
-                username='john', email='john@doe.info', password='doe')
-            self.appointmentstypes = AppointmentTypes.objects.create(title='checkup')
+        super(AppointmentsTest, self).setUp()
+        self.appointmentstypes = AppointmentTypes.objects.create(title='checkup')
 
     def create_appointments(self):
         user = self.user
@@ -48,7 +44,5 @@ class AppointmentsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        data = {'user': ''}
-        initial = {'user': self.user}
-        form = AppointmentsForm(data=data, initial=initial)
+        form = AppointmentsForm()
         self.assertFalse(form.is_valid())

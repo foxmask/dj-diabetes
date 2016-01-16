@@ -70,3 +70,6 @@ and at least :
 
 to startup the database and load the data
 
+
+
+.. image:: http://foxmask.trigger-happy.eu/static/2014/06/glucose_manager-1024x771.png

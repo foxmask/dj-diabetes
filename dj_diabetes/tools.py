@@ -4,9 +4,11 @@ import arrow
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-#************************
-# FBV : simple actions  *
-#************************
+# ************************
+# FBV : simple actions   *
+# ************************
+
+
 def page_it(data, record_per_page, page=''):
     """
         return the data of the current page
@@ -19,7 +21,7 @@ def page_it(data, record_per_page, page=''):
         data = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999),
-        # deliver last page of results.
+        # deliver last page of results.
         data = paginator.page(paginator.num_pages)
 
     return data

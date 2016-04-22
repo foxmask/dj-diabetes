@@ -42,7 +42,7 @@ requirements:
 
 * Python 3.4
 * Django 1.9
-* arrow 0.4.2
+* arrow 0.6.0
 
 
 Installation:

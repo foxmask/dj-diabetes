@@ -1,3 +1,5 @@
-Django==1.9.0
-arrow==0.4.2
-django-admin-bootstrapped==1.6.5
+arrow==0.6.0
+Django==1.9.5
+pluggy==0.3.1
+py==1.4.31
+python-dateutil==2.5.3

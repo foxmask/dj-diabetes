@@ -1,14 +1,14 @@
 # coding: utf-8
-from django.contrib import admin
-
-from dj_diabetes.forms import SportsAdminForm, ExaminationTypesAdminForm
 from dj_diabetes.forms import AppointmentTypesAdminForm, FoodsAdminForm
 from dj_diabetes.forms import PrefAdminForm
+from dj_diabetes.forms import SportsAdminForm, ExaminationTypesAdminForm
 from dj_diabetes.models import UserProfile, Preferences
+from dj_diabetes.models.appointments import AppointmentTypes
+from dj_diabetes.models.exams import ExaminationTypes
 from dj_diabetes.models.foods import Foods
 from dj_diabetes.models.sports import Sports
-from dj_diabetes.models.exams import ExaminationTypes
-from dj_diabetes.models.appointments import AppointmentTypes
+
+from django.contrib import admin
 
 
 class DiabetesAdminMixin(object):

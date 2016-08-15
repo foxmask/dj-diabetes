@@ -1,14 +1,15 @@
 # coding: utf-8
 import json
-from django.core.urlresolvers import reverse_lazy, reverse
+
+from dj_diabetes.forms.base import UserProfileForm
+from dj_diabetes.models import UserProfile
+from dj_diabetes.models.glucoses import Glucoses
+
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import UpdateView
-
-from dj_diabetes.models import UserProfile
-from dj_diabetes.forms.base import UserProfileForm
-from dj_diabetes.models.glucoses import Glucoses
 
 
 def logout_view(request):

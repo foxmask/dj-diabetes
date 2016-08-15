@@ -1,11 +1,8 @@
 # coding: utf-8
-from datetime import datetime, time
-from django.test import TestCase
-from django.contrib.auth.models import User
+from datetime import datetime
 
-from dj_diabetes.models.weights import Weights
 from dj_diabetes.forms.base import WeightsForm
-
+from dj_diabetes.models.weights import Weights
 from dj_diabetes.tests import MainTest
 
 

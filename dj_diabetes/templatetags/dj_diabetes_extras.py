@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from django import template
 from dj_diabetes.models import Preferences
+
+from django import template
 
 register = template.Library()
 

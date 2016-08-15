@@ -1,10 +1,11 @@
 # coding: utf-8
 from __future__ import unicode_literals
+
 import logging
+
 import arrow
 from django.conf import settings
 from django.views.generic import CreateView, UpdateView, DeleteView
-
 # dj_diabetes
 from dj_diabetes.models import InitMixin, SuccessMixin, PaginateMixin
 from dj_diabetes.views import LoginRequiredMixin

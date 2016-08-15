@@ -1,17 +1,18 @@
 # coding: utf-8
+from dj_diabetes.models import UserProfile, Preferences
+from dj_diabetes.models.appointments import Appointments
+from dj_diabetes.models.exams import Examinations, ExaminationDetails
+from dj_diabetes.models.glucoses import Glucoses
+from dj_diabetes.models.issues import Issues
+from dj_diabetes.models.meals import Meals
+from dj_diabetes.models.sports import Exercises
+from dj_diabetes.models.weights import Weights
+
 from django import forms
 from django.conf import settings
 from django.forms.models import inlineformset_factory
 from django.views.generic.edit import FormMixin
 
-from dj_diabetes.models import UserProfile, Preferences
-from dj_diabetes.models.glucoses import Glucoses
-from dj_diabetes.models.appointments import Appointments
-from dj_diabetes.models.meals import Meals
-from dj_diabetes.models.issues import Issues
-from dj_diabetes.models.weights import Weights
-from dj_diabetes.models.sports import Exercises
-from dj_diabetes.models.exams import Examinations, ExaminationDetails
 
 # Function
 
@@ -214,6 +215,7 @@ class ExamsForm(forms.ModelForm):
         self.myobject = super(ExamsForm, self).save(commit=False)
         self.myobject.user = user
         self.myobject.save()
+        return self.myobject
 
     class Meta:
         model = Examinations
@@ -242,7 +244,7 @@ class ExamDetailsForm(forms.ModelForm):
 # a formeset based on the model of the Mother and Child + 2 new empty lines
 ExamDetailsFormSet = inlineformset_factory(Examinations,
                                            ExaminationDetails,
-                                           fields=('title', 'value'), extra=2)
+                                           fields=('examination', 'title', 'value'), extra=2)
 
 
 class UserInstanceMixin(FormMixin):

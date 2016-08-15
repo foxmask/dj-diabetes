@@ -1,11 +1,11 @@
 # coding: utf-8
 from __future__ import unicode_literals
+
 import logging
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DeleteView
-
 # dj_diabetes
 from dj_diabetes.models import InitMixin, SuccessMixin, PaginateMixin
 from dj_diabetes.views import LoginRequiredMixin
@@ -17,13 +17,19 @@ logger = logging.getLogger(__name__)
 
 
 class ExamsMixin(SuccessMixin):
+    """
+        mixin for form_class and model settings
+    """
     form_class = ExamsForm
     model = Examinations
 
 
 class ExamsFormSetValid(object):
-
+    """
+        mixin for formset validation
+    """
     def form_valid(self, form):
+
         formset = ExamDetailsFormSet((self.request.POST or None),
                                      instance=self.object)
         if formset.is_valid():
@@ -34,7 +40,9 @@ class ExamsFormSetValid(object):
         return HttpResponseRedirect(reverse('exams'))
 
 class ExamsContextDataMixin(PaginateMixin):
-
+    """
+        mixin for context data
+    """
     def get_context_data(self, **kw):
         context = super(ExamsContextDataMixin, self).get_context_data(**kw)
         if self.request.POST:

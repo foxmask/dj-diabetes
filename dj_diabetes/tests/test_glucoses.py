@@ -1,13 +1,12 @@
 # coding: utf-8
 from datetime import datetime, time
 
-from django.conf import settings
-from dj_diabetes.models import UserProfile, Preferences
-from dj_diabetes.models.glucoses import Glucoses
-
 from dj_diabetes.forms.base import GlucosesForm
-
+from dj_diabetes.models import Preferences
+from dj_diabetes.models.glucoses import Glucoses
 from dj_diabetes.tests import MainTest
+
+from django.conf import settings
 
 
 class GlucosesTest(MainTest):

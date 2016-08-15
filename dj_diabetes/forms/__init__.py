@@ -1,11 +1,11 @@
 # coding: utf-8
-from django import forms
-
 from dj_diabetes.models import Preferences
-from dj_diabetes.models.exams import ExaminationTypes
 from dj_diabetes.models.appointments import AppointmentTypes
+from dj_diabetes.models.exams import ExaminationTypes
 from dj_diabetes.models.foods import Foods
 from dj_diabetes.models.sports import Sports
+
+from django import forms
 
 
 # ADMIN FORMS Part

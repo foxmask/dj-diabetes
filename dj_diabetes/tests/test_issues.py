@@ -1,9 +1,8 @@
 # coding: utf-8
-from datetime import datetime, time
+from datetime import datetime
 
-from dj_diabetes.models.issues import Issues
 from dj_diabetes.forms.base import IssuesForm
-
+from dj_diabetes.models.issues import Issues
 from dj_diabetes.tests import MainTest
 
 

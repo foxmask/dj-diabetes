@@ -1,10 +1,9 @@
 # coding: utf-8
 from datetime import datetime, time
 
-from dj_diabetes.models import UserProfile, Preferences
-from dj_diabetes.models.meals import Meals
 from dj_diabetes.forms.base import MealsForm
-
+from dj_diabetes.models import Preferences
+from dj_diabetes.models.meals import Meals
 from dj_diabetes.tests import MainTest
 
 

@@ -1,10 +1,11 @@
 # coding: utf-8
 from datetime import datetime
-from django.test import TestCase
-from django.contrib.auth.models import User
 
-from dj_diabetes.models import UserProfile, Preferences
 from dj_diabetes.forms.base import UserProfileForm
+from dj_diabetes.models import UserProfile
+
+from django.contrib.auth.models import User
+from django.test import TestCase
 
 
 class MainTest(TestCase):

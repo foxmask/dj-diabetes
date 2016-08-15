@@ -1,11 +1,11 @@
 # coding: utf-8
-from django.db import models
-from django.db.models.signals import post_save
+from dj_diabetes.tools import page_it, right_now
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models.signals import post_save
 from django.views.generic.edit import ModelFormMixin
-
-from dj_diabetes.tools import page_it, right_now
 
 
 class HatModel(models.Model):

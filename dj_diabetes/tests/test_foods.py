@@ -15,4 +15,3 @@ class FoodsTest(MainTest):
         s = self.create_foods()
         self.assertTrue(isinstance(s, Foods))
         self.assertEqual(s.show(), "%s" % s.title)
-

@@ -40,9 +40,9 @@ It permits to follow your daily health
 requirements:
 =============
 
-* Python 3.4
-* Django 1.9
-* arrow 0.6.0
+* Python 3.5
+* Django 1.10
+* arrow 0.8.0
 
 
 Installation:

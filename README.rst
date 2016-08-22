@@ -32,9 +32,9 @@
  Django Diabetes
 =================
 
-Django Diabetes is a personnal Glucose Manager
+Django Diabetes is a personal Glucose Manager
 
-It permits to follow your daily health
+It permits you to follow your daily health
 
 
 requirements:

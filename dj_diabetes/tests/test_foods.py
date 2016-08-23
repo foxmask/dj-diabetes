@@ -7,11 +7,11 @@ from dj_diabetes.tests import MainTest
 
 class FoodsTest(MainTest):
 
-    def create_foods(self):
+    def setUp(self):
+        super(FoodsTest, self).setUp()
         title = 'Chocolate'
-        return Foods.objects.create(title=title)
+        self.food = Foods.objects.create(title=title)
 
     def test_foods(self):
-        s = self.create_foods()
-        self.assertTrue(isinstance(s, Foods))
-        self.assertEqual(s.show(), "%s" % s.title)
+        self.assertTrue(isinstance(self.food, Foods))
+        self.assertEqual(self.food.__str__(), "%s" % self.food.title)

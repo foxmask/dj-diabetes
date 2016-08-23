@@ -2,3 +2,4 @@ arrow==0.8.0
 Django==1.10
 django-admin-bootstrapped==2.5.7
 six==1.10.0
+flake8==2.5.4

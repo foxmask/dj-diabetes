@@ -20,8 +20,5 @@ class Meals(models.Model):
         verbose_name = 'Meal'
         verbose_name_plural = 'Meals'
 
-    def show(self):
-        return "%s (date: %s)" % (self.food, self.date_meals)
-
     def __str__(self):
-        return self.show()
+        return "%s (date: %s)" % (self.food, self.date_meals)

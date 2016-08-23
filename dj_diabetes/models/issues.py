@@ -20,8 +20,5 @@ class Issues(models.Model):
         verbose_name = 'Issues'
         verbose_name_plural = 'Issues'
 
-    def show(self):
-        return "%s" % self.question
-
     def __str__(self):
-        return self.show()
+        return "%s" % self.question

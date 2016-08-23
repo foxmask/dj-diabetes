@@ -39,11 +39,8 @@ class UserProfile(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def show(self):
-        return "%s" % self.user
-
     def __str__(self):
-        return self.show()
+        return "%s" % self.user
 
 
 class Preferences(models.Model):

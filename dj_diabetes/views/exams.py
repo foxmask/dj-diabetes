@@ -47,9 +47,11 @@ class ExamsContextDataMixin(PaginateMixin):
     def get_context_data(self, **kw):
         context = super(ExamsContextDataMixin, self).get_context_data(**kw)
         if self.request.POST:
-            context['examsdetails_form'] = ExamDetailsFormSet(self.request.POST)
+            context['examsdetails_form'] = ExamDetailsFormSet(
+                self.request.POST)
         else:
-            context['examsdetails_form'] = ExamDetailsFormSet(instance=self.object)
+            context['examsdetails_form'] = ExamDetailsFormSet(
+                instance=self.object)
         return context
 
 

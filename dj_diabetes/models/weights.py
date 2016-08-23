@@ -18,8 +18,5 @@ class Weights(models.Model):
         verbose_name = 'Weight'
         verbose_name_plural = 'Weights'
 
-    def show(self):
-        return "%s (date: %s)" % (self.weight, self.date_weights)
-
     def __str__(self):
-        return self.show()
+        return "%s (date: %s)" % (self.weight, self.date_weights)

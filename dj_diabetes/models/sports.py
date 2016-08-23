@@ -14,11 +14,8 @@ class Sports(HatModel):
         verbose_name = 'Sports'
         verbose_name_plural = 'Sports'
 
-    def show(self):
-        return "%s" % self.title
-
     def __str__(self):
-        return self.show()
+        return "%s" % self.title
 
 
 class Exercises(models.Model):
@@ -35,8 +32,5 @@ class Exercises(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def show(self):
-        return "%s (duration: %s)" % (self.sports, self.duration)
-
     def __str__(self):
-        return self.show()
+        return "%s (duration: %s)" % (self.sports, self.duration)

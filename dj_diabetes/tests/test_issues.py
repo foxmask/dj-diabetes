@@ -8,23 +8,22 @@ from dj_diabetes.tests import MainTest
 
 class IssuesTest(MainTest):
 
-    def create_issues(self):
+    def setUp(self):
+        super(IssuesTest, self).setUp()
         user = self.user
         question = 'How does it work ?'
         question_to = 'Dr'
         answer = 'Like a charm'
-        return Issues.objects.create(user=user,
-                                     question=question,
-                                     answer=answer,
-                                     question_to=question_to)
+        self.issues = Issues.objects.create(user=user,
+                                            question=question,
+                                            answer=answer,
+                                            question_to=question_to)
 
     def test_issues(self):
-        s = self.create_issues()
-        self.assertTrue(isinstance(s, Issues))
-        self.assertEqual(s.show(), "%s" % s.question)
+        self.assertTrue(isinstance(self.issues, Issues))
+        self.assertEqual(self.issues.__str__(), "%s" % self.issues.question)
 
     def test_valid_form(self):
-        u = self.create_issues()
         data = {'question': 'How ?',
                 'question_to': 'Dr',
                 'answer': 'Like that',

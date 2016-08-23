@@ -8,24 +8,27 @@ from dj_diabetes.tests import MainTest
 
 class WeightsTest(MainTest):
 
-    def create_weights(self):
+    def setUp(self):
+        super(WeightsTest, self).setUp()
+
         user = self.user
         weight = 80
         date_weights = datetime.now()
-        return Weights.objects.create(user=user, weight=weight, date_weights=date_weights)
+        self.weights = Weights.objects.create(user=user,
+                                              weight=weight,
+                                              date_weights=date_weights)
 
     def test_weights(self):
-        s = self.create_weights()
-        self.assertTrue(isinstance(s, Weights))
-        self.assertEqual(s.show(), "%s (date: %s)" % (s.weight, s.date_weights))
+        self.assertTrue(isinstance(self.weights, Weights))
+        self.assertEqual(self.weights .__str__(), "%s (date: %s)" %
+                         (self.weights .weight, self.weights .date_weights))
 
     def test_valid_form(self):
-        u = self.create_weights()
         data = {'weight': 80, 'date_weights': datetime.now()}
         initial = {'user': self.user}
         form = WeightsForm(data=data, initial=initial)
         self.assertTrue(form.is_valid())
 
     def test_invalid_form(self):
-        form = WeightsForm( )
+        form = WeightsForm()
         self.assertFalse(form.is_valid())

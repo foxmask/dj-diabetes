@@ -32,14 +32,11 @@ class Examinations(models.Model):
         verbose_name = 'Examinations'
         verbose_name_plural = 'Examinations'
 
-    def show(self):
+    def __str__(self):
         return "%s (date %s) (comment: %s)" % (
             self.examination_types,
             self.date_examinations,
             self.comments)
-
-    def __str__(self):
-        return self.show()
 
 
 class ExaminationDetails(models.Model):
@@ -57,8 +54,5 @@ class ExaminationDetails(models.Model):
         verbose_name = 'Examination Details'
         verbose_name_plural = 'Examination Details'
 
-    def show(self):
-        return "%s" % self.title
-
     def __str__(self):
-        return self.show()
+        return "%s" % self.title

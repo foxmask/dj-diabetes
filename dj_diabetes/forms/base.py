@@ -72,7 +72,7 @@ class GlucosesForm(forms.ModelForm):
 
     class Meta:
         model = Glucoses
-        # Do the user uses insulin ?
+        # Do the user uses insulin ?
         if settings.DJ_DIABETES['insulin'] is True:
             fields = ['moment', 'comment', 'glucose', 'insulin',
                       'date_glucoses', 'hour_glucoses']
@@ -157,7 +157,7 @@ class MealsForm(forms.ModelForm):
     """
         Meals Form
     """
-    # get the list of pref to get the value in the dropdow
+    # get the list of pref to get the value in the dropdown
     breakfast_lunch_diner = forms.ChoiceField(widget=forms.Select(
         attrs={'class': 'form-control'}))
     food = forms.CharField(widget=forms.Textarea(
@@ -241,10 +241,11 @@ class ExamDetailsForm(forms.ModelForm):
         model = ExaminationDetails
         fields = ['title', 'value']
 
-# a formeset based on the model of the Mother and Child + 2 new empty lines
+# a formset based on the model of the Mother and Child + 2 new empty lines
+my_fields = ('examination', 'title', 'value')
 ExamDetailsFormSet = inlineformset_factory(Examinations,
                                            ExaminationDetails,
-                                           fields=('examination', 'title', 'value'), extra=2)
+                                           fields=my_fields, extra=2)
 
 
 class UserInstanceMixin(FormMixin):

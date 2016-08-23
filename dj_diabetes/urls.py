@@ -74,12 +74,12 @@ urlpatterns = [
         url(r'^exercises/delete/(?P<pk>\d+)$', ExercisesDeleteView.as_view(),
             name='exercise_delete'),
         url(r'^pref/$', GlucosesCreateView.as_view(), name='pref'),
-        #url(r'^$', 'dj_diabetes.views.glucose_create', name='home'),
-        # url(r'^blog/', include('blog.urls')),
+        # url(r'^$', 'dj_diabetes.views.glucose_create', name='home'),
         url(
             regex=r'^chart_data_json/$',
             view=views.chart_data_json,
             name='chart_data_json',
         ),
-        url(r'my_profile/(?P<pk>\d+)$', UserProfileUpdateView.as_view(), name='my_profile'),
+        url(r'my_profile/(?P<pk>\d+)$', UserProfileUpdateView.as_view(),
+            name='my_profile'),
 ]

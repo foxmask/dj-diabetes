@@ -6,14 +6,15 @@ from dj_diabetes.models import Preferences
 from dj_diabetes.models.glucoses import Glucoses
 from dj_diabetes.tests import MainTest
 
-from django.conf import settings
-
 
 class GlucosesTest(MainTest):
 
     def setUp(self):
         super(GlucosesTest, self).setUp()
-        Preferences.objects.create(key="moment", value="5", title="Midi", created=datetime.now())
+        Preferences.objects.create(key="moment",
+                                   value="5",
+                                   title="Midi",
+                                   created=datetime.now())
 
     def create_glucoses(self):
         user = self.user
@@ -30,26 +31,19 @@ class GlucosesTest(MainTest):
     def test_glucoses(self):
         s = self.create_glucoses()
         self.assertTrue(isinstance(s, Glucoses))
-        self.assertEqual(s.show(), "Glucose: %s Insulin: %s (date: %s)" % (
+        self.assertEqual(s.__str__(), "Glucose: %s Insulin: %s (date: %s)" % (
                                                 s.glucose,
                                                 s.insulin,
                                                 s.date_glucoses))
 
-    def test_valid_form(self):
-        u = self.create_glucoses()
-        if settings.DJ_DIABETES['insulin'] is True:
-            data = {'moment': '5',
-                    'comment': 'everything is ok',
-                    'glucose': 2,
-                    'insulin': 1,
-                    'date_glucoses': datetime.now(),
-                    'hour_glucoses': time()}
-        else:
-            data = {'moment': 'midi',
-                    'comment': 'everything is ok',
-                    'glucose': 2,
-                    'date_glucoses': datetime.now(),
-                    'hour_glucoses': time()}
+    def test_valid_form_insulin(self):
+        self.create_glucoses()
+        data = {'moment': '5',
+                'comment': 'everything is ok',
+                'glucose': 2,
+                'insulin': 1,
+                'date_glucoses': datetime.now(),
+                'hour_glucoses': time()}
         initial = {'user': self.user}
         form = GlucosesForm(data=data, initial=initial)
         self.assertTrue(form.is_valid())
@@ -57,4 +51,3 @@ class GlucosesTest(MainTest):
     def test_invalid_form(self):
         form = GlucosesForm()
         self.assertFalse(form.is_valid())
-

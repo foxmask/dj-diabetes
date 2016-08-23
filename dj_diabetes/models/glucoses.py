@@ -22,11 +22,8 @@ class Glucoses(models.Model):
         verbose_name = 'Glucose'
         verbose_name_plural = 'Glucoses'
 
-    def show(self):
+    def __str__(self):
         return "Glucose: %s Insulin: %s (date: %s)" % (
                                                 self.glucose,
                                                 self.insulin,
                                                 self.date_glucoses)
-
-    def __str__(self):
-        return self.show()

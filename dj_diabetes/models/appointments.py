@@ -37,8 +37,5 @@ class Appointments(models.Model):
         verbose_name = 'Appointments'
         verbose_name_plural = 'Appointments'
 
-    def show(self):
-        return "%s (date: %s)" % (self.title, self.date_appointments)
-
     def __str__(self):
-        return self.show()
+        return "%s (date: %s)" % (self.title, self.date_appointments)

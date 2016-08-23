@@ -10,7 +10,8 @@ class AppointmentsTest(MainTest):
 
     def setUp(self):
         super(AppointmentsTest, self).setUp()
-        self.appointmentstypes = AppointmentTypes.objects.create(title='checkup')
+        self.appointmentstypes = AppointmentTypes.objects.create(
+            title='checkup')
 
     def create_appointments(self):
         user = self.user
@@ -18,13 +19,17 @@ class AppointmentsTest(MainTest):
         title = 'A Title'
         body = 'A body'
         date_appointments = datetime.now()
-        return Appointments.objects.create(user=user, appointment_types=appointment_types, title=title, body=body,
+        return Appointments.objects.create(user=user,
+                                           appointment_types=appointment_types,
+                                           title=title,
+                                           body=body,
                                            date_appointments=date_appointments)
 
     def test_appointments(self):
         s = self.create_appointments()
         self.assertTrue(isinstance(s, Appointments))
-        self.assertEqual(s.show(), "%s (date: %s)" % (s.title, s.date_appointments))
+        self.assertEqual(s.__str__(), "%s (date: %s)" % (s.title,
+                                                         s.date_appointments))
 
     def test_valid_form(self):
         u = self.create_appointments()

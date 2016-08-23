@@ -25,11 +25,6 @@ SECRET_KEY = 'To be defined :P'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
-TEMPLATES = {
-    'DEBUG': DEBUG,
-}
-
 ALLOWED_HOSTS = ["*"]
 
 
@@ -59,6 +54,9 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'dj_diabetes.urls'
 
 TEMPLATES = [
+    {
+        'DEBUG': DEBUG,
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],

@@ -39,6 +39,7 @@ class ExamsFormSetValid(object):
 
         return HttpResponseRedirect(reverse('exams'))
 
+
 class ExamsContextDataMixin(PaginateMixin):
     """
         mixin for context data

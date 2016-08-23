@@ -16,7 +16,7 @@ install_requires = reqs('requirements.txt')
 setup(
     name='dj_diabetes',
     version=version,
-    description='Django Diabetes - a personnal Glucide manager',
+    description='Django Diabetes is a personal Glucose Manager',
     author='FoxMaSk',
     author_email='foxmask@trigger-happy.eu',
     url='https://github.com/foxmask/dj-diabetes',

@@ -3,6 +3,11 @@
     :alt: Code Climate
 
 
+.. image:: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/badges/quality-score.png?b=master
+    :target: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/?branch=master
+    :alt: Scrutinizer Code Quality
+
+
 .. image:: https://travis-ci.org/foxmask/dj-diabetes.svg?branch=master
     :target: https://travis-ci.org/foxmask/dj-diabetes
     :alt: Travis Status
@@ -13,7 +18,7 @@
     :alt: Latest version
 
 
-.. image:: http://img.shields.io/badge/python-3.4-orange.svg
+.. image:: http://img.shields.io/badge/python-3.5-orange.svg
     :target: https://pypi.python.org/pypi/dj-diabetes/
     :alt: Python version supported
 
@@ -22,22 +27,27 @@
     :target: https://pypi.python.org/pypi/dj-diabetes/
     :alt: License
 
-
 .. image:: http://img.shields.io/pypi/dm/dj-diabetes.svg
    :target: https://pypi.python.org/pypi/dj-diabetes/
    :alt: Downloads per month
 
 
-=================
- Django Diabetes
-=================
+===============
+Django Diabetes
+===============
 
 Django Diabetes is a personal Glucose Manager
 
 It permits you to follow your daily health
 
+Improvements
+============
 
-requirements:
+As I'm not suffering from diabetes, I am very open to suggestions for improvement of this project that I designed for a friend.
+For example with the type of examinations, etc...
+Currently I maintain the project by evolving versions of python and django.
+
+Requirements:
 =============
 
 * Python 3.5

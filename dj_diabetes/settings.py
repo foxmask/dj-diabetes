@@ -7,18 +7,17 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.9/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.9/ref/settings/
+https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
 from django.core.urlresolvers import reverse_lazy
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'To be defined :P'
@@ -56,9 +55,6 @@ ROOT_URLCONF = 'dj_diabetes.urls'
 
 TEMPLATES = [
     {
-        'DEBUG': DEBUG,
-    },
-    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
@@ -76,19 +72,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dj_diabetes.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR + '/../', 'db.sqlite3'),
     }
 }
 
 
 # Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,9 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
-
 LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
@@ -125,7 +115,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+
 
 STATIC_URL = '/static/'
 

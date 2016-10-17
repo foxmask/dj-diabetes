@@ -51,7 +51,7 @@ Requirements:
 =============
 
 * Python 3.5
-* Django 1.10.1
+* Django 1.10.x
 * arrow 0.8.0
 
 

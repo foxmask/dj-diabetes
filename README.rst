@@ -3,6 +3,11 @@
     :alt: Code Climate
 
 
+.. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/coverage.svg
+   :target: https://codeclimate.com/github/foxmask/dj-diabetes/coverage
+   :alt: Test Coverage
+
+
 .. image:: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/badges/quality-score.png?b=master
     :target: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/?branch=master
     :alt: Scrutinizer Code Quality

@@ -1,8 +1,12 @@
 # coding: utf-8
 from datetime import datetime
 
+from django.test import RequestFactory
+
 from dj_diabetes.forms.base import IssuesForm
 from dj_diabetes.models.issues import Issues
+from dj_diabetes.views.issues import IssuesCreateView, IssuesUpdateView,\
+    IssuesDeleteView
 from dj_diabetes.tests import MainTest
 
 
@@ -35,3 +39,52 @@ class IssuesTest(MainTest):
     def test_invalid_form(self):
         form = IssuesForm()
         self.assertFalse(form.is_valid())
+
+
+class IssuesCreateViewTestCase(IssuesTest):
+
+    def test_get(self):
+        template = "dj_diabetes/issues_form.html"
+        # Setup request and view.
+        request = RequestFactory().get('issues/')
+        request.user = self.user
+        view = IssuesCreateView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         "dj_diabetes/issues_form.html")
+
+
+class IssuesUpdateViewTestCase(IssuesTest):
+
+    def test_get(self):
+        template = "dj_diabetes/issues_form.html"
+        # Setup request and view.
+        request = RequestFactory().get('issues/edit/{}'.format(self.issues.id))
+        request.user = self.user
+        view = IssuesUpdateView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user, pk=self.issues.id)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         "dj_diabetes/issues_form.html")
+
+
+class IssuesDeleteViewTestCase(IssuesTest):
+
+    def test_get(self):
+        template = 'dj_diabetes/confirm_delete.html'
+        # Setup request and view.
+        request = RequestFactory().get('issues/delete/{}'.format(
+            self.issues.id))
+        request.user = self.user
+        view = IssuesDeleteView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user, pk=self.issues.id)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         'dj_diabetes/confirm_delete.html')

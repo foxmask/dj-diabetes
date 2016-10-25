@@ -1,0 +1,12 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    raise ImportError
+    except AttributeError
+
+[run]
+omit =
+    dj_diabetes/migrations/*
+    setup.py
+    dj_diabetes/local_settings_sample.py
+    dj_diabetes/wsgi.py

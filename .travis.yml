@@ -1,11 +1,14 @@
 language: python
 
 python:
-  - "3.4"
-  - "3.5"
+- '3.4'
+- '3.5'
 
 script:
 - tox
+
+sudo: false
+
 
 install:
 - pip install tox

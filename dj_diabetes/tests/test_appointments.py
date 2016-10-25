@@ -1,8 +1,12 @@
 # coding: utf-8
 from datetime import datetime, time
 
+from django.test import RequestFactory
+
 from dj_diabetes.forms.base import AppointmentsForm
 from dj_diabetes.models.appointments import Appointments, AppointmentTypes
+from dj_diabetes.views.appointments import AppointmentsCreateView,\
+    AppointmentsUpdateView, AppointmentsDeleteView
 from dj_diabetes.tests import MainTest
 
 
@@ -50,3 +54,53 @@ class AppointmentsTest(MainTest):
     def test_invalid_form(self):
         form = AppointmentsForm()
         self.assertFalse(form.is_valid())
+
+
+class AppointmentsCreateViewTestCase(AppointmentsTest):
+
+    def test_get(self):
+        template = "dj_diabetes/appointments_form.html"
+        # Setup request and view.
+        request = RequestFactory().get('appoints/')
+        request.user = self.user
+        view = AppointmentsCreateView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         "dj_diabetes/appointments_form.html")
+
+
+class AppointmentsUpdateViewTestCase(AppointmentsTest):
+
+    def test_get(self):
+        app = self.create_appointments()
+        template = "dj_diabetes/appointments_form.html"
+        # Setup request and view.
+        request = RequestFactory().get('appoints/edit/{}'.format(app.id))
+        request.user = self.user
+        view = AppointmentsUpdateView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user, pk=app.id)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         "dj_diabetes/appointments_form.html")
+
+
+class AppointmentsDeleteViewTestCase(AppointmentsTest):
+
+    def test_get(self):
+        app = self.create_appointments()
+        template = 'dj_diabetes/confirm_delete.html'
+        # Setup request and view.
+        request = RequestFactory().get('appoints/delete/{}'.format(app.id))
+        request.user = self.user
+        view = AppointmentsDeleteView.as_view(template_name=template)
+        # Run.
+        response = view(request, user=request.user, pk=app.id)
+        # Check.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0],
+                         'dj_diabetes/confirm_delete.html')

@@ -1,22 +1,17 @@
 language: python
-
 python:
 - '3.4'
 - '3.5'
-
 script:
 - tox
-
 sudo: false
-
-
 install:
 - pip install tox
-
 deploy:
   provider: pypi
   user: foxmask
   password:
-    secure: SMBRrjUZ2kngOV89YkMyIh8W21CGa+9l6cvlnBXhmmuTt/jlx4sT2HHSzmIFAAsGYkatGj66AVibVsUaqoch2kIH75IOgww38PSgHP4KuqsDIm7xWCcHPSZfXSC3hi89/RwSzFeHCapVXKTW+EKO6FS9hesG6pSMYVTF6WCXnoQ=
+    secure: GPT4jFk9Og/lwRh9lSm741n4brfpRYshIXj4F2iPLbZQAY27wXiWNJ9qIrJ5OIPCxu/23MJz2Mewb7SPcUsMPFbJeNEq2XmF0dG3uIuGhrWVOZHncBn0ki4Zl5gH3edDUMkvK4zymvn05Q14mA7BstxSrTf4oyFTq2xo7zjeeUM=
   on:
     tags: true
+    repo: foxmask/dj-diabetes

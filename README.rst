@@ -23,7 +23,7 @@
     :alt: Latest version
 
 
-.. image:: http://img.shields.io/badge/python-3.5-orange.svg
+.. image:: http://img.shields.io/badge/python-3.6-orange.svg
     :target: https://pypi.python.org/pypi/dj-diabetes/
     :alt: Python version supported
 
@@ -55,9 +55,9 @@ Currently I maintain the project by evolving versions of python and django.
 Requirements:
 =============
 
-* Python 3.5
-* Django 1.10.x
-* arrow 0.8.0
+* Python 3.6
+* Django 1.11
+* arrow 0.10.0
 
 
 Installation:

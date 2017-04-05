@@ -241,6 +241,7 @@ class ExamDetailsForm(forms.ModelForm):
         model = ExaminationDetails
         fields = ['title', 'value']
 
+
 # a formset based on the model of the Mother and Child + 2 new empty lines
 my_fields = ('examination', 'title', 'value')
 ExamDetailsFormSet = inlineformset_factory(Examinations,

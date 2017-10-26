@@ -3,7 +3,7 @@ from datetime import datetime, time
 
 from django.test import RequestFactory
 
-from dj_diabetes.forms.base import ExercisesForm
+from dj_diabetes.forms.exercises import ExercisesForm
 from dj_diabetes.models.sports import Sports, Exercises
 from dj_diabetes.tests import MainTest
 from dj_diabetes.views.exercises import ExercisesCreateView,\

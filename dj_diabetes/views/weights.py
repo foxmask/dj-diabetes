@@ -10,7 +10,9 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from dj_diabetes.models import SuccessMixin, PaginateMixin
 from dj_diabetes.views import LoginRequiredMixin
 from dj_diabetes.models.weights import Weights
-from dj_diabetes.forms.base import WeightsForm, UserInstanceMixin
+from dj_diabetes.forms.base import UserInstanceMixin
+from dj_diabetes.forms.weights import WeightsForm
+
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)

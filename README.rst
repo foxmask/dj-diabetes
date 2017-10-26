@@ -3,8 +3,8 @@
     :alt: Code Climate
 
 
-.. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/coverage.svg
-   :target: https://codeclimate.com/github/foxmask/dj-diabetes/coverage
+.. image:: https://coveralls.io/repos/github/foxmask/dj-diabetes/badge.svg
+   :target: https://coveralls.io/github/foxmask/django-th
    :alt: Test Coverage
 
 

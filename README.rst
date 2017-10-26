@@ -71,6 +71,12 @@ to add the needed modules , do :
 
     pip install -r requirements.txt
 
+create a new user who will be the admin :
+
+.. code:: python
+
+   python manage.py createsuperuser
+
 and at least :
 
 .. code:: python
@@ -78,6 +84,7 @@ and at least :
     python manage.py makemigrations dj_diabetes
     python manage.py migrate dj_diabetes
     python manage.py loaddata dj_diabetes_preferences.json
+    python manage.py createsuperuser
 
 to startup the database and load the data
 

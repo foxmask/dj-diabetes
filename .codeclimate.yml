@@ -1,2 +1,6 @@
 languages:
   Python: true
+
+exclude_paths:
+- dj_diabetes/tests/*
+- dj_diabetes/migrations/*

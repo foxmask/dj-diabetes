@@ -32,10 +32,6 @@
     :target: https://pypi.python.org/pypi/dj-diabetes/
     :alt: License
 
-.. image:: http://img.shields.io/pypi/dm/dj-diabetes.svg
-   :target: https://pypi.python.org/pypi/dj-diabetes/
-   :alt: Downloads per month
-
 
 ===============
 Django Diabetes
@@ -43,7 +39,7 @@ Django Diabetes
 
 Django Diabetes is a personal Glucose Manager
 
-It permits you to follow your daily health
+It allows you to follow your daily health
 
 Improvements
 ============

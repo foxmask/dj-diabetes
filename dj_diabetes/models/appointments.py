@@ -20,8 +20,9 @@ class Appointments(models.Model):
     """
         Appointments
     """
-    user = models.ForeignKey(User)
-    appointment_types = models.ForeignKey(AppointmentTypes)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    appointment_types = models.ForeignKey(AppointmentTypes,
+                                          on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

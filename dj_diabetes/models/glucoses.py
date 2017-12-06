@@ -8,7 +8,7 @@ class Glucoses(models.Model):
     """
         Glucoses
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     moment = models.IntegerField(null=True)
     glucose = models.DecimalField(max_digits=5, decimal_places=2)
     insulin = models.DecimalField(max_digits=10, decimal_places=2, null=True)

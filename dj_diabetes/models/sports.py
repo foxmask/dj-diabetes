@@ -23,8 +23,8 @@ class Exercises(models.Model):
     """
         Exercises
     """
-    user = models.ForeignKey(User)
-    sports = models.ForeignKey(Sports)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sports = models.ForeignKey(Sports, on_delete=models.CASCADE)
     comment = models.TextField()
     duration = models.FloatField()
     date_exercises = models.DateField(null=True)

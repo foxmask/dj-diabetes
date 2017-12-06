@@ -8,7 +8,7 @@ class Issues(models.Model):
     """
         Issues asked from the user
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.TextField()
     question_to = models.CharField(max_length=255)
     answer = models.TextField(null=True, blank=True)

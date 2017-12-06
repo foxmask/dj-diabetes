@@ -2,7 +2,7 @@
 from dj_diabetes.tools import page_it, right_now
 
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.views.generic.edit import ModelFormMixin
@@ -28,7 +28,7 @@ class UserProfile(models.Model):
     """
         Related user to handle his profile
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=15, blank=True)

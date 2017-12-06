@@ -8,7 +8,7 @@ class Meals(models.Model):
     """
         Meals
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     food = models.TextField()
     breakfast_lunch_diner = models.CharField(max_length=2)
     date_meals = models.DateField(null=True)

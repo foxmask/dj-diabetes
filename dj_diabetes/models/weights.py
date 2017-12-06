@@ -8,7 +8,7 @@ class Weights(models.Model):
     """
         Weight
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     weight = models.FloatField()
     date_weights = models.DateField()
     created = models.DateTimeField(auto_now_add=True)

@@ -52,8 +52,8 @@ Requirements:
 =============
 
 * Python 3.6
-* Django 1.11
-* arrow 0.10.0
+* Django 2
+* arrow 0.12.0
 
 
 Installation:

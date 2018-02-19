@@ -63,7 +63,7 @@ to get the project, from your virtualenv, do :
 
 .. code:: system
 
-    git clone https://github.com/foxmask/dj-diabetes.git
+    git clone https://github.com/push-things/dj-diabetes.git
 
 to add the needed modules , do :
 

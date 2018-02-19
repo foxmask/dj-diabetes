@@ -22,8 +22,8 @@ setup(
     maintainer='FoxMaSk',
     author_email='foxmask@trigger-happy.eu',
     maintainer_email='foxmask@trigger-happy.eu',
-    url='https://github.com/foxmask/dj-diabetes',
-    download_url="https://github.com/foxmask/dj-diabetes/"
+    url='https://github.com/push-things/dj-diabetes',
+    download_url="https://github.com/push-things/dj-diabetes/"
                  "archive/dj-diabetes-" + version + ".zip",
     packages=find_packages(exclude=['dj_diabetes/local_settings']),
     classifiers=[

@@ -1,30 +1,30 @@
-.. image:: https://codeclimate.com/github/foxmask/dj-diabetes/badges/gpa.svg
-    :target: https://codeclimate.com/github/foxmask/dj-diabetes
+.. image:: https://codeclimate.com/github/push-things/dj-diabetes/badges/gpa.svg
+    :target: https://codeclimate.com/github/push-things/dj-diabetes
     :alt: Code Climate
 
 
-.. image:: https://coveralls.io/repos/github/foxmask/dj-diabetes/badge.svg
-   :target: https://coveralls.io/github/foxmask/django-th
+.. image:: https://coveralls.io/repos/github/push-things/dj-diabetes/badge.svg
+   :target: https://coveralls.io/github/push-things/dj-diabetes
    :alt: Test Coverage
 
 
-.. image:: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/badges/quality-score.png?b=master
-    :target: https://scrutinizer-ci.com/g/foxmask/dj-diabetes/?branch=master
+.. image:: https://scrutinizer-ci.com/g/push-things/dj-diabetes/badges/quality-score.png?b=master
+    :target: https://scrutinizer-ci.com/g/push-things/dj-diabetes/?branch=master
     :alt: Scrutinizer Code Quality
 
 
-.. image:: https://travis-ci.org/foxmask/dj-diabetes.svg?branch=master
-    :target: https://travis-ci.org/foxmask/dj-diabetes
+.. image:: https://travis-ci.org/push-things/dj-diabetes.svg?branch=master
+    :target: https://travis-ci.org/push-things/dj-diabetes
     :alt: Travis Status
 
 
 .. image:: http://img.shields.io/pypi/v/dj-diabetes.svg
-    :target: https://pypi.python.org/pypi/dj-diabetes/
+    :target: https://pypi.org/pypi/dj-diabetes/
     :alt: Latest version
 
 
 .. image:: http://img.shields.io/badge/python-3.6-orange.svg
-    :target: https://pypi.python.org/pypi/dj-diabetes/
+    :target: https://pypi.org/pypi/dj-diabetes/
     :alt: Python version supported
 
 

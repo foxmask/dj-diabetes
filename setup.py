@@ -12,18 +12,20 @@ def reqs(*f):
         os.path.join(os.getcwd(), *f)).readlines()]))
 
 
+long_description = reqs('README.rst')
 install_requires = reqs('requirements.txt')
 
 setup(
     name='dj_diabetes',
     version=version,
     description='Django Diabetes is a personal Glucose Manager',
+    long_description=long_description,
     author='FoxMaSk',
     maintainer='FoxMaSk',
     author_email='foxmask@trigger-happy.eu',
     maintainer_email='foxmask@trigger-happy.eu',
-    url='https://github.com/foxmask/dj-diabetes',
-    download_url="https://github.com/foxmask/dj-diabetes/"
+    url='https://github.com/push-things/dj-diabetes',
+    download_url="https://github.com/push-things/dj-diabetes/"
                  "archive/dj-diabetes-" + version + ".zip",
     packages=find_packages(exclude=['dj_diabetes/local_settings']),
     classifiers=[

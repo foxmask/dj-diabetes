@@ -53,7 +53,7 @@ Requirements:
 
 * Python 3.6
 * Django 2
-* arrow 0.12.0
+* arrow 0.12.x
 
 
 Installation:

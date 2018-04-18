@@ -12,14 +12,18 @@ def reqs(*f):
         os.path.join(os.getcwd(), *f)).readlines()]))
 
 
-long_description = reqs('README.rst')
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
+
 install_requires = reqs('requirements.txt')
 
 setup(
     name='dj_diabetes',
     version=version,
     description='Django Diabetes is a personal Glucose Manager',
-    long_description=long_description,
+    long_description=readme(),
     author='FoxMaSk',
     maintainer='FoxMaSk',
     author_email='foxmask@trigger-happy.eu',
